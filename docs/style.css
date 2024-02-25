@@ -35,7 +35,7 @@ body, html {
 }
 
 .logo {
-    width: 10px; /* Adjust size as needed */
+    width: 20px; /* Adjust size as needed */
     height: auto;
     margin-right: 10px; /* Adjust spacing between logo and text */
 }
