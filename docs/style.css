@@ -28,3 +28,14 @@ body, html {
 .hidden {
     display: none;
 }
+
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px; /* Adjust size as needed */
+    height: auto;
+    margin-right: 10px; /* Adjust spacing between logo and text */
+}
