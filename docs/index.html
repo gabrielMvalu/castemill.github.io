@@ -12,15 +12,42 @@
             justify-content: center;
             align-items: center;
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
-            font-size: 24px;
+            background-color: #fff;
+            transition: background-color 1s ease;
+        }
+
+        .content {
+            text-align: center;
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+
+        .welcome {
+            cursor: pointer;
+            transition: transform 0.5s ease, color 0.5s ease;
+        }
+
+        .welcome:hover + .content {
+            opacity: 1;
+        }
+
+        .welcome:hover {
+            transform: scale(1.1);
+            color: #007BFF;
         }
     </style>
 </head>
 <body>
 
-<div>CASTEMILL SRL</div>
+<div class="welcome">CASTEMILL SRL</div>
+<div class="content">
+    <p>Welcome to our website!</p>
+    <p>Here's more about us...</p>
+</div>
+
+<script>
+    // Optional JavaScript to add more interactivity or effects
+</script>
 
 </body>
 </html>
