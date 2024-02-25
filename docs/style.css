@@ -11,7 +11,7 @@ body, html {
 
 .welcome {
     cursor: pointer;
-    font-size: 3em;
+    font-size: 4em;
     transition: transform 0.3s ease;
 }
 
@@ -35,7 +35,7 @@ body, html {
 }
 
 .logo {
-    width: 3em; 
+    width: 4em; 
     height: auto;
     margin-right: 10px; 
 }
