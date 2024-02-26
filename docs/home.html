@@ -15,5 +15,17 @@
     <div class="card"><p>Text 4</p></div>
 </div>
 
+<script>
+// Wait for the DOM to fully load
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all cards and add 'show' class to trigger the fade-in effect
+    document.querySelectorAll('.card').forEach(function(card) {
+        setTimeout(function() {
+            card.classList.add('show');
+        }, 300); // Delay can be adjusted
+    });
+});
+</script>
+
 </body>
 </html>
