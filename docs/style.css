@@ -9,39 +9,24 @@ body, html {
     background-color: #fff;
 }
 
+.container, .home-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
 .welcome {
     cursor: pointer;
     font-size: 3em;
-    animation: pulse 2s infinite; 
-    transition: transform 0.3s ease, color 0.3s ease; 
-    color: black; 
-}
-
-.welcome:hover {
-    animation: none; 
-    transform: scale(1.05);
-    color: #007bff; 
+    animation: pulse 2s infinite;
+    transition: transform 0.3s ease, opacity 0.5s ease;
+    color: black;
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
+    0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-.content {
-    opacity: 0;
-    transition: opacity 2s ease;
-    text-align: center;
-}
-
-.hidden {
-    display: none;
-}
-
-.container {
-    display: flex;
-    align-items: center;
 }
 
 .logo {
@@ -53,36 +38,20 @@ body, html {
 .card {
     width: 200px;
     height: 120px;
-    background-color: rgba(255, 255, 255, 0.8); /* Translucent background */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 10px;
-    transform: scale(0); /* Start scaled down */
-    transition: transform 0.5s ease;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: opacity 1s ease;
+    opacity: 0; /* Initially hidden */
 }
 
-#mainContent {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    height: 80%;
-}
-
-.home-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Use full viewport height */
-    padding: 20px; /* Add some padding */
+/* Transition effect for cards to fade in */
+.card.show {
+    opacity: 1;
 }
 
 
