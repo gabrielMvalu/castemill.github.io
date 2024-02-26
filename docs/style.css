@@ -1,5 +1,3 @@
-
-
 html {
     height: 100%;
 }
@@ -13,7 +11,7 @@ body {
     align-items: center;
     font-family: Arial, sans-serif;
     background: linear-gradient(45deg, #B433CF, #FF5C17);
-    background-attachment: fixed; /* Ensure background covers the full page */
+    background-attachment: fixed; 
 }
 
 /* Ensure any containers or elements inside body do not restrict its size */
