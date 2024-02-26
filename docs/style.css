@@ -10,7 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
-    background: linear-gradient(45deg, #B433CF, #FF6000);
+    background: linear-gradient(135deg, #B433CF, #FF6000);
     background-attachment: fixed; 
 }
 
@@ -72,11 +72,11 @@ body {
 }
 
 .frosted-glass {
-    background: rgba(126, 189, 255, 0.62);
+    background: rgba(126, 189, 255, 0.2);
     border-radius: 16px;
-    box-shadow: 4px 4px 12px rgba(77, 105, 112, 0.2);
+    box-shadow: 4px 4px 8px rgba(77, 105, 112, 0.6);
     backdrop-filter: blur(3.5px);
-    -webkit-backdrop-filter: blur(3.5px);
+    -webkit-backdrop-filter: blur(7.5px);
     border: 1px solid rgba(255, 255, 255, 1);
     width: 100%;
     height: 100%;
