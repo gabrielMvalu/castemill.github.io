@@ -6,8 +6,9 @@ body, html {
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
-    background-color: #fff;
+    background: linear-gradient(45deg, #9B175E54, #FF5C1754);
 }
+
 
 .container, .home-content {
     display: flex;
