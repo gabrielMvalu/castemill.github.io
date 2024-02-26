@@ -11,7 +11,7 @@ body, html {
 
 .welcome {
     cursor: pointer;
-    font-size: 4em;
+    font-size: 3em;
     animation: pulse 2s infinite; 
     transition: transform 0.3s ease, color 0.3s ease; 
     color: black; 
@@ -45,7 +45,7 @@ body, html {
 }
 
 .logo {
-    width: 4em; 
+    width: 3em; 
     height: auto;
     margin-right: 10px; 
 }
