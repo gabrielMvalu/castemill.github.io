@@ -74,12 +74,12 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    background: rgba(126, 189, 255, 0.78);
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 4px 4px 8px rgba(61, 116, 126, 0.2);
+    background: rgba(126, 189, 255, 0.62);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.5px);
+    -webkit-backdrop-filter: blur(3.5px);
+    border: 1px solid rgba(255, 255, 255, 1);
 }
 
 .card-back {
