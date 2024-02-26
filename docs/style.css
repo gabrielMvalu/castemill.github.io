@@ -54,9 +54,40 @@ body, html {
     opacity: 1;
 }
 
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.card {
+    perspective: 1000px; /* Depth effect */
 }
 
+.card-inner {
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    position: relative;
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Front and back styling */
+.card-front, .card-back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: 100%; /* Full width on smaller screens */
+        margin: 10px 0; /* Adjust margin for vertical stacking */
+    }
+
+    #mainContent, .home-content {
+        flex-direction: column; /* Stack cards vertically on smaller screens */
+    }
+}
