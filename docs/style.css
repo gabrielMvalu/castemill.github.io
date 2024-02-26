@@ -10,7 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
-    background: linear-gradient(45deg, #B433CF, #FF6000);
+    background: linear-gradient(135deg, #B433CF, #FF6000);
     background-attachment: fixed; 
 }
 
@@ -42,9 +42,9 @@ body {
     border-radius: 20px;
     background-image: linear-gradient(150deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
     backdrop-filter: blur(20px);
-    box-shadow: 0 1px 24px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 24px 10px rgba(0, 0, 0, 0.4);
     overflow: hidden;
-    transition: transform 0.2s ease-out;
+    transition: transform 0.5s ease-out;
 }
 
 .card-inner {
