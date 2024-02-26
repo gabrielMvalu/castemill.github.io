@@ -14,19 +14,13 @@ body {
     background-attachment: fixed; 
 }
 
-/* Ensure any containers or elements inside body do not restrict its size */
-.container, .home-content {
-    width: 100%; /* Full width */
-    max-width: 100%; /* Prevent overflow */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-}
-
-
 .container, .home-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .welcome {
@@ -43,16 +37,16 @@ body {
 }
 
 .logo {
-    width: 3em; 
+    width: 3em;
     height: auto;
-    margin-right: 10px; 
+    margin-right: 10px;
 }
 
 .card {
     width: 200px;
     height: 120px;
-    perspective: 1000px; /* Depth effect */
     margin: 10px;
+    perspective: 1000px;
 }
 
 .card-inner {
@@ -74,12 +68,29 @@ body {
     position: absolute;
     top: 0;
     left: 0;
+    border-radius: 16px;
+}
+
+.frosted-glass {
     background: rgba(126, 189, 255, 0.62);
     border-radius: 16px;
     box-shadow: 4px 4px 12px rgba(77, 105, 112, 0.2);
     backdrop-filter: blur(3.5px);
     -webkit-backdrop-filter: blur(3.5px);
     border: 1px solid rgba(255, 255, 255, 1);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 .card-back {
@@ -88,11 +99,12 @@ body {
 
 @media (max-width: 768px) {
     .card {
-        width: 100%; /* Full width on smaller screens */
-        margin: 10px 0; /* Adjust margin for vertical stacking */
+        width: 100%;
+        margin: 10px 0;
     }
 
     #mainContent, .home-content {
-        flex-direction: column; /* Stack cards vertically on smaller screens */
+        flex-direction: column;
     }
 }
+
