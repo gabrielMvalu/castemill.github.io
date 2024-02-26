@@ -10,7 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
-    background: linear-gradient(45deg, #B433CF, #FF5C17);
+    background: linear-gradient(45deg, #B433CF, #FF6000);
     background-attachment: fixed; 
 }
 
@@ -76,7 +76,7 @@ body {
     left: 0;
     background: rgba(126, 189, 255, 0.62);
     border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 4px 12px rgba(77, 105, 112, 0.2);
     backdrop-filter: blur(3.5px);
     -webkit-backdrop-filter: blur(3.5px);
     border: 1px solid rgba(255, 255, 255, 1);
