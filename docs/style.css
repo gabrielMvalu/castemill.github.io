@@ -75,3 +75,14 @@ body, html {
     width: 80%;
     height: 80%;
 }
+
+.home-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Use full viewport height */
+    padding: 20px; /* Add some padding */
+}
+
+
