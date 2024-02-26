@@ -93,7 +93,7 @@ body {
 }
 
 .card-back {
-    transform: rotateY(180deg);
+    transform: rotateY(360deg);
 }
 
 @media (max-width: 768px) {
