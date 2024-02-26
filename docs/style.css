@@ -49,3 +49,29 @@ body, html {
     height: auto;
     margin-right: 10px; 
 }
+
+.card {
+    width: 200px;
+    height: 120px;
+    background-color: rgba(255, 255, 255, 0.8); /* Translucent background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin: 10px;
+    transform: scale(0); /* Start scaled down */
+    transition: transform 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#mainContent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+}
