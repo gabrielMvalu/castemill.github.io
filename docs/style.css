@@ -22,7 +22,7 @@ body, html {
     font-size: 3em;
     animation: pulse 2s infinite;
     transition: transform 0.3s ease, opacity 0.5s ease;
-    color: black;
+    color: white;
 }
 
 @keyframes pulse {
