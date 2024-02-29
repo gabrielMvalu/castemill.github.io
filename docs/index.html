@@ -3,74 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CASTEMILL SRL</title>
+    <title>CASTEMILL SRL - Innovative Solutions for Your Business</title>
+    <meta name="description" content="CASTEMILL SRL specializes in providing innovative solutions for businesses. Learn about our mission, contact us, or discover more about our services.">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    
-<div class="container">
-    <img src="castemillLOGO.png" alt="Castemill Logo" class="logo">
-    <div id="welcomeText" class="welcome">CASTEMILL SRL</div>
-</div>
-    
-<div id="mainContent" class="home-content">
-    <div class="card">
-        <div class="card-inner">
-            <div class="card-front">
-                <div class="frosted-glass"></div>
-                <div class="content"><p>Text 1</p></div>
-            </div>
-            <div class="card-back">
-                <div class="frosted-glass"></div>
-                <div class="content"><p>More Info 1</p></div>
-            </div>
+    <header class="topbar">
+        <div class="logo-container">
+            <img src="castemillLOGO.png" alt="Castemill Logo" class="logo">
+            <span>CASTEMILL SRL</span>
         </div>
-    </div>
-    <div class="card">
-        <div class="card-inner">
-            <div class="card-front">
-                <div class="frosted-glass"></div>
-                <div class="content"><p>Text 2</p></div>
-            </div>
-            <div class="card-back">
-                <div class="frosted-glass"></div>
-                <div class="content"><p>More Info 2</p></div>
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-inner">
-            <div class="card-front">
-                <div class="frosted-glass"></div>
-                <div class="content"><p>Text 3</p></div>
-            </div>
-            <div class="card-back">
-                <div class="frosted-glass"></div>
-                <div class="content"><p>More Info 3</p></div>
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-inner">
-            <div class="card-front">
-                <div class="frosted-glass"></div>
-                <div class="content"><p>Text 4</p></div>
-            </div>
-            <div class="card-back">
-                <div class="frosted-glass"></div>
-                <div class="content"><p>More Info 4</p></div>
-            </div>
-        </div>
-    </div>
-</div>
+        <nav class="navigation">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#mission">Mission</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.card').forEach(function(card) {
-        card.classList.add('show');
-    });
-});
-</script>
+    <div class="morse-code">
+        <!-- C: -.-. -->
+        <div class="letter" id="letter-C">
+            <button class="dash"></button><button class="dot"></button><button class="dash"></button><button class="dot"></button>
+        </div>
+        <!-- A: .- -->
+        <div class="letter" id="letter-A">
+            <button class="dot"></button><button class="dash"></button>
+        </div>
+        <!-- S: ... -->
+        <div class="letter" id="letter-S">
+            <button class="dot"></button><button class="dot"></button><button class="dot"></button>
+        </div>
+        <!-- T: - -->
+        <div class="letter" id="letter-T">
+            <button class="dash"></button>
+        </div>
+        <!-- E: . -->
+        <div class="letter" id="letter-E">
+            <button class="dot"></button>
+        </div>
+        <!-- M: -- -->
+        <div class="letter" id="letter-M">
+            <button class="dash"></button><button class="dash"></button>
+        </div>
+        <!-- I: .. -->
+        <div class="letter" id="letter-I">
+            <button class="dot"></button><button class="dot"></button>
+        </div>
+        <!-- L: .-.. -->
+        <div class="letter" id="letter-L1">
+            <button class="dot"></button><button class="dash"></button><button class="dot"></button><button class="dot"></button>
+        </div>
+        <!-- L: .-.. -->
+        <div class="letter" id="letter-L2">
+            <button class="dot"></button><button class="dash"></button><button class="dot"></button><button class="dot"></button>
+        </div>
+    </div>
 
+
+
+    <div id="letterDisplay" class="display-window">
+        <p id="displayedLetter"></p>
+    </div>
+    
+      
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const displayedLetter = document.getElementById('displayedLetter'); // Elementul care afișează litera
+        
+            document.querySelectorAll('.letter').forEach(function(letter) {
+                letter.addEventListener('mouseover', function() {
+                    // Setează textul în fereastra de afișare când mouse-ul este deasupra butonului
+                    var letterText = this.id.replace('letter-', '');
+                    displayedLetter.innerText = "Text pentru " + letterText; // Actualizează textul afișat
+                });
+        
+                letter.addEventListener('mouseout', function() {
+                    // Îndepărtează textul când mouse-ul părăsește butonul
+                    displayedLetter.innerText = ""; // Șterge textul afișat
+                });
+            });
+        });
+        </script>
+         
+      
 </body>
 </html>
