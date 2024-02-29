@@ -1,104 +1,172 @@
-html {
-    height: 100%;
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #B433CF, #FF6000);
-    background-attachment: fixed; 
+body, html {
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+  background: url('bk.png') no-repeat center center fixed; 
+  background-size: cover;
 }
 
-.container, .home-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    box-sizing: border-box;
+/* Top Bar Styles */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1.5rem;
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 10px 60px rgba(100, 100, 100, 0.663);
 }
 
-.welcome {
-    cursor: pointer;
-    font-size: 3em;
-    color: white;
+.logo-container {
+  display: flex;
+  align-items: center;
 }
 
 .logo {
-    width: 3em;
-    height: auto;
-    margin-right: 10px;
+  max-width: 100px; /* Adjust logo size as needed */
+  margin-right: 0.5rem;
 }
 
-.card {
-    width: 200px;
-    height: 120px;
-    margin: 10px;
-    border-radius: 20px;
-    background-image: linear-gradient(150deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 1px 24px 10px rgba(0, 0, 0, 0.4);
-    overflow: hidden;
-    transition: transform 0.5s ease-out;
+.logo-container span {
+  font-size: 5rem;
+  font-weight: bold;
+  color: #3186ae; /* Adjust the color to fit your brand */
 }
 
-.card-inner {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
+.navigation ul {
+  list-style: none;
+  display: flex;
 }
 
-.card:hover {
-    transform: perspective(1000px) scale(1.05) rotateX(var(--main-angle)) rotateY(calc(var(--main-angle) * -1));
+.navigation li {
+  margin-left: 2rem; /* Space between navigation items */
 }
 
-.card-front, .card-back {
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
+.navigation a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  transition: color 0.3s ease;
 }
 
-.frosted-glass {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    border-radius: 16px;
+.navigation a:hover {
+  color: #007bff;
 }
 
-.content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
+.logo:hover {
+  animation: pulse 0.5s infinite;
 }
 
-.card-back {
-    transform: rotateY(180deg);
+@keyframes pulse {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.1);
+  }
+  100% {
+      transform: scale(1);
+  }
 }
 
-@media (max-width: 768px) {
-    .card {
-        width: 100%;
-        margin: 10px 0;
-    }
 
-    #mainContent, .home-content {
-        flex-direction: column;
-    }
+
+
+.morse-code {
+  display: flex;
+  flex-wrap: wrap; /* Permite elementelor să treacă pe linia următoare dacă este necesar, dar încercăm să evităm acest lucru pentru desktop */
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  gap: 50px 0; 
+  margin-top: 50px;
 }
+
+.morse-code button {
+  margin: 2px; /* Spațiu redus între butoane */
+  border: none;
+  width: 35px; /* Reducem dimensiunea inițială pentru desktop */
+  height: 35px; /* Reducem dimensiunea inițială pentru desktop */
+  background-color: #ff0000;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 15px 20px 25px rgba(45, 45, 45, 1);
+}
+
+.morse-code button.dash {
+  border-radius: 15px;
+  width: 70px; /* Dimensiune ajustată pentru dash */
+}
+
+.morse-code button.dot {
+  border-radius: 50%;
+  position: relative;
+  top: 50%;
+  transform: translateY(50%);
+}
+
+.morse-code button:hover {
+  background-color: #ff383894;
+}
+
+.letter {
+  display: inline-flex; /* Menține alinierea verticală */
+  cursor: pointer;
+  margin-right: 20px; /* Spațiu redus între grupurile de litere */
+}
+
+.letter:hover .dash,
+.letter:hover .dot {
+  background-color: #fb00006e;
+}
+
+/* Media Queries pentru ecrane mai mici de 600px */
+@media (max-width: 600px) {
+  .morse-code button {
+    margin: 1% 1%; /* Spațiu ajustat pentru ecrane mici */
+    width: 5%; /* Lățime procentuală pentru a se adapta la ecrane mici */
+    height: 5%; /* Înălțime procentuală pentru a se adapta la ecrane mici */
+  }
+
+  .morse-code button.dash {
+    width: 10%; /* Lățime procentuală ajustată pentru dash pe ecrane mici */
+  }
+
+  .letter {
+    margin-right: 2%; /* Spațiu ajustat între grupurile de litere pe ecrane mici */
+  }
+}
+
+
+.display-window {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  gap: 50px 0; 
+  margin-top: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%; 
+  max-width: 600px; 
+  height: 450px; 
+  background-color: rgba(144, 0, 255, 0.628); /* Transparent background */
+  color: #000;
+  font-size: 24px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 15px 25px 12px rgba(0, 0, 0, 0.514);
+}
+
+
+
 
 
 
