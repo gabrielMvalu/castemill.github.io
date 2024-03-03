@@ -1,94 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CASTEMILL SRL - Innovative Solutions for Your Business</title>
-    <meta name="description" content="CASTEMILL SRL specializes in providing innovative solutions for businesses. Learn about our mission, contact us, or discover more about our services.">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery Layout</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
 </head>
 <body>
-    <header class="topbar">
-        <div class="logo-container">
-            <img src="castemillLOGO.png" alt="Castemill Logo" class="logo">
-            <span>CASTEMILL SRL</span>
-        </div>
-        <nav class="navigation">
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#mission">Mission</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="morse-code">
-        <!-- C: -.-. -->
-        <div class="letter" id="letter-C">
-            <button class="dash"></button><button class="dot"></button><button class="dash"></button><button class="dot"></button>
-        </div>
-        <!-- A: .- -->
-        <div class="letter" id="letter-A">
-            <button class="dot"></button><button class="dash"></button>
-        </div>
-        <!-- S: ... -->
-        <div class="letter" id="letter-S">
-            <button class="dot"></button><button class="dot"></button><button class="dot"></button>
-        </div>
-        <!-- T: - -->
-        <div class="letter" id="letter-T">
-            <button class="dash"></button>
-        </div>
-        <!-- E: . -->
-        <div class="letter" id="letter-E">
-            <button class="dot"></button>
-        </div>
-        <!-- M: -- -->
-        <div class="letter" id="letter-M">
-            <button class="dash"></button><button class="dash"></button>
-        </div>
-        <!-- I: .. -->
-        <div class="letter" id="letter-I">
-            <button class="dot"></button><button class="dot"></button>
-        </div>
-        <!-- L: .-.. -->
-        <div class="letter" id="letter-L1">
-            <button class="dot"></button><button class="dash"></button><button class="dot"></button><button class="dot"></button>
-        </div>
-        <!-- L: .-.. -->
-        <div class="letter" id="letter-L2">
-            <button class="dot"></button><button class="dash"></button><button class="dot"></button><button class="dot"></button>
-        </div>
+  <div class="gallery">
+    <!-- Gallery item 1 -->
+    <div class="gallery-item">
+      <p class="description">Inovație la Orizont</p>
+      <div class="image-circle"><img src="globe2.png" alt="Description"></div>
+      <p class="description">Castemill SRL se lansează pe piața tehnologiei cu o viziune clară - 
+         să aducă inovația în software-ul personalizat și soluțiile de data science.
+         Echipa pasionată și dedicată este gata să transforme ideile îndrăznețe în realitate.</p>
     </div>
 
-
-
-    <div id="letterDisplay" class="display-window">
-        <p id="displayedLetter"></p>
+    <!-- Gallery item 5 -->
+    <div class="gallery-item">
+      <p class="description">Soluții Personalizate</p>
+      <div class="image-circle"><img src="8.png" alt="Description"></div>
+      <p class="description">La Castemill SRL, fiecare proiect este o nouă aventură. Specializați în software customizat,
+         ne dedicăm să îndeplinim nevoile unice ale clienților noștri, 
+         oferind soluții tailor-made care depășesc așteptările.</p>
     </div>
-    
-      
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const displayedLetter = document.getElementById('displayedLetter'); // Elementul care afișează litera
-        
-            document.querySelectorAll('.letter').forEach(function(letter) {
-                letter.addEventListener('mouseover', function() {
-                    // Setează textul în fereastra de afișare când mouse-ul este deasupra butonului
-                    var letterText = this.id.replace('letter-', '');
-                    displayedLetter.innerText = "Text pentru " + letterText; // Actualizează textul afișat
-                });
-        
-                letter.addEventListener('mouseout', function() {
-                    // Îndepărtează textul când mouse-ul părăsește butonul
-                    displayedLetter.innerText = ""; // Șterge textul afișat
-                });
-            });
-        });
-    </script>
-         
-      
+
+    <!-- Gallery item 6 -->
+    <div class="gallery-item">
+      <p class="description">Automatizare Avansată</p>
+      <div class="image-circle"><img src="7.png" alt="Description"></div>
+      <p class="description">Echipa Castemill SRL crede în puterea automatizării pentru a simplifica procesele complexe. 
+        Prin tehnologie de ultimă oră, ne propunem să eficientizăm operațiunile afacerilor, economisind timp și resurse.</p>
+    </div>
+
+     <!-- Gallery item 2 -->
+      <div class="gallery-item">
+        <p class="description">Data Science de Buzunar</p>
+        <div class="image-circle"><img src="1.png" alt="Description"></div>
+        <p class="description">Cu un nucleu solid de experți în data science, Castemill SRL este la frontiera 
+          analizei de date.   Transformăm volume mari de informații 
+          în insight-uri valoroase, conducând decizii de afaceri informate.</p>
+      </div>
+  
+      <!-- Gallery item 4 -->
+      <div class="gallery-item">
+        <p class="description">Colaborare și Parteneriat                       </p>
+        <div class="image-circle"><img src="3.png" alt="Description"></div>
+        <p class="description">La Castemill SRL, colaborarea este cheia succesului. Lucrăm îndeaproape cu clienții noștri 
+          pentru a asigura că fiecare proiect reflectă viziunea și obiectivele lor, creând parteneriate durabile.</p>
+      </div>
+  
+      <!-- Gallery item 5 -->
+      <div class="gallery-item">
+        <p class="description">Tehnologie de Pionierat                            </p>
+        <div class="image-circle"><img src="4.png" alt="Description"></div>
+        <p class="description">Misiunea noastră este să rămânem în fruntea inovației tehnologice. Investim
+           constant în cercetare și dezvoltare pentru a oferi soluții de software care să seteze noi standarde pe piață.</p>
+      </div>
+  
+      <!-- Gallery item 6 -->
+      <div class="gallery-item">
+        <p class="description">Angajament pentru Excelență</p>
+        <div class="image-circle"><img src="5.png" alt="Description"></div>
+        <p class="description">Calitatea este în centrul tuturor eforturilor noastre la Castemill SRL. Fiecare 
+          linie de cod și fiecare analiză de date este realizată cu cea mai mare atenție și dedicare pentru excelență.</p>
+      </div>
+
+  </div>
+
+  <!-- Contact button -->
+  <div class="contact-btn">Contact</div>
+
+  <!-- Contact modal -->
+  <div class="contact-modal hidden">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <p>Pentru intrebari, sunati la: <strong>+4(0)721.720.155</strong></p>
+    </div>
+  </div>
 </body>
 </html>
 
