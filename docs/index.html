@@ -9,8 +9,8 @@
     <link rel="canonical" href="https://www.castemill.com">
     <style>
         :root {
-            --color-primary: #5877e5dc;
-            --color-secondary: #62dff8;
+            --color-primary: #507cfdfa;
+            --color-secondary: #4cf0ffd0;
             --color-accent: #ff8e3c;
             --color-background: #0f172a;
             --color-surface: #1e293b;
@@ -91,7 +91,7 @@
         .logo {
             width: 100%;
             height: 100%;
-            animation: rotateLogo 10s linear infinite, pulseLogo 4s ease-in-out infinite alternate;
+            animation: rotateLogo 10s linear infinite, pulseLogo 3s ease-in-out infinite alternate;
         }
         @keyframes rotateLogo {
             0% { transform: rotateY(0deg); }
@@ -239,6 +239,79 @@
             border-top: 1px solid rgba(255,255,255,0.1);
             position: relative;
             z-index: 1;
+            overflow: hidden;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            position: relative;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff00ee, #00ff00, #00ffff, #ff00ee);
+            border-radius: 50px;
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-item:hover::before {
+            opacity: 1;
+        }
+
+        .contact-item a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover a {
+            color: var(--color-accent);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .contact-item:hover .contact-icon {
+            animation: pulse 1s infinite;
         }
     </style>
 </head>
@@ -338,8 +411,20 @@ while True:
             <button class="cta-button" id="demo">Solicită o Demonstrație</button>
             <button class="cta-button" id="consult">Consultanță Gratuită</button>
             <button class="cta-button" id="contact">Contactează-ne</button>
-            <p>Descoperă puterea AI: <strong>+4(0)721.720.155</strong></p>
-            <p>Email: <a href="mailto:office@castemill.com">office@castemill.com</a></p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <a href="tel:+40721720155">
+                        <span class="contact-icon">📞</span>
+                        +4(0)721.720.155
+                    </a>
+                </div>
+                <div class="contact-item">
+                    <a href="mailto:office@castemill.com">
+                        <span class="contact-icon">✉️</span>
+                        office@castemill.com
+                    </a>
+                </div>
+            </div>
         </footer>
     </main>
     <script type="application/ld+json">
@@ -363,7 +448,5 @@ while True:
     </script>
 </body>
 </html>
-
-
 
 
