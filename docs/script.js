@@ -1,27 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const contactModal = document.querySelector('.contact-modal');
-  const closeBtn = document.querySelector('.close-btn');
-
-  document.getElementById('sign-up').addEventListener('click', function() {
-    contactModal.classList.remove('hidden');
-  });
-
-  document.getElementById('learn-more').addEventListener('click', function() {
-    contactModal.classList.remove('hidden');
-  });
-
-  document.getElementById('test-ai').addEventListener('click', function() {
-    contactModal.classList.remove('hidden');
-  });
-
-  closeBtn.addEventListener('click', function() {
-    contactModal.classList.add('hidden');
-  });
-
-  window.addEventListener('click', function(event) {
-    if (event.target === contactModal) {
-      contactModal.classList.add('hidden');
+    const particlesContainer = document.getElementById('particles');
+    
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.top = `${Math.random() * 100}%`;
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.width = `${Math.random() * 5 + 2}px`;
+        particle.style.height = particle.style.width;
+        particle.style.animation = `floatParticle ${Math.random() * 3 + 2}s infinite alternate`;
+        particlesContainer.appendChild(particle);
     }
-  });
 });
 
