@@ -1,44 +1,143 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Descoperă Soluții AI Personalizate pentru Afacerea Ta</title>
-  <link rel="stylesheet" href="style.css">
-  <script defer src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Castemill SRL - Soluții AI Personalizate</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #1a1a1a; /* Fundal închis pentru contrast */
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            background: linear-gradient(135deg, #4a4a4a, #2a2a2a);
+            color: white;
+            padding: 1rem 0; /* Reducem puțin padding-ul, dar nu dramatic */
+            text-align: center;
+        }
+        .logo {
+            width: 80px; /* Reducem puțin dimensiunea logo-ului */
+            height: 80px;
+            margin-bottom: 0.5rem;
+        }
+        .company-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+        h1 {
+            font-size: 1.8rem; /* Reducem puțin dimensiunea fontului pentru h1 */
+            margin-bottom: 0.3rem;
+        }
+        .tagline {
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+        .content {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            gap: 2rem;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.1); /* Fundal foarte transparent */
+            backdrop-filter: blur(15px); /* Efect de blur mai pronunțat */
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 12px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+        }
+        .card h2 {
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 0;
+        }
+        .card p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 1rem;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .header h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .cta-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            border: none;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 0.5rem;
+            cursor: pointer;
+        }
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <header class="header">
-      <h1>Descoperă Soluții AI Personalizate pentru Afacerea Ta</h1>
-      <h2>Transformă-ți afacerea cu servicii de top în implementarea AI, LLM și Machine Learning.</h2>
+    <header>
+        <img src="logo.png" alt="Logo" class="logo">
+        <div class="company-name">Castemill SRL</div>
+        <h1>Descoperă Soluții AI Personalizate pentru Afacerea Ta</h1>
+        <h2>Transformă-ți afacerea cu servicii de top în implementarea AI, LLM și Machine Learning.</h2>
     </header>
-    <main class="main">
-      <section class="card">
-        <h3>Expertiză și Inovație în AI</h3>
-        <p>La Castemill SRL, avem o vastă experiență în implementarea modelelor de limbaj mare (LLM) și Machine Learning pentru diverse afaceri. Ne angajăm să oferim soluții personalizate care să satisfacă nevoile specifice ale fiecărui client, asigurându-ne că respectăm cele mai înalte standarde de calitate și securitate, conform ISO 270001. Echipa noastră este compusă din experți certificați CISA, pionieri în auditul sistemelor AI.</p>
-      </section>
-      <section class="card">
-        <h3>Satisfacția Clientului pe Primul Loc</h3>
-        <p>Fiecare proiect pe care îl abordăm este tratat cu maximă seriozitate și profesionalism. Orientarea noastră spre calitate și satisfacția clienților ne-a adus recunoașterea ca lideri în domeniu. Suntem aici pentru a transforma ideile tale îndrăznețe în realitate, oferindu-ți soluții AI și Machine Learning de ultimă generație.</p>
-      </section>
-      <section class="card">
-        <h3>Testează și Învață Mai Mult</h3>
-        <p>Te invităm să testezi funcționalități simple de tip plug & play ale soluțiilor noastre AI și să înveți mai multe despre cum putem transforma afacerea ta. Abonează-te la newsletter-ul nostru pentru a rămâne la curent cu ultimele inovații și a beneficia de expertiza noastră continuă.</p>
-      </section>
-    </main>
-    <footer class="footer">
-      <button class="cta-button" id="sign-up">Sign Up</button>
-      <button class="cta-button" id="learn-more">Learn More</button>
-      <button class="cta-button" id="test-ai">Testează AI</button>
-    </footer>
-    <div class="contact-modal hidden">
-      <div class="modal-content">
-        <span class="close-btn">&times;</span>
-        <p>Pentru întrebări, sunați la: <strong>+4(0)721.720.155</strong></p>
-      </div>
+    <div class="container">
+        <div class="content">
+            <div class="card">
+                <h3>Expertiză și Inovație în AI</h3>
+                <p>La Castemill SRL, avem o vastă experiență în implementarea modelelor de limbaj mare (LLM) și Machine Learning pentru diverse afaceri. Ne angajăm să oferim soluții personalizate care să satisfacă nevoile specifice ale fiecărui client, asigurându-ne că respectăm cele mai înalte standarde de calitate și securitate, conform ISO 270001. Echipa noastră este compusă din experți certificați CISA, pionieri în auditul sistemelor AI.</p>
+            </div>
+            <div class="card">
+                <h3>Satisfacția Clientului pe Primul Loc</h3>
+                <p>Fiecare proiect pe care îl abordăm este tratat cu maximă seriozitate și profesionalism. Orientarea noastră spre calitate și satisfacția clienților ne-a adus recunoașterea ca lideri în domeniu. Suntem aici pentru a transforma ideile tale îndrăznețe în realitate, oferindu-ți soluții AI și Machine Learning de ultimă generație.</p>
+            </div>
+            <div class="card">
+                <h3>Testează și Învață Mai Mult</h3>
+                <p>Te invităm să testezi funcționalități simple de tip plug & play ale soluțiilor noastre AI și să înveți mai multe despre cum putem transforma afacerea ta. Abonează-te la newsletter-ul nostru pentru a rămâne la curent cu ultimele inovații și a beneficia de expertiza noastră continuă.</p>
+            </div>
+        </div>
+        <footer class="footer">
+            <button class="cta-button" id="sign-up">Sign Up</button>
+            <button class="cta-button" id="learn-more">Learn More</button>
+            <button class="cta-button" id="test-ai">Testează AI</button>
+            <p>Pentru întrebări, sunați la: <strong>+4(0)721.720.155</strong></p>
+        </footer>
     </div>
-  </div>
 </body>
 </html>
 
