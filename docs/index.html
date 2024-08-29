@@ -3,77 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Castemill SRL - Soluții AI Personalizate</title>
+    <title>Castemill SRL - Soluții AI Avansate</title>
     <style>
         :root {
-            --color-primary: #68c0dbb0;
-            --color-secondary: #8bbadb;
+            --color-primary: #81ffd7dc;
+            --color-secondary: #9fe97fb1;
             --color-accent: #ff8e3c;
             --color-background: #0f172a;
             --color-surface: #1e293b;
             --color-text: #f8fafc;
+            --color-code: #39FF14;
         }
-        body {
+        body, html {
             font-family: 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, var(--color-background), var(--color-surface));
+            background: var(--color-background);
             color: var(--color-text);
             line-height: 1.6;
             margin: 0;
             padding: 0;
+            height: 100%;
+            overflow-x: hidden;
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        .code-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        .code-background pre {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 300%;
+            margin: 0;
+            line-height: 1.5em;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            animation: scrollCode 60s linear infinite;
+            color: var(--color-code);
+            font-size: 0.8rem;
+            text-shadow: 0 0 5px rgba(255,255,255,0.1);
+        }
+        @keyframes scrollCode {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-66.666%); }
         }
         header {
-            background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
             color: white;
-            padding: 3rem 0;
-            text-align: center;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            padding: 1rem 0;
             position: relative;
             overflow: hidden;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        header::before {
-            content: '';
+        .header-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .logo-container {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            margin-right: 2rem;
+        }
+        .logo {
+            width: 100%;
+            height: 100%;
+            animation: rotateLogo 10s linear infinite, pulseLogo 2s ease-in-out infinite alternate;
+        }
+        @keyframes rotateLogo {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+        @keyframes pulseLogo {
+            0% { transform: scale(1) rotateY(0deg); }
+            100% { transform: scale(1.1) rotateY(360deg); }
+        }
+        .text-content {
+            flex-grow: 1;
+        }
+        .company-name {
+            font-size: 1.8rem;
+            margin-bottom: 0.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: glowText 2s ease-in-out infinite alternate;
+        }
+        @keyframes glowText {
+            0% { text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+            100% { text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px var(--color-accent); }
+        }
+        h1 {
+            font-size: 1.2rem;
+            margin: 0;
+            animation: slideInFromRight 1s ease-out;
+        }
+        @keyframes slideInFromRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .particles {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            animation: shine 5s infinite linear;
+            overflow: hidden;
         }
-        @keyframes shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+        .particle {
+            position: absolute;
+            background-color: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            pointer-events: none;
         }
-        .logo {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 1rem;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
-            animation: float 3s ease-in-out infinite;
+        @keyframes floatParticle {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(10px, -10px); }
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .shine-effect {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            right: -50%;
+            bottom: -50%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            transform: rotate(25deg);
+            animation: shineEffect 3s infinite;
         }
-        .company-name {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            background: linear-gradient(45deg, var(--color-accent), #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        @keyframes shineEffect {
+            0% { transform: translateX(-100%) rotate(25deg); }
+            100% { transform: translateX(100%) rotate(25deg); }
         }
         .content {
             display: flex;
@@ -156,39 +234,113 @@
             padding: 2rem 0;
             background: linear-gradient(135deg, var(--color-surface), var(--color-background));
             border-top: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
+    <div class="code-background">
+        <pre>
+import numpy as np
+import tensorflow as tf
+from sklearn.model_selection import train_test_split
+
+def create_model():
+    model = tf.keras.Sequential([
+        tf.keras.layers.Dense(64, activation='relu', input_shape=(10,)),
+        tf.keras.layers.Dense(32, activation='relu'),
+        tf.keras.layers.Dense(1, activation='sigmoid')
+    ])
+    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+    return model
+
+def train_model(X, y):
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    model = create_model()
+    model.fit(X_train, y_train, epochs=100, batch_size=32, validation_split=0.2, verbose=0)
+    return model
+
+def predict(model, X):
+    return model.predict(X)
+
+# Generate sample data
+X = np.random.rand(1000, 10)
+y = np.random.randint(2, size=(1000, 1))
+
+# Train the model
+trained_model = train_model(X, y)
+
+# Make predictions
+new_data = np.random.rand(5, 10)
+predictions = predict(trained_model, new_data)
+print("Predictions:", predictions)
+
+# Automate data processing
+def process_data(data):
+    processed_data = data * 2 + 1
+    return processed_data
+
+# Simulate real-time data processing
+import time
+while True:
+    incoming_data = np.random.rand(10)
+    processed_result = process_data(incoming_data)
+    print("Processed data:", processed_result)
+    time.sleep(1)
+        </pre>
+    </div>
     <header>
-        <img src="logo.png" alt="Logo" class="logo">
-        <div class="company-name">Castemill SRL</div>
-        <h1>Descoperă Soluții AI Personalizate pentru Afacerea Ta</h1>
+        <div class="shine-effect"></div>
+        <div class="particles">
+            <!-- Adăugăm 20 de particule -->
+            <script>
+                for (let i = 0; i < 20; i++) {
+                    document.write(`<div class="particle" style="
+                        top: ${Math.random() * 100}%;
+                        left: ${Math.random() * 100}%;
+                        width: ${Math.random() * 5 + 2}px;
+                        height: ${Math.random() * 5 + 2}px;
+                        animation: floatParticle ${Math.random() * 3 + 2}s infinite alternate;
+                    "></div>`);
+                }
+            </script>
+        </div>
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="logo.png" alt="Logo" class="logo">
+            </div>
+            <div class="text-content">
+                <div class="company-name">Castemill SRL</div>
+                <h1>Soluții AI Avansate pentru Viitorul Afacerii Tale</h1>
+            </div>
+        </div>
     </header>
     <div class="container">
         <div class="content">
             <div class="card">
                 <h3>Expertiză și Inovație în AI</h3>
-                <p>La Castemill SRL, avem o vastă experiență în implementarea modelelor de limbaj mare (LLM) și Machine Learning pentru diverse afaceri. Ne angajăm să oferim soluții personalizate care să satisfacă nevoile specifice ale fiecărui client, asigurându-ne că respectăm cele mai înalte standarde de calitate și securitate, conform ISO 270001.</p>
+                <p>La Castemill SRL, avem o vastă experiență în implementarea modelelor de limbaj mare (LLM) și Machine Learning pentru diverse afaceri. Ne angajăm să oferim soluții personalizate care să satisfacă nevoile specifice ale fiecărui client, asigurându-ne că respectăm cele mai înalte standarde de calitate și securitate, conform ISO 270001. Echipa noastră este compusă din experți certificați CISA, pionieri în auditul sistemelor AI.</p>
             </div>
             <div class="card">
                 <h3>Satisfacția Clientului pe Primul Loc</h3>
-                <p>Fiecare proiect pe care îl abordăm este tratat cu maximă seriozitate și profesionalism. Orientarea noastră spre calitate și satisfacția clienților ne-a adus recunoașterea ca lideri în domeniu. Suntem aici pentru a transforma ideile tale îndrăznețe în realitate.</p>
+                <p>Fiecare proiect pe care îl abordăm este tratat cu maximă seriozitate și profesionalism. Orientarea noastră spre calitate și satisfacția clienților ne-a adus recunoașterea ca lideri în domeniu. Suntem aici pentru a transforma ideile tale îndrăznețe în realitate, oferindu-ți soluții AI și Machine Learning de ultimă generație.</p>
             </div>
             <div class="card">
                 <h3>Testează și Învață Mai Mult</h3>
-                <p>Te invităm să testezi funcționalități simple de tip plug & play ale soluțiilor noastre AI și să înveți mai multe despre cum putem transforma afacerea ta. Abonează-te la newsletter-ul nostru pentru a rămâne la curent cu ultimele inovații.</p>
+                <p>Te invităm să testezi funcționalități simple de tip plug & play ale soluțiilor noastre AI și să înveți mai multe despre cum putem transforma afacerea ta. Abonează-te la newsletter-ul nostru pentru a rămâne la curent cu ultimele inovații și a beneficia de expertiza noastră continuă.</p>
             </div>
         </div>
         <footer class="footer">
-            <button class="cta-button" id="sign-up">Sign Up</button>
-            <button class="cta-button" id="learn-more">Learn More</button>
-            <button class="cta-button" id="test-ai">Testează AI</button>
-            <p>Pentru întrebări, sunați la: <strong>+4(0)721.720.155</strong></p>
+            <button class="cta-button" id="demo">Solicită o Demonstrație</button>
+            <button class="cta-button" id="consult">Consultanță Gratuită</button>
+            <button class="cta-button" id="contact">Contactează-ne</button>
+            <p>Descoperă puterea AI: <strong>+4(0)721.720.155</strong></p>
         </footer>
     </div>
 </body>
 </html>
+
 
 
 
