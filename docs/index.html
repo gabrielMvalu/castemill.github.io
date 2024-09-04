@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-        <!-- Google tag (gtag.js) -->
+    <!-- Tag Google Analytics pentru urmărirea traficului pe site -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8K077E6D29"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-    
       gtag('config', 'G-8K077E6D29');
     </script>
+    
+    <!-- Setări de bază pentru pagina HTML -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Titlul paginii afișat în bara browser-ului -->
     <title>Castemill SRL - Soluții Software Personalizate pentru Business-ul Tău</title>
-    <meta name="description" content="Castemill SRL oferă soluții software personalizate pentru afaceri, inclusiv software de estimare a prețurilor în construcții și alte soluții la cerere. Expertiză în dezvoltarea de aplicații personalizate pentru a satisface nevoile fiecărui client.">
+    
+    <!-- Meta descriere pentru optimizare SEO -->
+    <meta name="description" content="Castemill SRL oferă soluții software personalizate pentru afaceri, inclusiv unelte avansate de estimare a prețurilor bazate pe AI, soluții de optimizare a resurselor, automatizări și alte aplicații personalizate pentru diverse industrii, de la construcții și producție până la retail și logistică.">
+    
+    <!-- Cuvinte cheie pentru optimizare SEO -->
     <meta name="keywords" content="software personalizat, dezvoltare software, estimare prețuri construcții, soluții IT, licitații construcții, management buget construcții">
+    
+    <!-- Link către versiunea canonică a paginii -->
     <link rel="canonical" href="https://www.castemill.com">
+    
+    <!-- Legătura la fișierul CSS pentru stilizarea paginii -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Secțiunea de fundal de cod, care afișează un exemplu de cod Python -->
     <div class="code-background">
+        <!-- Cod Python afișat pe pagina principală (poate fi mutat pe o altă pagină) -->
         <pre>
 import numpy as np
 import tensorflow as tf
@@ -43,24 +56,24 @@ def train_model(X, y):
 def predict(model, X):
     return model.predict(X)
 
-# Generate sample data
+# Generarea unor date de test și antrenarea modelului
 X = np.random.rand(1000, 10)
 y = np.random.randint(2, size=(1000, 1))
 
-# Train the model
+# Antrenarea modelului
 trained_model = train_model(X, y)
 
-# Make predictions
+# Realizarea de predicții
 new_data = np.random.rand(5, 10)
 predictions = predict(trained_model, new_data)
 print("Predictions:", predictions)
 
-# Automate data processing
+# Automatizarea procesării datelor
 def process_data(data):
     processed_data = data * 2 + 1
     return processed_data
 
-# Simulate real-time data processing
+# Simularea procesării datelor în timp real
 import time
 while True:
     incoming_data = np.random.rand(10)
@@ -69,38 +82,54 @@ while True:
     time.sleep(1)
         </pre>
     </div>
+    
+    <!-- Header-ul paginii: logo și titlul companiei -->
     <header>
-        <div class="shine-effect"></div>
-        <div class="particles" id="particles"></div>
+        <div class="shine-effect"></div> <!-- Efect vizual de strălucire -->
+        <div class="particles" id="particles"></div> <!-- Fundal cu particule animate -->
+        
         <div class="header-content">
+            <!-- Containerul pentru logo-ul companiei -->
             <div class="logo-container">
                 <img src="logo.png" alt="Logo" class="logo">
             </div>
+            <!-- Numele companiei și sloganul -->
             <div class="text-content">
                 <div class="company-name">Castemill SRL</div>
                 <h1>Soluții Software Personalizate pentru Business-ul Tău</h1>
             </div>
         </div>
     </header>
+    
+    <!-- Secțiunea principală a paginii -->
     <main class="container">
         <div class="content">
+            <!-- Primul card: Soluții software personalizate -->
             <div class="card">
                <h3>Soluții Software Personalizate</h3>
                <p>La Castemill SRL, dezvoltăm soluții software adaptate fiecărei afaceri. Fie că ești în domeniul construcțiilor, producției sau al serviciilor, soluțiile noastre sunt proiectate pentru a răspunde exact nevoilor tale. Un exemplu este softul nostru de estimare a costurilor pentru construcții, care preia și analizează datele de ofertare pentru a genera rapoarte precise și detaliate despre costuri și marje de profit.</p>
             </div>
+            
+            <!-- Al doilea card: Estimarea prețurilor în construcții -->
             <div class="card">
                 <h3>Estimare Prețuri în Construcții</h3>
                 <p>Dezvoltăm un software avansat care ajută companiile de construcții să gestioneze mai bine licitațiile și bugetele. Aplicația noastră preia listele de cantități (F3-uri) și generează estimări precise pe baza prețurilor actualizate de la furnizori. Află exact cât va costa un proiect, ce marje de profit poți obține și cum să optimizezi utilizarea resurselor pentru un management financiar mai eficient.</p>
             </div>
+            
+            <!-- Al treilea card: Consultanță și suport continu -->
             <div class="card">
-                <h3>Consultanță și Suport Continu</h3>
+                <h3>Consultanță și Suport Continuu</h3>
                 <p>Echipa noastră de experți este alături de tine pe tot parcursul procesului de implementare și utilizare a soluțiilor software. Oferim consultanță personalizată, training și suport pentru ca tu să beneficiezi de tot potențialul tehnologiilor noastre. Contactează-ne pentru o consultanță gratuită și descoperă cum te putem ajuta să îți îmbunătățești procesele de business.</p>
             </div>
         </div>
+        
+        <!-- Footer-ul paginii: butoane CTA și informații de contact -->
         <footer class="footer">
             <button class="cta-button" id="demo">Solicită o Demonstrație</button>
             <button class="cta-button" id="consult">Consultanță Software Gratuită</button>
             <button class="cta-button" id="contact">Contactează-ne pentru Oferte</button>
+            
+            <!-- Informațiile de contact: telefon și email -->
             <div class="contact-info">
                 <div class="contact-item">
                     <a href="tel:+40721720155">
@@ -117,6 +146,8 @@ while True:
             </div>
         </footer>
     </main>
+    
+    <!-- Datele structurate pentru Schema.org (pentru SEO) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -136,8 +167,8 @@ while True:
       ]
     }
     </script>
+    
+    <!-- Script personalizat pentru efecte interactive -->
     <script src="script.js"></script>
 </body>
 </html>
-
-
