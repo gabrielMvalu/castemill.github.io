@@ -241,6 +241,7 @@
                 title: 'Fereastra de Nord-Est',
                 info: 'Această fereastră are un coeficient de transfer termic de 1.2 W/m²K. Expunerea sa asigură lumina naturală maximă în orele dimineții.',
                 data: [120, 110, 100, 90, 80, 75],
+                data2: [5, 4, 3, 4, 5, 4],
                 fill: '#93c5fd'
             },
             {
@@ -248,6 +249,7 @@
                 title: 'Fereastra de Sud-Est',
                 info: 'Această fereastră este optimizată pentru eficiență energetică, cu sticlă dublă și strat Low-E.',
                 data: [130, 120, 110, 100, 90, 85],
+                data2: [6, 5, 4, 5, 6, 5],
                 fill: '#93c5fd'
             },
             {
@@ -255,6 +257,7 @@
                 title: 'Ușa Principală Inteligentă',
                 info: 'Ușa este echipată cu sisteme de securitate biometrice și izolație fonică avansată.',
                 data: [150, 140, 130, 120, 110, 100],
+                data2: [7, 6, 5, 6, 7, 6],
                 fill: '#86efac'
             },
             {
@@ -262,6 +265,7 @@
                 title: 'Panou Opac Izolat 1',
                 info: 'Panoul contribuie la eficiența termică a clădirii, având o rezistență termică ridicată.',
                 data: [100, 95, 90, 85, 80, 75],
+                data2: [4, 3, 2, 3, 4, 3],
                 fill: '#d1d5db'
             },
             {
@@ -269,6 +273,7 @@
                 title: 'Panou Opac Izolat 2',
                 info: 'Fabricat din materiale sustenabile, acest panou reduce impactul asupra mediului.',
                 data: [90, 85, 80, 75, 70, 65],
+                data2: [3, 2, 1, 2, 3, 2],
                 fill: '#d1d5db'
             }
         ];
@@ -330,56 +335,92 @@
 
         // Initialize Chart
         const ctx = document.getElementById('energyChart').getContext('2d');
-        const energyChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie'],
-                datasets: [{
-                    label: 'Consum Energetic (kWh)',
-                    data: [0, 0, 0, 0, 0, 0],
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
-                    tension: 0.3,
-                    fill: true,
-                    pointRadius: 5,
-                    pointBackgroundColor: '#3b82f6'
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: false,
-                        ticks: {
-                            color: '#ffffff'  // Replace var(--color-text) with actual color value
+        let energyChart;
+
+        function createChart(element) {
+            energyChart = new Chart(ctx, {
+                data: {
+                    labels: ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie'],
+                    datasets: [
+                        {
+                            type: 'line',
+                            label: 'Consum Energetic (kWh)',
+                            data: element.data,
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                            tension: 0.3,
+                            fill: true,
+                            yAxisID: 'y',
+                            pointRadius: 5,
+                            pointBackgroundColor: '#3b82f6'
                         },
-                        grid: {
-                            color: '#444'
+                        {
+                            type: 'bar',
+                            label: 'Eficiență Termică',
+                            data: element.data2,
+                            backgroundColor: '#ff8e3c',
+                            yAxisID: 'y1',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            ticks: {
+                                color: '#ffffff'
+                            },
+                            grid: {
+                                color: '#444'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            ticks: {
+                                color: '#ffffff'
+                            },
+                            grid: {
+                                drawOnChartArea: false,
+                            },
+                        },
+                        x: {
+                            ticks: {
+                                color: '#ffffff'
+                            },
+                            grid: {
+                                color: '#444'
+                            }
                         }
                     },
-                    x: {
-                        ticks: {
-                            color: '#ffffff'  // Replace var(--color-text) with actual color value
-                        },
-                        grid: {
-                            color: '#444'
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: '#ffffff'  // Replace var(--color-text) with actual color value
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#ffffff'
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
+        }
 
         // Update Chart with Element Data
         function updateChart(element) {
-            energyChart.data.datasets[0].data = element.data;
-            energyChart.update();
+            if (energyChart) {
+                energyChart.data.datasets[0].data = element.data;
+                energyChart.data.datasets[1].data = element.data2;
+                energyChart.update();
+            } else {
+                createChart(element);
+            }
         }
 
         // Initial selection
