@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <!-- Basic HTML settings -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Page title and description -->
+    <title>Castemill SRL - Demonstrație Interactivă AI</title>
+    <meta name="description" content="Experimentează soluțiile noastre AI personalizate prin această demonstrație interactivă.">
+    
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Link to Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header section -->
+    <header>
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="logo.png" alt="Logo" class="logo">
+            </div>
+            <div class="company-info">
+                <div class="company-name">Castemill SRL</div>
+                <h1>Demonstrație Interactivă AI</h1>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Acasă</a></li>
+                <li><a href="demo.html">Demonstrație</a></li>
+                <li><a href="consultanta.html">Consultanță</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Main content -->
+    <main class="container">
+        <h2>Experimentează Soluțiile Noastre AI</h2>
+        <p>Introdu datele tale pentru a vedea cum funcționează soluțiile noastre AI în timp real.</p>
+        
+        <!-- Industry selection -->
+        <div class="form-group">
+            <label for="industry-select">Alege industria:</label>
+            <select id="industry-select">
+                <option value="construction">Construcții</option>
+                <option value="retail">Retail</option>
+                <option value="logistics">Logistică</option>
+            </select>
+        </div>
+        
+        <!-- Data input form -->
+        <form id="input-form">
+            <!-- Dynamic fields will be loaded here based on industry selection -->
+            <div id="dynamic-fields"></div>
+            <button type="submit">Trimite</button>
+        </form>
+        
+        <!-- Visualization area -->
+        <canvas id="resultChart"></canvas>
+        
+        <!-- Explanation section -->
+        <div id="explanation"></div>
+    </main>
+    
+    <!-- Footer section -->
+    <footer class="footer">
+        <div class="contact-info">
+            <div class="contact-item">
+                <a href="tel:+40721720155">
+                    <span class="contact-icon">📞</span>
+                    +4(0)721.720.155
+                </a>
+            </div>
+            <div class="contact-item">
+                <a href="mailto:office@castemill.com">
+                    <span class="contact-icon">✉️</span>
+                    office@castemill.com
+                </a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript code -->
+    <script>
+        // Load form fields based on industry selection
+        document.getElementById('industry-select').addEventListener('change', loadFormFields);
+        
+        function loadFormFields() {
+            const industry = document.getElementById('industry-select').value;
+            const dynamicFields = document.getElementById('dynamic-fields');
+            dynamicFields.innerHTML = ''; // Clear existing fields
+            
+            if (industry === 'construction') {
+                dynamicFields.innerHTML = \`
+                    <div class="form-group">
+                        <label for="project-cost">Costul Proiectului (EUR):</label>
+                        <input type="number" id="project-cost" name="projectCost" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-duration">Durata Proiectului (luni):</label>
+                        <input type="number" id="project-duration" name="projectDuration" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="materials-cost">Costul Materialelor (EUR):</label>
+                        <input type="number" id="materials-cost" name="materialsCost" required>
+                    </div>
+                \`;
+            } else if (industry === 'retail') {
+                dynamicFields.innerHTML = \`
+                    <div class="form-group">
+                        <label for="monthly-sales">Vânzări Lunare (EUR):</label>
+                        <input type="number" id="monthly-sales" name="monthlySales" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="average-basket">Coșul Mediu (EUR):</label>
+                        <input type="number" id="average-basket" name="averageBasket" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="foot-traffic">Traficul de Clienți (lunar):</label>
+                        <input type="number" id="foot-traffic" name="footTraffic" required>
+                    </div>
+                \`;
+            } else if (industry === 'logistics') {
+                dynamicFields.innerHTML = \`
+                    <div class="form-group">
+                        <label for="number-of-vehicles">Număr de Vehicule:</label>
+                        <input type="number" id="number-of-vehicles" name="numberOfVehicles" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="average-distance">Distanța Medie per Cursă (km):</label>
+                        <input type="number" id="average-distance" name="averageDistance" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fuel-cost">Costul Combustibilului (EUR/l):</label>
+                        <input type="number" id="fuel-cost" name="fuelCost" required>
+                    </div>
+                \`;
+            }
+        }
+        
+        // Initialize form fields on page load
+        window.onload = loadFormFields;
+        
+        // Handle form submission
+        document.getElementById('input-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const industry = document.getElementById('industry-select').value;
+            const formData = new FormData(e.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = parseFloat(value);
+            });
+            generatePrediction(industry, data);
+        });
+        
+        // Function to simulate AI prediction
+        function generatePrediction(industry, data) {
+            let prediction = 0;
+            let explanation = '';
+            
+            if (industry === 'construction') {
+                // Simulated AI prediction logic for construction
+                prediction = ((data.projectCost + data.materialsCost) / data.projectDuration) * 1.1; // Adding 10% for overhead
+                explanation = \`
+                    <h3>Estimarea Costului Lunar</h3>
+                    <p>Am calculat costul lunar estimat adăugând o marjă de 10% pentru cheltuieli generale.</p>
+                \`;
+            } else if (industry === 'retail') {
+                // Simulated AI prediction logic for retail
+                prediction = (data.monthlySales / data.footTraffic) * data.averageBasket * 1.05; // Adding 5% for upselling
+                explanation = \`
+                    <h3>Estimarea Vânzărilor per Client</h3>
+                    <p>Am estimat vânzările per client incluzând o creștere de 5% datorată strategiilor de upselling.</p>
+                \`;
+            } else if (industry === 'logistics') {
+                // Simulated AI prediction logic for logistics
+                prediction = (data.averageDistance * data.numberOfVehicles * data.fuelCost) * 0.95; // Assuming 5% efficiency savings
+                explanation = \`
+                    <h3>Costul Total al Combustibilului</h3>
+                    <p>Am calculat costul total al combustibilului, presupunând o economie de 5% datorată optimizării rutelor.</p>
+                \`;
+            }
+            
+            // Update chart and explanation
+            updateChart(prediction);
+            document.getElementById('explanation').innerHTML = explanation;
+        }
+        
+        // Function to update the chart
+        function updateChart(prediction) {
+            const ctx = document.getElementById('resultChart').getContext('2d');
+            // Destroy existing chart if any
+            if (window.predictionChart) {
+                window.predictionChart.destroy();
+            }
+            window.predictionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Predicție AI'],
+                    datasets: [{
+                        label: 'Rezultat',
+                        data: [prediction],
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Rezultat: ' + context.parsed.y.toFixed(2) + ' EUR';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+    
+    <!-- Include your CSS styles inline or link to your external CSS file -->
+    <style>
+        /* Basic styles for the demo page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header, footer {
+            background-color: #f8f8f8;
+            padding: 20px;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        
+        h2 {
+            margin-top: 0;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        input, select, button {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        canvas {
+            margin-top: 20px;
+            max-width: 100%;
+        }
+        
+        #explanation {
+            margin-top: 20px;
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .contact-item {
+            margin: 0 10px;
+        }
+        
+        .contact-icon {
+            margin-right: 5px;
+        }
+        
+        .logo-container {
+            text-align: center;
+        }
+        
+        .logo {
+            max-width: 150px;
+        }
+        
+        .company-name {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        nav {
+            margin-top: 10px;
+        }
+    </style>
+</body>
+</html>
