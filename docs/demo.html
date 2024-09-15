@@ -4,14 +4,14 @@
     <!-- Basic HTML settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Castemill SRL - Demonstrație Interactivă AI</title>
+    <title>Castemill SRL - Demonstrație Interactivă AI ** Momentan UNDER CONSTRUCTION ** </title>
     <meta name="description" content="Experimentează soluțiile noastre AI personalizate prin această demonstrație interactivă.">
     <!-- Link to your existing CSS file -->
     <link rel="stylesheet" href="style.css">
     <!-- Link to TensorFlow.js -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
-    <!-- Link to p5.js for visuals -->
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.min.js"></script>
+    <!-- Link to Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <!-- Header section -->
@@ -36,15 +36,28 @@
     </header>
     <!-- Main content -->
     <main class="container">
-        <h2>Experimentează Puterea AI în Timp Real</h2>
-        <p>Interactează cu rețeaua neurală și vezi cum AI procesează datele în timp real.</p>
-        <!-- Interactive canvas -->
-        <div id="sketch-holder"></div>
-        <!-- Controls -->
-        <div class="controls">
-            <label for="slider">Ajustează Complexitatea Rețelei Neurale:</label>
-            <input type="range" id="slider" min="1" max="10" value="5">
-        </div>
+        <h2>Predicție Costuri cu AI</h2>
+        <p>Ajustați parametrii pentru a vedea cum AI estimează costurile proiectului.</p>
+        <!-- Data input form -->
+        <form id="ai-form">
+            <div class="form-group">
+                <label for="feature1">Număr de Angajați:</label>
+                <input type="range" id="feature1" name="feature1" min="1" max="100" value="50" oninput="updateInput('feature1')">
+                <span id="feature1-value">50</span>
+            </div>
+            <div class="form-group">
+                <label for="feature2">Durata Proiectului (luni):</label>
+                <input type="range" id="feature2" name="feature2" min="1" max="24" value="12" oninput="updateInput('feature2')">
+                <span id="feature2-value">12</span>
+            </div>
+            <div class="form-group">
+                <label for="feature3">Complexitatea Proiectului:</label>
+                <input type="range" id="feature3" name="feature3" min="1" max="10" value="5" oninput="updateInput('feature3')">
+                <span id="feature3-value">5</span>
+            </div>
+        </form>
+        <!-- Visualization area -->
+        <canvas id="resultChart"></canvas>
     </main>
     <!-- Footer section -->
     <footer class="footer">
@@ -65,73 +78,91 @@
     </footer>
     <!-- JavaScript code -->
     <script>
+        // Update displayed value for sliders
+        function updateInput(id) {
+            document.getElementById(id + '-value').innerText = document.getElementById(id).value;
+            predict();
+        }
+
+        // Define the model
         let model;
-        let xs, ys;
-        let resolution = 20;
-        let cols, rows;
-        let slider;
-        function setup() {
-            let canvas = createCanvas(600, 400);
-            canvas.parent('sketch-holder');
-            tf.setBackend('cpu');
-            cols = width / resolution;
-            rows = height / resolution;
-            slider = select('#slider');
-            slider.input(trainModel);
-            initData();
-            trainModel();
+        async function createModel() {
+            model = tf.sequential();
+            model.add(tf.layers.dense({ units: 8, activation: 'relu', inputShape: [3] }));
+            model.add(tf.layers.dense({ units: 1 }));
+            // Simulate training the model
+            const xs = tf.tensor2d([
+                [10, 6, 2],
+                [50, 12, 5],
+                [80, 18, 8],
+                [100, 24, 10],
+                [20, 3, 1]
+            ]);
+            const ys = tf.tensor2d([
+                [50000],
+                [200000],
+                [400000],
+                [600000],
+                [30000]
+            ]);
+            await model.compile({ optimizer: 'adam', loss: 'meanSquaredError' });
+            await model.fit(xs, ys, { epochs: 50 });
+            predict();
         }
 
-        function initData() {
-            xs = [];
-            ys = [];
-            for (let i = 0; i < 100; i++) {
-                let x = random(-1, 1);
-                let y = random(-1, 1);
-                xs.push([x, y]);
-                ys.push([x * y > 0 ? 1 : 0]);
-            }
-            xs = tf.tensor2d(xs);
-            ys = tf.tensor1d(ys);
-        }
+        // Predict function
+        function predict() {
+            const feature1 = parseFloat(document.getElementById('feature1').value);
+            const feature2 = parseFloat(document.getElementById('feature2').value);
+            const feature3 = parseFloat(document.getElementById('feature3').value);
 
-        function trainModel() {
-            let layers = [];
-            layers.push(tf.layers.dense({ units: slider.value(), activation: 'sigmoid', inputShape: [2] }));
-            layers.push(tf.layers.dense({ units: 1, activation: 'sigmoid' }));
-            model = tf.sequential({ layers });
-            model.compile({ optimizer: 'adam', loss: 'binaryCrossentropy' });
-            model.fit(xs, ys, { epochs: 10 }).then(() => {
-                drawDecisionBoundary();
+            tf.tidy(() => {
+                const input = tf.tensor2d([[feature1, feature2, feature3]]);
+                const output = model.predict(input);
+                const prediction = output.dataSync()[0];
+
+                updateChart(prediction);
             });
         }
 
-        function drawDecisionBoundary() {
-            let density = 50;
-            let grid = [];
-            for (let x = -1; x <= 1; x += 2 / density) {
-                for (let y = -1; y <= 1; y += 2 / density) {
-                    grid.push([x, y]);
-                }
+        // Chart.js setup
+        let chart;
+        function updateChart(prediction) {
+            const ctx = document.getElementById('resultChart').getContext('2d');
+            if (chart) {
+                chart.destroy();
             }
-            tf.tidy(() => {
-                const input = tf.tensor2d(grid);
-                let pred = model.predict(input);
-                pred = pred.dataSync();
-                background(0);
-                let index = 0;
-                for (let x = 0; x < width; x += width / density) {
-                    for (let y = 0; y < height; y += height / density) {
-                        noStroke();
-                        let br = pred[index] * 255;
-                        fill(br, 255 - br, br);
-                        rect(x, y, width / density, height / density);
-                        index++;
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Cost Estimat al Proiectului'],
+                    datasets: [{
+                        label: 'Cost (EUR)',
+                        data: [prediction.toFixed(2)],
+                        backgroundColor: ['rgba(54, 162, 235, 0.7)'],
+                        borderColor: ['rgba(54, 162, 235, 1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
                     }
                 }
             });
         }
+
+        // Initialize
+        createModel();
     </script>
 </body>
 </html>
+
 
