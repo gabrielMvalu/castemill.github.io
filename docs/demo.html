@@ -1,193 +1,331 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
-    <!-- Basic HTML settings -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Castemill SRL - Demonstrație Interactivă AI *** UNDER CONSTUCTION ***</title>
-    <meta name="description" content="Experimentează soluțiile noastre AI personalizate prin această demonstrație interactivă.">
-    <!-- Link to your existing CSS file -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Link to Chart.js for data visualization -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Link to AnyChart for Gantt Chart -->
-    <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/v8/js/anychart-gantt.min.js"></script>
+    <title>AI-Powered Curtain Wall Analysis Demo</title>
+    <style>
+        /* Global Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #1a1a1a;
+            font-family: 'Roboto', sans-serif;
+            color: #fff;
+        }
+        /* Loader Styles */
+        #loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        #loader h1 {
+            font-size: 24px;
+            color: #fff;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% {opacity: 0.5;}
+            50% {opacity: 1;}
+            100% {opacity: 0.5;}
+        }
+        /* Interface Styles */
+        #interface {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+        #interface h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        #interface p {
+            font-size: 18px;
+            max-width: 400px;
+        }
+        /* Info Panel Styles */
+        #infoPanel {
+            position: absolute;
+            top: 50%;
+            right: -400px;
+            transform: translateY(-50%);
+            width: 400px;
+            height: 80%;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+            transition: right 0.5s;
+            z-index: 10;
+        }
+        #infoPanel.active {
+            right: 0;
+        }
+        #infoPanel h2 {
+            margin-top: 0;
+            font-size: 32px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+        #infoPanel p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        #closeInfo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #fff;
+        }
+        /* Canvas Styles */
+        #threejsCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        /* Tooltip Styles */
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 8px 12px;
+            border-radius: 4px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 9;
+        }
+    </style>
 </head>
 <body>
-    <!-- Header section -->
-    <header>
-        <div class="header-content">
-            <div class="logo-container">
-                <img src="logo.png" alt="Logo" class="logo">
-            </div>
-            <div class="company-info">
-                <div class="company-name">Castemill SRL</div>
-                <h1>Demonstrație Interactivă AI</h1>
-            </div>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Acasă</a></li>
-                <li><a href="demo.html">Demonstrație</a></li>
-                <li><a href="consultanta.html">Consultanță</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    <!-- Main content -->
-    <main class="container">
-        <h2>Simulează Proiectul Tău cu AI Avansat</h2>
-        <p>Ajustează parametrii proiectului și vezi cum AI prezice costurile, timpii și potențialele riscuri.</p>
-        <!-- Data input form -->
-        <form id="ai-form">
-            <div class="form-group">
-                <label for="num-employees">Număr de Angajați:</label>
-                <input type="number" id="num-employees" name="numEmployees" min="1" max="500" value="50" required>
-            </div>
-            <div class="form-group">
-                <label for="project-duration">Durata Proiectului (luni):</label>
-                <input type="number" id="project-duration" name="projectDuration" min="1" max="36" value="12" required>
-            </div>
-            <div class="form-group">
-                <label for="project-complexity">Complexitatea Proiectului (1-10):</label>
-                <input type="number" id="project-complexity" name="projectComplexity" min="1" max="10" value="5" required>
-            </div>
-            <div class="form-group">
-                <label for="material-cost">Costuri Materiale (EUR):</label>
-                <input type="number" id="material-cost" name="materialCost" min="1000" value="50000" required>
-            </div>
-            <div class="form-group">
-                <label for="labor-rate">Tarif Orar Muncitori (EUR):</label>
-                <input type="number" id="labor-rate" name="laborRate" min="5" value="20" required>
-            </div>
-            <button type="button" class="cta-button" onclick="simulateProject()">Simulează Proiectul</button>
-        </form>
-        <!-- Visualization areas -->
-        <h3>Previziuni AI</h3>
-        <canvas id="costBreakdownChart"></canvas>
-        <h3>Grafic Gantt al Proiectului</h3>
-        <div id="ganttChart" style="height: 500px;"></div>
-        <h3>Evaluare Riscuri</h3>
-        <div id="riskAssessment"></div>
-    </main>
-    <!-- Footer section -->
-    <footer class="footer">
-        <div class="contact-info">
-            <div class="contact-item">
-                <a href="tel:+40721720155">
-                    <span class="contact-icon">📞</span>
-                    +4(0)721.720.155
-                </a>
-            </div>
-            <div class="contact-item">
-                <a href="mailto:office@castemill.com">
-                    <span class="contact-icon">✉️</span>
-                    office@castemill.com
-                </a>
-            </div>
-        </div>
-    </footer>
-    <!-- JavaScript code -->
-    <script>
-        function simulateProject() {
-            // Get input values
-            const numEmployees = parseInt(document.getElementById('num-employees').value);
-            const projectDuration = parseInt(document.getElementById('project-duration').value);
-            const projectComplexity = parseInt(document.getElementById('project-complexity').value);
-            const materialCost = parseFloat(document.getElementById('material-cost').value);
-            const laborRate = parseFloat(document.getElementById('labor-rate').value);
 
-            // Simulate AI predictions
-            const overhead = 0.1 * (materialCost + numEmployees * laborRate * projectDuration * 160);
-            const laborCost = numEmployees * laborRate * projectDuration * 160;
-            const totalCost = materialCost + laborCost + overhead;
+<div id="loader">
+    <h1>Loading AI Analysis Demo...</h1>
+</div>
 
-            // Cost Breakdown Data
-            const costData = {
-                labels: ['Materiale', 'Muncă', 'Cheltuieli Generale'],
-                datasets: [{
-                    data: [materialCost, laborCost, overhead],
-                    backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56']
-                }]
-            };
+<div id="interface">
+    <h1>AI Curtain Wall Analysis</h1>
+    <p>Explore the 3D model below. Click on different components to see AI-driven analysis and estimations.</p>
+</div>
 
-            // Create Cost Breakdown Chart
-            const ctx = document.getElementById('costBreakdownChart').getContext('2d');
-            if (window.costChart) {
-                window.costChart.destroy();
-            }
-            window.costChart = new Chart(ctx, {
-                type: 'pie',
-                data: costData,
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
-                        }
-                    }
-                }
-            });
+<div id="infoPanel">
+    <span id="closeInfo">&times;</span>
+    <h2 id="elementTitle">Component Title</h2>
+    <p id="elementDescription">Component description and AI analysis will appear here.</p>
+    <canvas id="chartCanvas" width="350" height="200"></canvas>
+</div>
 
-            // Generate Gantt Chart Data
-            const tasks = generateGanttData(projectDuration, projectComplexity);
+<div class="tooltip" id="tooltip">Tooltip</div>
 
-            // Create Gantt Chart
-            anychart.onDocumentReady(function () {
-                if (window.ganttChart) {
-                    window.ganttChart.dispose();
-                }
-                window.ganttChart = anychart.ganttProject();
-                window.ganttChart.data(tasks, 'asTable');
-                window.ganttChart.container('ganttChart');
-                window.ganttChart.draw();
-            });
+<!-- Three.js Canvas -->
+<canvas id="threejsCanvas"></canvas>
 
-            // Risk Assessment
-            const riskLevel = assessRisk(projectComplexity, projectDuration);
-            document.getElementById('riskAssessment').innerHTML = '<p>Nivelul estimat de risc pentru acest proiect este: <strong>' + riskLevel + '</strong></p>';
-        }
+<!-- Include Three.js Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- Include OrbitControls -->
+<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
 
-        function generateGanttData(duration, complexity) {
-            const tasks = [];
-            const startDate = new Date();
-            const endDate = new Date();
-            endDate.setMonth(startDate.getMonth() + duration);
+<script>
+    // Loader
+    window.addEventListener('load', () => {
+        document.getElementById('loader').style.display = 'none';
+    });
 
-            for (let i = 1; i <= complexity; i++) {
-                const taskDuration = Math.floor(duration / complexity);
-                const taskStart = new Date();
-                taskStart.setMonth(startDate.getMonth() + (i - 1) * taskDuration);
-                const taskEnd = new Date();
-                taskEnd.setMonth(taskStart.getMonth() + taskDuration);
-                tasks.push({
-                    id: i,
-                    name: 'Activitate ' + i,
-                    actualStart: taskStart,
-                    actualEnd: taskEnd
-                });
-            }
+    // Three.js Variables
+    let scene, camera, renderer, controls, raycaster, mouse, INTERSECTED;
+    let tooltip = document.getElementById('tooltip');
+    let infoPanel = document.getElementById('infoPanel');
 
-            // Define dependencies
-            for (let i = 2; i <= complexity; i++) {
-                tasks[i - 1].successors = [{ task: i, type: 'FS' }];
-            }
+    // Initialize Three.js Scene
+    init();
+    animate();
 
-            return tasks;
-        }
+    function init() {
+        // Scene Setup
+        scene = new THREE.Scene();
 
-        function assessRisk(complexity, duration) {
-            let riskScore = (complexity / 10) * 0.6 + (duration / 36) * 0.4;
-            if (riskScore < 0.3) {
-                return 'Scăzut';
-            } else if (riskScore < 0.6) {
-                return 'Moderat';
-            } else {
-                return 'Ridicat';
+        // Camera Setup
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
+        camera.position.set(0, 200, 400);
+
+        // Renderer Setup
+        renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('threejsCanvas'), antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        // Controls Setup
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
+        // Light Setup
+        const ambientLight = new THREE.AmbientLight(0x404040, 2);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(100, 200, 100);
+        scene.add(directionalLight);
+
+        // Raycaster for Interactivity
+        raycaster = new THREE.Raycaster();
+        mouse = new THREE.Vector2();
+
+        // Add 3D Model
+        addModel();
+
+        // Event Listeners
+        window.addEventListener('resize', onWindowResize, false);
+        window.addEventListener('mousemove', onMouseMove, false);
+        window.addEventListener('click', onMouseClick, false);
+    }
+
+    function addModel() {
+        // Load a simplified 3D model of a curtain wall (for demo purposes, we'll create it procedurally)
+        const wallGeometry = new THREE.BoxGeometry(300, 200, 10);
+        const wallMaterial = new THREE.MeshPhongMaterial({ color: 0x555555, side: THREE.DoubleSide });
+        const wall = new THREE.Mesh(wallGeometry, wallMaterial);
+        wall.position.set(0, 100, 0);
+        scene.add(wall);
+
+        // Add windows (interactive components)
+        const windowGeometry = new THREE.PlaneGeometry(50, 50);
+        const windowMaterial = new THREE.MeshBasicMaterial({ color: 0x87ceeb, side: THREE.DoubleSide });
+        const components = [];
+
+        for (let i = -2; i <= 2; i++) {
+            for (let j = -1; j <= 1; j++) {
+                const windowMesh = new THREE.Mesh(windowGeometry, windowMaterial.clone());
+                windowMesh.position.set(i * 60, j * 60 + 100, 5.5);
+                windowMesh.userData = {
+                    title: `Window ${i + 3}-${j + 2}`,
+                    description: `This is an AI analysis for Window ${i + 3}-${j + 2}. It includes energy efficiency metrics and structural integrity assessments.`,
+                    data: generateRandomData()
+                };
+                components.push(windowMesh);
+                scene.add(windowMesh);
             }
         }
-    </script>
+
+        // Store components for interaction
+        scene.userData.components = components;
+    }
+
+    function generateRandomData() {
+        // Generate random data for the chart
+        const data = [];
+        for (let i = 0; i < 5; i++) {
+            data.push(Math.floor(Math.random() * 100));
+        }
+        return data;
+    }
+
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function onMouseMove(event) {
+        event.preventDefault();
+
+        mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
+        mouse.y = - (event.clientY / renderer.domElement.clientHeight) * 2 + 1;
+
+        // Update tooltip position
+        tooltip.style.left = event.clientX + 10 + 'px';
+        tooltip.style.top = event.clientY + 10 + 'px';
+    }
+
+    function onMouseClick(event) {
+        if (INTERSECTED) {
+            showInfoPanel(INTERSECTED.userData);
+        }
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        controls.update();
+
+        render();
+    }
+
+    function render() {
+        // Update the picking ray with the camera and mouse position
+        raycaster.setFromCamera(mouse, camera);
+
+        // Calculate objects intersecting the picking ray
+        const intersects = raycaster.intersectObjects(scene.userData.components);
+
+        if (intersects.length > 0) {
+            if (INTERSECTED != intersects[0].object) {
+                if (INTERSECTED) INTERSECTED.material.color.set(0x87ceeb);
+                INTERSECTED = intersects[0].object;
+                INTERSECTED.material.color.set(0xffa500);
+
+                // Update tooltip
+                tooltip.style.opacity = 1;
+                tooltip.innerHTML = INTERSECTED.userData.title;
+            }
+        } else {
+            if (INTERSECTED) INTERSECTED.material.color.set(0x87ceeb);
+            INTERSECTED = null;
+
+            // Hide tooltip
+            tooltip.style.opacity = 0;
+        }
+
+        renderer.render(scene, camera);
+    }
+
+    // Info Panel Logic
+    function showInfoPanel(data) {
+        document.getElementById('elementTitle').innerText = data.title;
+        document.getElementById('elementDescription').innerText = data.description;
+        drawChart(data.data);
+        infoPanel.classList.add('active');
+    }
+
+    document.getElementById('closeInfo').addEventListener('click', () => {
+        infoPanel.classList.remove('active');
+    });
+
+    // Chart Drawing Function
+    function drawChart(data) {
+        const canvas = document.getElementById('chartCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Clear previous chart
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw chart
+        ctx.beginPath();
+        ctx.moveTo(0, canvas.height - data[0] * 2);
+        for (let i = 1; i < data.length; i++) {
+            ctx.lineTo(i * (canvas.width / (data.length - 1)), canvas.height - data[i] * 2);
+        }
+        ctx.strokeStyle = '#00ff00';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Draw data points
+        ctx.fillStyle = '#00ff00';
+        for (let i = 0; i < data.length; i++) {
+            ctx.beginPath();
+            ctx.arc(i * (canvas.width / (data.length - 1)), canvas.height - data[i] * 2, 4, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+    }
+</script>
+
 </body>
 </html>
 
