@@ -88,60 +88,62 @@
     </footer>
     <!-- JavaScript code -->
     <script>
-        document.getElementById('ai-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            var projectSize = parseFloat(document.getElementById('project-size').value);
-            var materialQuality = document.getElementById('material-quality').value;
-            var projectDuration = parseFloat(document.getElementById('project-duration').value);
-            var laborSkill = document.getElementById('labor-skill').value;
+        window.onload = function() {
+            document.getElementById('ai-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var projectSize = parseFloat(document.getElementById('project-size').value);
+                var materialQuality = document.getElementById('material-quality').value;
+                var projectDuration = parseFloat(document.getElementById('project-duration').value);
+                var laborSkill = document.getElementById('labor-skill').value;
 
-            var baseCostPerSqM = 500;
-            var materialMultiplier = {
-                'standard': 1,
-                'premium': 1.2,
-                'luxury': 1.5
-            };
-            var laborMultiplier = {
-                'basic': 1,
-                'skilled': 1.1,
-                'expert': 1.25
-            };
+                var baseCostPerSqM = 500;
+                var materialMultiplier = {
+                    'standard': 1,
+                    'premium': 1.2,
+                    'luxury': 1.5
+                };
+                var laborMultiplier = {
+                    'basic': 1,
+                    'skilled': 1.1,
+                    'expert': 1.25
+                };
 
-            var estimatedCost = projectSize * baseCostPerSqM * materialMultiplier[materialQuality] * laborMultiplier[laborSkill];
-            var monthlyCost = estimatedCost / projectDuration;
+                var estimatedCost = projectSize * baseCostPerSqM * materialMultiplier[materialQuality] * laborMultiplier[laborSkill];
+                var monthlyCost = estimatedCost / projectDuration;
 
-            updateChart(estimatedCost, monthlyCost);
+                updateChart(estimatedCost, monthlyCost);
 
-            var explanation = '<h3>Estimarea Costului Proiectului</h3>';
-            explanation += '<p>Cost total estimat: <strong>' + estimatedCost.toFixed(2) + ' EUR</strong></p>';
-            explanation += '<p>Cost lunar estimat: <strong>' + monthlyCost.toFixed(2) + ' EUR</strong></p>';
-            document.getElementById('explanation').innerHTML = explanation;
-        });
+                var explanation = '<h3>Estimarea Costului Proiectului</h3>';
+                explanation += '<p>Cost total estimat: <strong>' + estimatedCost.toFixed(2) + ' EUR</strong></p>';
+                explanation += '<p>Cost lunar estimat: <strong>' + monthlyCost.toFixed(2) + ' EUR</strong></p>';
+                document.getElementById('explanation').innerHTML = explanation;
+            });
 
-        function updateChart(totalCost, monthlyCost) {
-            var ctx = document.getElementById('resultChart').getContext('2d');
-            if (window.resultChart) {
-                window.resultChart.destroy();
-            }
-            window.resultChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Cost Total', 'Cost Lunar'],
-                    datasets: [{
-                        data: [totalCost, monthlyCost],
-                        backgroundColor: ['rgba(54, 162, 235, 0.7)', 'rgba(255, 99, 132, 0.7)'],
-                        hoverBackgroundColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
+            function updateChart(totalCost, monthlyCost) {
+                var ctx = document.getElementById('resultChart').getContext('2d');
+                if (window.resultChart) {
+                    window.resultChart.destroy();
+                }
+                window.resultChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Cost Total', 'Cost Lunar'],
+                        datasets: [{
+                            data: [totalCost, monthlyCost],
+                            backgroundColor: ['rgba(54, 162, 235, 0.7)', 'rgba(255, 99, 132, 0.7)'],
+                            hoverBackgroundColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
                         }
                     }
-                }
-            });
+                });
+            }
         }
     </script>
 </body>
