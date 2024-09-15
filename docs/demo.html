@@ -1,333 +1,349 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
     <meta charset="UTF-8">
-    <title>AI-Powered Curtain Wall Analysis Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analiză AI - Sisteme de Pereți Cortină</title>
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Include FontAwesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Include Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Styles -->
     <style>
         /* Global Styles */
-        body, html {
+        body {
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            overflow: hidden;
-            background-color: #1a1a1a;
-            font-family: 'Roboto', sans-serif;
-            color: #fff;
+            background-color: #1e1e2f;
+            color: #ffffff;
         }
-        /* Loader Styles */
-        #loader {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #1a1a1a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
+        a {
+            color: inherit;
+            text-decoration: none;
         }
-        #loader h1 {
-            font-size: 24px;
-            color: #fff;
-            animation: pulse 1s infinite;
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
-        @keyframes pulse {
-            0% {opacity: 0.5;}
-            50% {opacity: 1;}
-            100% {opacity: 0.5;}
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 20px;
         }
-        /* Interface Styles */
-        #interface {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 10;
-        }
-        #interface h1 {
-            font-size: 48px;
+        header h1 {
+            font-size: 36px;
             margin-bottom: 10px;
         }
-        #interface p {
+        header p {
             font-size: 18px;
-            max-width: 400px;
+            color: #a0a0a0;
         }
-        /* Info Panel Styles */
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        /* Drawing Container */
+        .drawing-container {
+            flex: 2;
+            background-color: #2e2e3e;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Info Sidebar */
+        .info-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        /* SVG Styles */
+        #drawing {
+            width: 100%;
+            height: auto;
+            cursor: grab;
+        }
+        .element {
+            cursor: pointer;
+            transition: fill 0.3s, stroke 0.3s;
+        }
+        .element:hover {
+            fill: #3b82f6;
+            stroke: #3b82f6;
+        }
+        .highlight {
+            fill: #3b82f6 !important;
+            stroke: #3b82f6 !important;
+        }
+        /* Info Panel */
         #infoPanel {
-            position: absolute;
-            top: 50%;
-            right: -400px;
-            transform: translateY(-50%);
-            width: 400px;
-            height: 80%;
-            background: rgba(0, 0, 0, 0.95);
+            background-color: #2e2e3e;
+            border-radius: 8px;
             padding: 20px;
+            flex-grow: 1;
             overflow-y: auto;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
-            transition: right 0.5s;
-            z-index: 10;
-        }
-        #infoPanel.active {
-            right: 0;
         }
         #infoPanel h2 {
             margin-top: 0;
-            font-size: 32px;
-            border-bottom: 1px solid #444;
-            padding-bottom: 10px;
+            font-size: 24px;
+            margin-bottom: 10px;
         }
         #infoPanel p {
             font-size: 16px;
             line-height: 1.5;
+            color: #c0c0c0;
         }
-        #closeInfo {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 28px;
-            cursor: pointer;
-            color: #fff;
+        /* Chart Container */
+        #chartContainer {
+            background-color: #2e2e3e;
+            border-radius: 8px;
+            padding: 20px;
         }
-        /* Canvas Styles */
-        #threejsCanvas {
-            width: 100%;
-            height: 100%;
-            display: block;
+        #chartContainer h2 {
+            margin-top: 0;
+            font-size: 20px;
+            margin-bottom: 10px;
         }
-        /* Tooltip Styles */
+        /* Tooltip */
         .tooltip {
             position: absolute;
-            background: rgba(0, 0, 0, 0.75);
+            background-color: #3b82f6;
+            color: #ffffff;
             padding: 8px 12px;
             border-radius: 4px;
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.3s;
-            z-index: 9;
+            font-size: 14px;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            .drawing-container, .info-container {
+                flex: none;
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
 
-<div id="loader">
-    <h1>Loading AI Analysis Demo...</h1>
-</div>
+    <!-- Header -->
+    <header>
+        <h1><i class="fas fa-building"></i> Analiză AI - Sisteme de Pereți Cortină</h1>
+        <p>Explorați elementele interactive pentru a vedea detalii și analize AI.</p>
+    </header>
 
-<div id="interface">
-    <h1>AI Curtain Wall Analysis</h1>
-    <p>Explore the 3D model below. Click on different components to see AI-driven analysis and estimations.</p>
-</div>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Drawing Container -->
+            <div class="drawing-container">
+                <!-- Tooltip -->
+                <div class="tooltip" id="tooltip"></div>
+                <!-- SVG Drawing -->
+                <svg id="drawing" viewBox="0 0 800 600">
+                    <!-- Background Grid -->
+                    <defs>
+                        <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+                            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#444" stroke-width="0.5"/>
+                        </pattern>
+                        <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+                            <rect width="100" height="100" fill="url(#smallGrid)"/>
+                            <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#666" stroke-width="1"/>
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
 
-<div id="infoPanel">
-    <span id="closeInfo">&times;</span>
-    <h2 id="elementTitle">Component Title</h2>
-    <p id="elementDescription">Component description and AI analysis will appear here.</p>
-    <canvas id="chartCanvas" width="350" height="200"></canvas>
-</div>
+                    <!-- Building Structure -->
+                    <rect x="50" y="50" width="700" height="500" fill="#1e1e2f" stroke="#666" stroke-width="2"/>
 
-<div class="tooltip" id="tooltip">Tooltip</div>
+                    <!-- Elements -->
+                    <!-- Windows -->
+                    <rect id="window1" class="element" x="100" y="100" width="150" height="120" fill="#93c5fd" stroke="#3b82f6" stroke-width="2"/>
+                    <rect id="window2" class="element" x="550" y="100" width="150" height="120" fill="#93c5fd" stroke="#3b82f6" stroke-width="2"/>
+                    <!-- Door -->
+                    <rect id="door" class="element" x="350" y="400" width="100" height="150" fill="#86efac" stroke="#22c55e" stroke-width="2"/>
+                    <!-- Panels -->
+                    <rect id="panel1" class="element" x="100" y="300" width="150" height="80" fill="#d1d5db" stroke="#9ca3af" stroke-width="2"/>
+                    <rect id="panel2" class="element" x="550" y="300" width="150" height="80" fill="#d1d5db" stroke="#9ca3af" stroke-width="2"/>
+                </svg>
+            </div>
 
-<!-- Three.js Canvas -->
-<canvas id="threejsCanvas"></canvas>
+            <!-- Info Container -->
+            <div class="info-container">
+                <!-- Info Panel -->
+                <div id="infoPanel">
+                    <h2 id="elementTitle">Selectați un element</h2>
+                    <p id="elementInfo">Faceți clic pe un element din desen pentru a vedea detalii și analize AI.</p>
+                </div>
+                <!-- Chart Container -->
+                <div id="chartContainer">
+                    <h2>Performanță Energetică</h2>
+                    <canvas id="energyChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<!-- Include Three.js Library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<!-- Include OrbitControls -->
-<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
-
-<script>
-    // Loader
-    window.addEventListener('load', () => {
-        document.getElementById('loader').style.display = 'none';
-    });
-
-    // Three.js Variables
-    let scene, camera, renderer, controls, raycaster, mouse, INTERSECTED;
-    let tooltip = document.getElementById('tooltip');
-    let infoPanel = document.getElementById('infoPanel');
-
-    // Initialize Three.js Scene
-    init();
-    animate();
-
-    function init() {
-        // Scene Setup
-        scene = new THREE.Scene();
-
-        // Camera Setup
-        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
-        camera.position.set(0, 200, 400);
-
-        // Renderer Setup
-        renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('threejsCanvas'), antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-
-        // Controls Setup
-        controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-        controls.dampingFactor = 0.05;
-
-        // Light Setup
-        const ambientLight = new THREE.AmbientLight(0x404040, 2);
-        scene.add(ambientLight);
-
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-        directionalLight.position.set(100, 200, 100);
-        scene.add(directionalLight);
-
-        // Raycaster for Interactivity
-        raycaster = new THREE.Raycaster();
-        mouse = new THREE.Vector2();
-
-        // Add 3D Model
-        addModel();
-
-        // Event Listeners
-        window.addEventListener('resize', onWindowResize, false);
-        window.addEventListener('mousemove', onMouseMove, false);
-        window.addEventListener('click', onMouseClick, false);
-    }
-
-    function addModel() {
-        // Load a simplified 3D model of a curtain wall (for demo purposes, we'll create it procedurally)
-        const wallGeometry = new THREE.BoxGeometry(300, 200, 10);
-        const wallMaterial = new THREE.MeshPhongMaterial({ color: 0x555555, side: THREE.DoubleSide });
-        const wall = new THREE.Mesh(wallGeometry, wallMaterial);
-        wall.position.set(0, 100, 0);
-        scene.add(wall);
-
-        // Add windows (interactive components)
-        const windowGeometry = new THREE.PlaneGeometry(50, 50);
-        const windowMaterial = new THREE.MeshBasicMaterial({ color: 0x87ceeb, side: THREE.DoubleSide });
-        const components = [];
-
-        for (let i = -2; i <= 2; i++) {
-            for (let j = -1; j <= 1; j++) {
-                const windowMesh = new THREE.Mesh(windowGeometry, windowMaterial.clone());
-                windowMesh.position.set(i * 60, j * 60 + 100, 5.5);
-                windowMesh.userData = {
-                    title: `Window ${i + 3}-${j + 2}`,
-                    description: `This is an AI analysis for Window ${i + 3}-${j + 2}. It includes energy efficiency metrics and structural integrity assessments.`,
-                    data: generateRandomData()
-                };
-                components.push(windowMesh);
-                scene.add(windowMesh);
+    <!-- Scripts -->
+    <script>
+        // Element Data
+        const elements = [
+            {
+                id: 'window1',
+                title: 'Fereastra de Nord-Est',
+                info: 'Această fereastră are un coeficient de transfer termic de 1.2 W/m²K. Expunerea sa asigură lumina naturală maximă în orele dimineții.',
+                data: [120, 110, 100, 90, 80, 75],
+                fill: '#93c5fd'
+            },
+            {
+                id: 'window2',
+                title: 'Fereastra de Sud-Est',
+                info: 'Această fereastră este optimizată pentru eficiență energetică, cu sticlă dublă și strat Low-E.',
+                data: [130, 120, 110, 100, 90, 85],
+                fill: '#93c5fd'
+            },
+            {
+                id: 'door',
+                title: 'Ușa Principală Inteligentă',
+                info: 'Ușa este echipată cu sisteme de securitate biometrice și izolație fonică avansată.',
+                data: [150, 140, 130, 120, 110, 100],
+                fill: '#86efac'
+            },
+            {
+                id: 'panel1',
+                title: 'Panou Opac Izolat 1',
+                info: 'Panoul contribuie la eficiența termică a clădirii, având o rezistență termică ridicată.',
+                data: [100, 95, 90, 85, 80, 75],
+                fill: '#d1d5db'
+            },
+            {
+                id: 'panel2',
+                title: 'Panou Opac Izolat 2',
+                info: 'Fabricat din materiale sustenabile, acest panou reduce impactul asupra mediului.',
+                data: [90, 85, 80, 75, 70, 65],
+                fill: '#d1d5db'
             }
-        }
+        ];
 
-        // Store components for interaction
-        scene.userData.components = components;
-    }
+        // Tooltip
+        const tooltip = document.getElementById('tooltip');
 
-    function generateRandomData() {
-        // Generate random data for the chart
-        const data = [];
-        for (let i = 0; i < 5; i++) {
-            data.push(Math.floor(Math.random() * 100));
-        }
-        return data;
-    }
+        // Event Listeners for Elements
+        elements.forEach(element => {
+            const el = document.getElementById(element.id);
 
-    function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    function onMouseMove(event) {
-        event.preventDefault();
-
-        mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
-        mouse.y = - (event.clientY / renderer.domElement.clientHeight) * 2 + 1;
-
-        // Update tooltip position
-        tooltip.style.left = event.clientX + 10 + 'px';
-        tooltip.style.top = event.clientY + 10 + 'px';
-    }
-
-    function onMouseClick(event) {
-        if (INTERSECTED) {
-            showInfoPanel(INTERSECTED.userData);
-        }
-    }
-
-    function animate() {
-        requestAnimationFrame(animate);
-
-        controls.update();
-
-        render();
-    }
-
-    function render() {
-        // Update the picking ray with the camera and mouse position
-        raycaster.setFromCamera(mouse, camera);
-
-        // Calculate objects intersecting the picking ray
-        const intersects = raycaster.intersectObjects(scene.userData.components);
-
-        if (intersects.length > 0) {
-            if (INTERSECTED != intersects[0].object) {
-                if (INTERSECTED) INTERSECTED.material.color.set(0x87ceeb);
-                INTERSECTED = intersects[0].object;
-                INTERSECTED.material.color.set(0xffa500);
-
-                // Update tooltip
+            // Mouse Enter
+            el.addEventListener('mouseenter', (e) => {
+                tooltip.innerText = element.title;
                 tooltip.style.opacity = 1;
-                tooltip.innerHTML = INTERSECTED.userData.title;
+                moveTooltip(e);
+            });
+
+            // Mouse Move
+            el.addEventListener('mousemove', (e) => {
+                moveTooltip(e);
+            });
+
+            // Mouse Leave
+            el.addEventListener('mouseleave', () => {
+                tooltip.style.opacity = 0;
+            });
+
+            // Click Event
+            el.addEventListener('click', () => {
+                handleElementClick(element);
+            });
+        });
+
+        // Tooltip Movement
+        function moveTooltip(e) {
+            const drawingRect = document.getElementById('drawing').getBoundingClientRect();
+            tooltip.style.left = `${e.clientX - drawingRect.left + 15}px`;
+            tooltip.style.top = `${e.clientY - drawingRect.top + 15}px`;
+        }
+
+        // Handle Element Click
+        function handleElementClick(element) {
+            resetHighlights();
+            const el = document.getElementById(element.id);
+            el.classList.add('highlight');
+            document.getElementById('elementTitle').innerText = element.title;
+            document.getElementById('elementInfo').innerText = element.info;
+            updateChart(element);
+        }
+
+        // Reset Highlights
+        function resetHighlights() {
+            elements.forEach(element => {
+                const el = document.getElementById(element.id);
+                el.classList.remove('highlight');
+            });
+        }
+
+        // Initialize Chart
+        const ctx = document.getElementById('energyChart').getContext('2d');
+        const energyChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie'],
+                datasets: [{
+                    label: 'Consum Energetic (kWh)',
+                    data: [0, 0, 0, 0, 0, 0],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    tension: 0.3,
+                    fill: true,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#3b82f6'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: {
+                            color: '#ffffff'
+                        },
+                        grid: {
+                            color: '#444'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#ffffff'
+                        },
+                        grid: {
+                            color: '#444'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#ffffff'
+                        }
+                    }
+                }
             }
-        } else {
-            if (INTERSECTED) INTERSECTED.material.color.set(0x87ceeb);
-            INTERSECTED = null;
+        });
 
-            // Hide tooltip
-            tooltip.style.opacity = 0;
+        // Update Chart with Element Data
+        function updateChart(element) {
+            energyChart.data.datasets[0].data = element.data;
+            energyChart.update();
         }
-
-        renderer.render(scene, camera);
-    }
-
-    // Info Panel Logic
-    function showInfoPanel(data) {
-        document.getElementById('elementTitle').innerText = data.title;
-        document.getElementById('elementDescription').innerText = data.description;
-        drawChart(data.data);
-        infoPanel.classList.add('active');
-    }
-
-    document.getElementById('closeInfo').addEventListener('click', () => {
-        infoPanel.classList.remove('active');
-    });
-
-    // Chart Drawing Function
-    function drawChart(data) {
-        const canvas = document.getElementById('chartCanvas');
-        const ctx = canvas.getContext('2d');
-
-        // Clear previous chart
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Draw chart
-        ctx.beginPath();
-        ctx.moveTo(0, canvas.height - data[0] * 2);
-        for (let i = 1; i < data.length; i++) {
-            ctx.lineTo(i * (canvas.width / (data.length - 1)), canvas.height - data[i] * 2);
-        }
-        ctx.strokeStyle = '#00ff00';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-
-        // Draw data points
-        ctx.fillStyle = '#00ff00';
-        for (let i = 0; i < data.length; i++) {
-            ctx.beginPath();
-            ctx.arc(i * (canvas.width / (data.length - 1)), canvas.height - data[i] * 2, 4, 0, 2 * Math.PI);
-            ctx.fill();
-        }
-    }
-</script>
-
+    </script>
 </body>
 </html>
-
-
-
