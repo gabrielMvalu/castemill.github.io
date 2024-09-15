@@ -4,14 +4,15 @@
     <!-- Basic HTML settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Castemill SRL - Demonstrație Interactivă AI ** Momentan UNDER CONSTRUCTION ** </title>
+    <title>Castemill SRL - Demonstrație Interactivă AI *** UNDER CONSTUCTION ***</title>
     <meta name="description" content="Experimentează soluțiile noastre AI personalizate prin această demonstrație interactivă.">
     <!-- Link to your existing CSS file -->
     <link rel="stylesheet" href="style.css">
-    <!-- Link to TensorFlow.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
     <!-- Link to Chart.js for data visualization -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Link to AnyChart for Gantt Chart -->
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-gantt.min.js"></script>
 </head>
 <body>
     <!-- Header section -->
@@ -36,28 +37,39 @@
     </header>
     <!-- Main content -->
     <main class="container">
-        <h2>Predicție Costuri cu AI</h2>
-        <p>Ajustați parametrii pentru a vedea cum AI estimează costurile proiectului.</p>
+        <h2>Simulează Proiectul Tău cu AI Avansat</h2>
+        <p>Ajustează parametrii proiectului și vezi cum AI prezice costurile, timpii și potențialele riscuri.</p>
         <!-- Data input form -->
         <form id="ai-form">
             <div class="form-group">
-                <label for="feature1">Număr de Angajați:</label>
-                <input type="range" id="feature1" name="feature1" min="1" max="100" value="50" oninput="updateInput('feature1')">
-                <span id="feature1-value">50</span>
+                <label for="num-employees">Număr de Angajați:</label>
+                <input type="number" id="num-employees" name="numEmployees" min="1" max="500" value="50" required>
             </div>
             <div class="form-group">
-                <label for="feature2">Durata Proiectului (luni):</label>
-                <input type="range" id="feature2" name="feature2" min="1" max="24" value="12" oninput="updateInput('feature2')">
-                <span id="feature2-value">12</span>
+                <label for="project-duration">Durata Proiectului (luni):</label>
+                <input type="number" id="project-duration" name="projectDuration" min="1" max="36" value="12" required>
             </div>
             <div class="form-group">
-                <label for="feature3">Complexitatea Proiectului:</label>
-                <input type="range" id="feature3" name="feature3" min="1" max="10" value="5" oninput="updateInput('feature3')">
-                <span id="feature3-value">5</span>
+                <label for="project-complexity">Complexitatea Proiectului (1-10):</label>
+                <input type="number" id="project-complexity" name="projectComplexity" min="1" max="10" value="5" required>
             </div>
+            <div class="form-group">
+                <label for="material-cost">Costuri Materiale (EUR):</label>
+                <input type="number" id="material-cost" name="materialCost" min="1000" value="50000" required>
+            </div>
+            <div class="form-group">
+                <label for="labor-rate">Tarif Orar Muncitori (EUR):</label>
+                <input type="number" id="labor-rate" name="laborRate" min="5" value="20" required>
+            </div>
+            <button type="button" class="cta-button" onclick="simulateProject()">Simulează Proiectul</button>
         </form>
-        <!-- Visualization area -->
-        <canvas id="resultChart"></canvas>
+        <!-- Visualization areas -->
+        <h3>Previziuni AI</h3>
+        <canvas id="costBreakdownChart"></canvas>
+        <h3>Grafic Gantt al Proiectului</h3>
+        <div id="ganttChart" style="height: 500px;"></div>
+        <h3>Evaluare Riscuri</h3>
+        <div id="riskAssessment"></div>
     </main>
     <!-- Footer section -->
     <footer class="footer">
@@ -78,91 +90,106 @@
     </footer>
     <!-- JavaScript code -->
     <script>
-        // Update displayed value for sliders
-        function updateInput(id) {
-            document.getElementById(id + '-value').innerText = document.getElementById(id).value;
-            predict();
-        }
+        function simulateProject() {
+            // Get input values
+            const numEmployees = parseInt(document.getElementById('num-employees').value);
+            const projectDuration = parseInt(document.getElementById('project-duration').value);
+            const projectComplexity = parseInt(document.getElementById('project-complexity').value);
+            const materialCost = parseFloat(document.getElementById('material-cost').value);
+            const laborRate = parseFloat(document.getElementById('labor-rate').value);
 
-        // Define the model
-        let model;
-        async function createModel() {
-            model = tf.sequential();
-            model.add(tf.layers.dense({ units: 8, activation: 'relu', inputShape: [3] }));
-            model.add(tf.layers.dense({ units: 1 }));
-            // Simulate training the model
-            const xs = tf.tensor2d([
-                [10, 6, 2],
-                [50, 12, 5],
-                [80, 18, 8],
-                [100, 24, 10],
-                [20, 3, 1]
-            ]);
-            const ys = tf.tensor2d([
-                [50000],
-                [200000],
-                [400000],
-                [600000],
-                [30000]
-            ]);
-            await model.compile({ optimizer: 'adam', loss: 'meanSquaredError' });
-            await model.fit(xs, ys, { epochs: 50 });
-            predict();
-        }
+            // Simulate AI predictions
+            const overhead = 0.1 * (materialCost + numEmployees * laborRate * projectDuration * 160);
+            const laborCost = numEmployees * laborRate * projectDuration * 160;
+            const totalCost = materialCost + laborCost + overhead;
 
-        // Predict function
-        function predict() {
-            const feature1 = parseFloat(document.getElementById('feature1').value);
-            const feature2 = parseFloat(document.getElementById('feature2').value);
-            const feature3 = parseFloat(document.getElementById('feature3').value);
+            // Cost Breakdown Data
+            const costData = {
+                labels: ['Materiale', 'Muncă', 'Cheltuieli Generale'],
+                datasets: [{
+                    data: [materialCost, laborCost, overhead],
+                    backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56']
+                }]
+            };
 
-            tf.tidy(() => {
-                const input = tf.tensor2d([[feature1, feature2, feature3]]);
-                const output = model.predict(input);
-                const prediction = output.dataSync()[0];
-
-                updateChart(prediction);
-            });
-        }
-
-        // Chart.js setup
-        let chart;
-        function updateChart(prediction) {
-            const ctx = document.getElementById('resultChart').getContext('2d');
-            if (chart) {
-                chart.destroy();
+            // Create Cost Breakdown Chart
+            const ctx = document.getElementById('costBreakdownChart').getContext('2d');
+            if (window.costChart) {
+                window.costChart.destroy();
             }
-            chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Cost Estimat al Proiectului'],
-                    datasets: [{
-                        label: 'Cost (EUR)',
-                        data: [prediction.toFixed(2)],
-                        backgroundColor: ['rgba(54, 162, 235, 0.7)'],
-                        borderColor: ['rgba(54, 162, 235, 1)'],
-                        borderWidth: 1
-                    }]
-                },
+            window.costChart = new Chart(ctx, {
+                type: 'pie',
+                data: costData,
                 options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    },
+                    responsive: true,
                     plugins: {
                         legend: {
-                            display: false
+                            position: 'bottom'
                         }
                     }
                 }
             });
+
+            // Generate Gantt Chart Data
+            const tasks = generateGanttData(projectDuration, projectComplexity);
+
+            // Create Gantt Chart
+            anychart.onDocumentReady(function () {
+                if (window.ganttChart) {
+                    window.ganttChart.dispose();
+                }
+                window.ganttChart = anychart.ganttProject();
+                window.ganttChart.data(tasks, 'asTable');
+                window.ganttChart.container('ganttChart');
+                window.ganttChart.draw();
+            });
+
+            // Risk Assessment
+            const riskLevel = assessRisk(projectComplexity, projectDuration);
+            document.getElementById('riskAssessment').innerHTML = '<p>Nivelul estimat de risc pentru acest proiect este: <strong>' + riskLevel + '</strong></p>';
         }
 
-        // Initialize
-        createModel();
+        function generateGanttData(duration, complexity) {
+            const tasks = [];
+            const startDate = new Date();
+            const endDate = new Date();
+            endDate.setMonth(startDate.getMonth() + duration);
+
+            for (let i = 1; i <= complexity; i++) {
+                const taskDuration = Math.floor(duration / complexity);
+                const taskStart = new Date();
+                taskStart.setMonth(startDate.getMonth() + (i - 1) * taskDuration);
+                const taskEnd = new Date();
+                taskEnd.setMonth(taskStart.getMonth() + taskDuration);
+                tasks.push({
+                    id: i,
+                    name: 'Activitate ' + i,
+                    actualStart: taskStart,
+                    actualEnd: taskEnd
+                });
+            }
+
+            // Define dependencies
+            for (let i = 2; i <= complexity; i++) {
+                tasks[i - 1].successors = [{ task: i, type: 'FS' }];
+            }
+
+            return tasks;
+        }
+
+        function assessRisk(complexity, duration) {
+            let riskScore = (complexity / 10) * 0.6 + (duration / 36) * 0.4;
+            if (riskScore < 0.3) {
+                return 'Scăzut';
+            } else if (riskScore < 0.6) {
+                return 'Moderat';
+            } else {
+                return 'Ridicat';
+            }
+        }
     </script>
 </body>
 </html>
+
 
 
