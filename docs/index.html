@@ -28,150 +28,305 @@
     
     <!-- Legătura la fișierul CSS pentru stilizarea paginii -->
     <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CASTEMILL - Time Reimagined</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  
+  <style>
+    :root {
+      --primary-color: #1a1a1a;
+      --accent-color: #0E9B8A;
+      --bg-color: #fafafa;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --metallic-text: linear-gradient(90deg, #f70000, #c0c0c0, #e0e0e0);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .main-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .clock-container {
+      position: relative;
+      width: min(80vw, 800px);
+      height: min(80vw, 800px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .clock-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      box-shadow: 
+        0 0 40px rgba(8, 104, 155, 0.4),
+        inset 0 0 60px rgba(36, 134, 253, 0.3),
+        0 0 100px rgba(14, 155, 138, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .clock-face:hover {
+      transform: scale(1.02);
+      box-shadow: 
+        0 0 60px rgba(8, 104, 155, 0.6),
+        inset 0 0 80px rgba(36, 134, 253, 0.4),
+        0 0 120px rgba(14, 155, 138, 0.3);
+    }
+
+    .second-hand {
+      position: absolute;
+      width: 24px;
+      height: 45%;
+      background: linear-gradient(45deg, #0e9b8a, #6caffb, #0e4d9b);
+      bottom: 50%;
+      transform-origin: bottom center;
+      z-index: 5;
+      clip-path: polygon(50% 0%, 70% 100%, 30% 100%);
+      box-shadow: 0 0 20px rgba(14, 155, 138, 0.8);
+      animation: shiny-reflection 2s linear infinite;
+    }
+
+    .second-hand::after {
+      content: '';
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(45deg, #ff0000, #ff6b6b);
+      border-radius: 50%;
+      left: 50%;
+      top: 10%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+    }
+
+    .brand-logo {
+      position: absolute;
+      top: 3%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: auto;
+      height: auto;
+      max-width: 120px;
+      opacity: 0.9;
+      z-index: 4;
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+    }
+
+    .brand-logo:hover {
+      transform: translateX(-50%) scale(1.1);
+      opacity: 1;
+    }
+
+    .brand-name {
+      position: absolute;
+      top: 25%;
+      left: 0%;
+      transform: translateX(10%);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      z-index: 1;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    .slogan {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      color: #ff6b6b;
+      text-align: center;
+      text-shadow: 0 0 15px rgba(255, 107, 107, 0.6);
+      animation: glow 2s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 15px rgba(255, 107, 107, 0.6); }
+      50% { text-shadow: 0 0 25px rgba(255, 107, 107, 0.8); }
+      100% { text-shadow: 0 0 15px rgba(255, 107, 107, 0.6); }
+    }
+
+    .slogan-description {
+      margin-top: 0.5rem;
+      font-size: 0.7rem;
+      color: #ffffff;
+      text-align: center;
+      max-width: 70%;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.4;
+      opacity: 0.8;
+    }
+
+    .navigation {
+      position: fixed;
+      bottom: 10rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 1rem;
+      z-index: 20;
+    }
+
+    .contact-button {
+      position: relative;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      color: #ffffff;
+      background: rgba(14, 155, 138, 0.2);
+      border: 1px solid rgba(14, 155, 138, 0.3);
+      border-radius: 30px;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(14, 155, 138, 0.2);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+    }
+
+    .contact-button:hover {
+      background: rgba(14, 155, 138, 0.3);
+      box-shadow: 0 4px 30px rgba(14, 155, 138, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .contact-button .phone-number {
+      position: absolute;
+      top: 120%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(14, 155, 138, 0.9);
+      padding: 0.8rem 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(14, 155, 138, 0.3);
+      font-size: 0.9rem;
+      color: #ffffff;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .contact-button:hover .phone-number {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(5px);
+    }
+
+    @media (max-width: 768px) {
+      .clock-container {
+        width: 90vw;
+        height: 90vw;
+      }
+      
+      .navigation {
+        bottom: 5rem;
+      }
+
+      .brand-logo {
+        max-width: 100px;
+        top: 38%;
+      }
+
+      .brand-name {
+        font-size: 1rem;
+      }
+
+      .slogan {
+        font-size: 1rem;
+      }
+
+      .slogan-description {
+        font-size: 0.6rem;
+        max-width: 80%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Secțiunea de fundal de cod, care afișează un exemplu de cod Python -->
-    <div class="code-background">
-        <!-- Cod Python afișat pe pagina principală (poate fi mutat pe o altă pagină) -->
-        <pre>
-import numpy as np
-import tensorflow as tf
-from sklearn.model_selection import train_test_split
-
-def create_model():
-    model = tf.keras.Sequential([
-        tf.keras.layers.Dense(64, activation='relu', input_shape=(10,)),
-        tf.keras.layers.Dense(32, activation='relu'),
-        tf.keras.layers.Dense(1, activation='sigmoid')
-    ])
-    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-    return model
-
-def train_model(X, y):
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-    model = create_model()
-    model.fit(X_train, y_train, epochs=100, batch_size=32, validation_split=0.2, verbose=0)
-    return model
-
-def predict(model, X):
-    return model.predict(X)
-
-# Generarea unor date de test și antrenarea modelului
-X = np.random.rand(1000, 10)
-y = np.random.randint(2, size=(1000, 1))
-
-# Antrenarea modelului
-trained_model = train_model(X, y)
-
-# Realizarea de predicții
-new_data = np.random.rand(5, 10)
-predictions = predict(trained_model, new_data)
-print("Predictions:", predictions)
-
-# Automatizarea procesării datelor
-def process_data(data):
-    processed_data = data * 2 + 1
-    return processed_data
-
-# Simularea procesării datelor în timp real
-import time
-while True:
-    incoming_data = np.random.rand(10)
-    processed_result = process_data(incoming_data)
-    print("Processed data:", processed_result)
-    time.sleep(1)
-        </pre>
+  <div class="main-container">
+    <div class="clock-container">
+      <div class="clock-face">
+        <img src="logo.png" alt="CASTEMILL" class="brand-logo">
+        <div class="brand-name">CASTEMILL S.R.L.
+          <div class="slogan">
+            <b>Turning Data into Time for Your Business</b>
+          </div>
+          <div class="slogan-description">
+            <i>Saving entrepreneurs time by providing actionable, AI-driven insights, allowing them to focus on growth and strategy rather than tedious data analysis.</i>
+          </div>
+        </div>
+        <div class="second-hand"></div>        
+      </div>
     </div>
-    
-    <!-- Header-ul paginii: logo și titlul companiei -->
-    <header>
-        <div class="header-content">
-            <div class="logo-container">
-                <img src="logo.png" alt="Logo" class="logo">
-            </div>
-            <div class="company-info">
-                <div class="company-name">Castemill SRL</div>
-                <h1>Soluții Software Personalizate pentru Business-ul Tău</h1>
-            </div>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Acasă</a></li>
-                <li><a href="demo.html">Demonstrație</a></li>
-                <li><a href="consultanta.html">Consultanță</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <!-- Secțiunea principală a paginii -->
-    <main class="container">
-        <div class="content">
-            <!-- Primul card: Soluții software personalizate -->
-            <div class="card">
-               <h3>Soluții Software Personalizate</h3>
-               <p>La Castemill SRL, dezvoltăm soluții software adaptate fiecărei afaceri. Fie că ești în domeniul construcțiilor, producției sau al serviciilor, soluțiile noastre sunt proiectate pentru a răspunde exact nevoilor tale. Un exemplu este softul nostru de estimare a costurilor pentru construcții, care preia și analizează datele de ofertare pentru a genera rapoarte precise și detaliate despre costuri și marje de profit.</p>
-            </div>
-            
-            <!-- Al doilea card: Estimarea prețurilor în construcții -->
-            <div class="card">
-                <h3>Estimare Prețuri în Construcții</h3>
-                <p>Dezvoltăm un software avansat care ajută companiile de construcții să gestioneze mai bine licitațiile și bugetele. Aplicația noastră preia listele de cantități și generează estimări precise pe baza prețurilor actualizate de la furnizori. Află exact cât va costa un proiect, ce marje de profit poți obține și cum să optimizezi utilizarea resurselor pentru un management financiar mai eficient.</p>
-            </div>
-            
-            <!-- Al treilea card: Consultanță și suport continu -->
-            <div class="card">
-                <h3>Consultanță și Suport Continuu</h3>
-                <p>Echipa noastră de experți este alături de tine pe tot parcursul procesului de implementare și utilizare a soluțiilor software. Oferim consultanță personalizată, training și suport pentru ca tu să beneficiezi de tot potențialul tehnologiilor noastre. Contactează-ne pentru o consultanță gratuită și descoperă cum te putem ajuta să îți îmbunătățești procesele de business.</p>
-            </div>
-        </div>
-        
-        <!-- Footer-ul paginii: butoane CTA și informații de contact -->
-        <footer class="footer">
-            <button class="cta-button" id="demo">Solicită o Demonstrație</button>
-            <button class="cta-button" id="consult">Consultanță Software Gratuită</button>
-            <button class="cta-button" id="contact">Contactează-ne pentru Oferte</button>
-            
-            <!-- Informațiile de contact: telefon și email -->
-            <div class="contact-info">
-                <div class="contact-item">
-                    <a href="tel:+40721720155">
-                        <span class="contact-icon">📞</span>
-                        +4(0)721.720.155
-                    </a>
-                </div>
-                <div class="contact-item">
-                    <a href="mailto:office@castemill.com">
-                        <span class="contact-icon">✉️</span>
-                        office@castemill.com
-                    </a>
-                </div>
-            </div>
-        </footer>
-    </main>
-    
-    <!-- Datele structurate pentru Schema.org (pentru SEO) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Castemill SRL",
-      "description": "Soluții AI și Soluții Software Personalizate pentru afaceri",
-      "url": "https://www.castemill.com",
-      "telephone": "+40721720155",
-      "email": "office@castemill.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "RO"
-      },
-      "sameAs": [
-        "https://www.facebook.com/castemill",
-        "https://www.linkedin.com/company/castemill"
-      ]
-    }
-    </script>
-    
-    <!-- Script personalizat pentru efecte interactive -->
-    <script src="script.js"></script>
+  </div>
+
+  <nav class="navigation">
+    <div class="contact-button">
+      Contact
+      <span class="phone-number">+40721720155</span>
+    </div>
+  </nav>
+
+  <script>
+    gsap.to('.second-hand', {
+      rotation: -360,
+      duration: 60,
+      ease: "none",
+      repeat: -1,
+      transformOrigin: "bottom center",
+    });
+
+    // Adăugăm animație pentru logo la scroll
+    window.addEventListener('scroll', () => {
+      const logo = document.querySelector('.brand-logo');
+      const scrollPosition = window.scrollY;
+      logo.style.transform = `translateX(-50%) rotate(${scrollPosition * 0.1}deg)`;
+    });
+  </script>
 </body>
 </html>
