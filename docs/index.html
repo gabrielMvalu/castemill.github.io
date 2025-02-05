@@ -11,20 +11,17 @@
             --primary-blue: #00aaff;
             --dark-bg: #1a1f40;
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Space Grotesk', sans-serif;
             background: linear-gradient(to bottom, #000, var(--dark-bg), var(--primary-blue));
             color: white;
             min-height: 100vh;
         }
-
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -37,12 +34,10 @@
             top: 0;
             z-index: 1000;
         }
-
         .logo {
             font-size: 1.5rem;
             font-weight: 600;
         }
-
         .nav-links a {
             color: white;
             text-decoration: none;
@@ -50,11 +45,9 @@
             font-weight: 500;
             transition: color 0.3s ease;
         }
-
         .nav-links a:hover {
             color: var(--primary-blue);
         }
-
         .hero {
             padding-top: 5rem;
             min-height: 100vh;
@@ -64,24 +57,20 @@
             padding-left: 2rem;
             position: relative;
         }
-
         .hero-content {
             max-width: 600px;
             margin-bottom: 2rem;
             z-index: 1;
         }
-
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
         }
-
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
             opacity: 0.9;
         }
-
         .contact-btn {
             background: var(--primary-blue);
             color: white;
@@ -92,35 +81,32 @@
             cursor: pointer;
             transition: background 0.3s ease;
         }
-
         .contact-btn:hover {
             background: #0090dd;
         }
-
+        /* Containerul pentru Spline - modificat pentru responsivitate */
         .spline-container {
-            position: absolute;
-            top: 0;
-            right: 0;
             width: 100%;
-            height: 100%;
-            z-index: 0;
+            height: 100vh; /* Ocupă întreaga înălțime a viewport-ului */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-
         spline-viewer {
             width: 100%;
             height: 100%;
+            max-width: 100vw;
+            max-height: 100vh;
+            object-fit: cover; /* Asigură scalarea corectă */
         }
-
         .features {
             padding: 4rem 2rem;
             text-align: center;
         }
-
         .features h2 {
             font-size: 2rem;
             margin-bottom: 3rem;
         }
-
         .cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -128,7 +114,6 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-
         .card {
             background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
@@ -136,49 +121,39 @@
             border-radius: 16px;
             text-align: left;
         }
-
         .card h3 {
             color: var(--primary-blue);
             margin-bottom: 1rem;
         }
-
         .footer {
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
             padding: 2rem;
             text-align: center;
         }
-
         .footer p {
             margin-bottom: 1rem;
         }
-
         .footer a {
             color: white;
             text-decoration: none;
             margin: 0 1rem;
             transition: color 0.3s ease;
         }
-
         .footer a:hover {
             color: var(--primary-blue);
         }
-
         @media (max-width: 768px) {
             .hero {
                 padding: 4rem 1rem;
             }
-
             .hero h1 {
                 font-size: 2.5rem;
             }
-
             .spline-container {
-                position: relative;
-                height: 50vh;
+                height: 50vh; /* Înălțime redusă pentru mobil */
                 margin-top: 2rem;
             }
-
             .cards {
                 grid-template-columns: 1fr;
             }
@@ -193,7 +168,6 @@
             <a href="#contact">Contact</a>
         </div>
     </nav>
-
     <section class="hero" id="home">
         <div class="hero-content">
             <h1>Business Intelligence</h1>
@@ -204,7 +178,6 @@
             <spline-viewer url="https://prod.spline.design/86PYGczZ2IDF-48y/scene.splinecode"></spline-viewer>
         </div>
     </section>
-
     <section class="features">
         <h2>Aplicația de Business Intelligence pe care o așteptai.</h2>
         <div class="cards">
@@ -222,7 +195,6 @@
             </div>
         </div>
     </section>
-
     <footer class="footer" id="contact">
         <p>© 2025 Castemill SRL. Toate drepturile rezervate.</p>
         <div>
