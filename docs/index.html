@@ -68,26 +68,21 @@
     }
 
     .hero {
-      position: relative;
       width: 100%;
       height: 100vh;
-      overflow: hidden;
-    }
-
-    .hero-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       position: relative;
-      width: 100%;
-      height: 100%;
-      padding-top: 56.25%; /* 16:9 Aspect Ratio */
+      padding-top: 60px; /* Pentru navbar */
     }
 
     .hero iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       border: none;
+      display: block;
+      object-fit: cover;
     }
 
     .features {
