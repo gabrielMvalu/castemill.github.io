@@ -1,107 +1,235 @@
-import React from 'react';
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Castemill - Business Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.59/build/spline-viewer.js"></script>
+    <style>
+        :root {
+            --primary-blue: #00aaff;
+            --dark-bg: #1a1f40;
+        }
 
-const BusinessIntelligence = () => {
-  React.useEffect(() => {
-    const script = document.createElement('script');
-    script.type = 'module';
-    script.src = 'https://unpkg.com/@splinetool/viewer@1.9.59/build/spline-viewer.js';
-    document.head.appendChild(script);
-    
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-black via-[#1a1f40] to-[#00aaff]">
-      {/* Navigation */}
-      <nav className="flex justify-between items-center px-8 py-4 fixed w-full top-0 z-50 bg-black/70 backdrop-blur-sm">
-        <div className="text-white text-xl font-semibold">CASTEMILL</div>
-        <div className="flex gap-6">
-          <a href="#home" className="text-white hover:text-blue-400 transition-colors">Home</a>
-          <a href="#contact" className="text-white hover:text-blue-400 transition-colors">Contact</a>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: linear-gradient(to bottom, #000, var(--dark-bg), var(--primary-blue));
+            color: white;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .hero {
+            padding-top: 5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            margin-bottom: 2rem;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .contact-btn {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: #0090dd;
+        }
+
+        .spline-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        spline-viewer {
+            width: 100%;
+            height: 100%;
+        }
+
+        .features {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: left;
+        }
+
+        .card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--primary-blue);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .spline-container {
+                position: relative;
+                height: 50vh;
+                margin-top: 2rem;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">CASTEMILL</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#contact">Contact</a>
         </div>
-      </nav>
+    </nav>
 
-      {/* Hero Section */}
-      <main className="flex-1 pt-16">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col items-start gap-6 mb-12 pt-8">
-            <h1 className="text-5xl font-bold text-white">Business Intelligence</h1>
-            <p className="text-gray-300 text-xl max-w-2xl">
-              Vizualizează, monitorizează și acționează în afaceri cu Business Intelligence fără bariere.
-            </p>
-            <button className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
-              Contact us
-            </button>
-          </div>
-
-          <div className="w-full h-[calc(100vh-200px)] relative flex justify-center items-center">
-            <spline-viewer
-              url="https://prod.spline.design/86PYGczZ2IDF-48y/scene.splinecode"
-              className="w-full h-full max-w-screen-xl"
-            />
-          </div>
-
-          <div className="text-center my-16">
-            <h2 className="text-3xl font-bold text-white mb-2">
-              Fă-ți afacerea mai inteligentă în timp real.
-            </h2>
-          </div>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Business Intelligence</h1>
+            <p>Vizualizează, monitorizează și acționează în afaceri cu Business Intelligence fără bariere.</p>
+            <button class="contact-btn">Contact us</button>
         </div>
+        <div class="spline-container">
+            <spline-viewer url="https://prod.spline.design/86PYGczZ2IDF-48y/scene.splinecode"></spline-viewer>
+        </div>
+    </section>
 
-        {/* Features */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-white text-center mb-12">
-              Aplicația de Business Intelligence pe care o așteptai.
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-black/30 backdrop-blur-sm p-6 rounded-xl">
-                <h3 className="text-xl font-semibold text-blue-400 mb-4">Design Intuitiv</h3>
-                <p className="text-gray-300">
-                  Experimentează o interfață modernă și dinamică, centrată pe date ce îți va ușura munca în timp real.
-                </p>
-              </div>
-
-              <div className="bg-black/30 backdrop-blur-sm p-6 rounded-xl">
-                <h3 className="text-xl font-semibold text-blue-400 mb-4">Componente Personalizate</h3>
-                <p className="text-gray-300">
-                  Adaptează-ți soluția de Business Intelligence la propriile nevoi. Module flexibile, monitorizare și inteligență artificială.
-                </p>
-              </div>
-
-              <div className="bg-black/30 backdrop-blur-sm p-6 rounded-xl">
-                <h3 className="text-xl font-semibold text-blue-400 mb-4">Scalare Inteligentă</h3>
-                <p className="text-gray-300">
-                  Extinde-ți afacerea fără limite. Platforma noastră se dezvoltă odată cu tine, oferind suport avansat.
-                </p>
-              </div>
+    <section class="features">
+        <h2>Aplicația de Business Intelligence pe care o așteptai.</h2>
+        <div class="cards">
+            <div class="card">
+                <h3>Design Intuitiv</h3>
+                <p>Experimentează o interfață modernă și dinamică, centrată pe date ce îți va ușura munca în timp real.</p>
             </div>
-          </div>
-        </section>
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-black/80 backdrop-blur-sm py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-400 mb-4">© 2025 Castemill SRL. Toate drepturile rezervate.</p>
-          <div className="flex justify-center gap-6">
-            <a href="https://www.facebook.com/castemill" className="text-gray-400 hover:text-white transition-colors">
-              Facebook
-            </a>
-            <a href="https://www.instagram.com/castemill" className="text-gray-400 hover:text-white transition-colors">
-              Instagram
-            </a>
-            <a href="https://www.x.com/castemill" className="text-gray-400 hover:text-white transition-colors">
-              X
-            </a>
-          </div>
+            <div class="card">
+                <h3>Componente Personalizate</h3>
+                <p>Adaptează-ți soluția de Business Intelligence la propriile nevoi. Module flexibile, monitorizare și inteligență artificială.</p>
+            </div>
+            <div class="card">
+                <h3>Scalare Inteligentă</h3>
+                <p>Extinde-ți afacerea fără limite. Platforma noastră se dezvoltă odată cu tine, oferind suport avansat.</p>
+            </div>
         </div>
-      </footer>
-    </div>
-  );
-};
+    </section>
 
-export default BusinessIntelligence;
+    <footer class="footer" id="contact">
+        <p>© 2025 Castemill SRL. Toate drepturile rezervate.</p>
+        <div>
+            <a href="https://www.facebook.com/castemill" target="_blank" rel="noopener">Facebook</a>
+            <a href="https://www.instagram.com/castemill" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.x.com/castemill" target="_blank" rel="noopener">X</a>
+        </div>
+    </footer>
+</body>
+</html>
