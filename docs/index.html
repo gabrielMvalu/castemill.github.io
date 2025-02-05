@@ -71,41 +71,23 @@
     .hero {
       width: 100%;
       height: 100vh;
-      position: relative;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 60px; /* Pentru navbar */
+      padding-top: 60px;
+      box-sizing: border-box;
     }
 
     spline-viewer {
-      aspect-ratio: 1400/700;
-      width: 100%;
-      max-width: 100vw;
-      max-height: calc(100vh - 60px);
-      object-fit: contain;
+      width: min(100vw, 1400px);
+      height: min(calc(100vh - 60px), 700px);
+      display: block;
     }
 
-    @media (max-width: 768px) {
+    @media (max-aspect-ratio: 2/1) {
       spline-viewer {
-        width: 100%;
-        height: auto;
-        max-height: calc(100vh - 60px);
-      }
-    }
-
-    @media (min-width: 769px) and (max-width: 1400px) {
-      spline-viewer {
-        width: 100%;
-        height: auto;
-      }
-    }
-
-    @media (min-width: 1401px) {
-      spline-viewer {
-        width: 1400px;
-        height: 700px;
+        width: 100vw;
+        height: 50vw;
       }
     }
 
