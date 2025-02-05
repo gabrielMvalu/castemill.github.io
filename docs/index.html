@@ -84,20 +84,21 @@
         .contact-btn:hover {
             background: #0090dd;
         }
-        /* Containerul pentru Spline - modificat pentru responsivitate */
+        /* Containerul pentru Spline - responsivitate */
         .spline-container {
+            position: relative;
             width: 100%;
-            height: 100vh; /* Ocupă întreaga înălțime a viewport-ului */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            overflow: hidden;
         }
-        spline-viewer {
+        .spline-container spline-viewer {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            max-width: 100vw;
-            max-height: 100vh;
-            object-fit: cover; /* Asigură scalarea corectă */
+            object-fit: cover;
         }
         .features {
             padding: 4rem 2rem;
@@ -151,7 +152,8 @@
                 font-size: 2.5rem;
             }
             .spline-container {
-                height: 50vh; /* Înălțime redusă pentru mobil */
+                height: 50vh;
+                padding-bottom: 0;
                 margin-top: 2rem;
             }
             .cards {
