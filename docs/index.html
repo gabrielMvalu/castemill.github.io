@@ -18,33 +18,29 @@
   <meta name="keywords" content="software BI, dezvoltare software, estimare prețuri, soluții IT, licitații construcții, management buget">
   <link rel="canonical" href="https://www.castemill.com">
   
-  <!-- Fonturi și GSAP -->
+  <!-- Fonturi -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link 
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&display=swap" 
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- GSAP pentru animații -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   
   <!-- Stiluri personalizate -->
   <style>
-    /* Variabile de culoare */
+    /* Variabile de culoare - monocromatic */
     :root {
-      --primary-color: #1a1a1a;
-      --accent-color: #0E9B8A;
-      --bg-color: #fafafa;
-      --shadow-color: rgba(0, 0, 0, 0.1);
-
-      /* Culori fundal gradient */
-      --grad1: #0D1B2A;
-      --grad2: #1B263B;
-      --grad3: #415A77;
-      --grad4: #778DA9;
-
-      /* Culori pentru carduri */
-      --card-bg: rgba(255,255,255,0.1);
-      --card-hover-bg: rgba(255,255,255,0.2);
+      --black: #0A0A0A;
+      --dark-gray: #1A1A1A;
+      --medium-gray: #2A2A2A;
+      --gray: #555555;
+      --light-gray: #888888;
+      --very-light-gray: #E0E0E0;
+      --white: #FFFFFF;
+      --accent: #333333;
+      --accent-light: #444444;
+      --hover-gray: #222222;
     }
 
     /* Reset și font */
@@ -52,705 +48,898 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Space Grotesk', sans-serif;
-      color: #FFF;
+      font-family: 'Inter', sans-serif;
     }
 
     body {
+      background-color: var(--white);
+      color: var(--black);
       overflow-x: hidden;
-      background: conic-gradient(
-        from 180deg,
-        var(--grad1),
-        var(--grad2),
-        var(--grad3),
-        var(--grad4),
-        var(--grad1)
-      );
-      background-size: 200% 200%;
-      animation: swirl 12s linear infinite;
-      position: relative;
-      min-height: 100vh;
-    }
-    @keyframes swirl {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      line-height: 1.6;
     }
 
-    /* Starfield - un efect subtil de stele */
-    .starfield {
-      pointer-events: none; 
-      position: absolute;
-      top: 0; 
-      left: 0; 
-      width: 100%; 
-      height: 100%;
-      background: radial-gradient(rgba(255,255,255,0.2), transparent 40%) 0 0,
-                  radial-gradient(rgba(255,255,255,0.2), transparent 40%) 10px 10px,
-                  radial-gradient(rgba(255,255,255,0.2), transparent 40%) 20px 20px,
-                  radial-gradient(rgba(255,255,255,0.2), transparent 40%) 30px 30px;
-      background-size: 50px 50px;
-      opacity: 0.1;
-      animation: twinkle 5s infinite;
-      z-index: 1;
+    /* Stiluri text generale */
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 600;
+      line-height: 1.3;
     }
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.15; }
-      50% { opacity: 0.25; }
+    
+    p {
+      margin-bottom: 1rem;
     }
 
-    /*  NAVBAR STIL  */
+    a {
+      text-decoration: none;
+      color: var(--black);
+      transition: all 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--gray);
+    }
+
+    /* Container fluid */
+    .container {
+      width: 90%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Navbar modern și minimal */
     .navbar {
       position: fixed;
-      top: 0; 
+      top: 0;
       width: 100%;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1.2rem 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .navbar.scrolled {
+      padding: 0.8rem 0;
+    }
+    
+    .navbar-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
-      z-index: 999;
-      backdrop-filter: blur(10px);
-      background: rgba(0, 0, 0, 0.3);
     }
-    .navbar .logo {
-      font-size: 1.2rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--black);
     }
-    .navbar .nav-links {
+    
+    .nav-links {
       display: flex;
-      gap: 1.5rem;
+      gap: 2.5rem;
     }
-    .navbar a {
-      text-decoration: none;
-      color: #FFF;
-      font-weight: 400;
-      transition: color 0.3s;
+    
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--black);
+      position: relative;
     }
-    .navbar a:hover {
-      color: var(--accent-color);
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--black);
+      transition: width 0.3s ease;
     }
-
-    /* Hamburger menu (pentru mobil) */
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
     .hamburger {
       display: none;
-      flex-direction: column;
-      gap: 5px;
       cursor: pointer;
     }
+    
     .hamburger span {
+      display: block;
       width: 25px;
-      height: 3px;
-      background: #FFF;
+      height: 2px;
+      background-color: var(--black);
+      margin-bottom: 5px;
+      transition: all 0.3s ease;
     }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none; /* Ascundem link-urile */
-      }
-      .hamburger {
-        display: flex;
-      }
-    }
-
-    /*  HERO (CEAS) SECTION  */
+    
+    /* Hero Section Modern */
     .hero {
-      width: 100%;
-      height: 100vh;
-      position: relative;
+      min-height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center;
-    }
-
-    .main-container {
+      padding-top: 80px; /* Pentru navbar */
       position: relative;
-      z-index: 2; 
-      perspective: 1000px;
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background-color: var(--white);
+      overflow: hidden;
     }
-
+    
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 2rem;
+    }
+    
+    .hero-content {
+      z-index: 2;
+    }
+    
+    .hero-tagline {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--gray);
+      margin-bottom: 1rem;
+    }
+    
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      letter-spacing: -1px;
+    }
+    
+    .hero-description {
+      font-size: 1.1rem;
+      color: var(--gray);
+      margin-bottom: 2rem;
+      max-width: 90%;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.8rem 2rem;
+      background-color: var(--black);
+      color: var(--white);
+      font-weight: 500;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      border: 1px solid var(--black);
+    }
+    
+    .btn:hover {
+      background-color: var(--white);
+      color: var(--black);
+    }
+    
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--black);
+      border: 1px solid var(--black);
+      margin-left: 1rem;
+    }
+    
+    .btn-secondary:hover {
+      background-color: var(--black);
+      color: var(--white);
+    }
+    
+    .hero-visual {
+      position: relative;
+      z-index: 1;
+    }
+    
     .clock-container {
       position: relative;
-      width: min(70vw, 600px);
-      height: min(70vw, 600px);
+      width: 100%;
+      height: 550px;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      animation: float 6s ease-in-out infinite alternate;
-      transform-style: preserve-3d; 
-      transition: transform 1s ease;
     }
-    @keyframes float {
-      0% { transform: translateY(-10px); }
-      100% { transform: translateY(10px); }
-    }
-    .main-container:hover .clock-container {
-      transform: rotateY(10deg) rotateX(10deg);
-    }
-
+    
     .clock-face {
       position: absolute;
-      width: 100%;
-      height: 100%;
+      width: 75%;
+      height: 75%;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(20px);
+      background: linear-gradient(135deg, var(--white) 0%, var(--very-light-gray) 100%);
       box-shadow: 
-        0 0 40px rgba(8, 104, 155, 0.3),
-        inset 0 0 60px rgba(36, 134, 253, 0.2),
-        0 0 100px rgba(14, 155, 138, 0.1);
+        20px 20px 60px rgba(0, 0, 0, 0.08),
+        -20px -20px 60px rgba(255, 255, 255, 0.8),
+        inset 2px 2px 4px rgba(255, 255, 255, 1),
+        inset -2px -2px 4px rgba(0, 0, 0, 0.1);
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 2px solid rgba(255, 255, 255, 0.15);
-      overflow: hidden;
-      transition: all 0.3s ease;
-      transform-style: preserve-3d;
     }
-    .clock-face:hover {
-      transform: scale(1.02) rotateZ(2deg);
-      box-shadow: 
-        0 0 60px rgba(8, 104, 155, 0.6),
-        inset 0 0 80px rgba(36, 134, 253, 0.3),
-        0 0 120px rgba(14, 155, 138, 0.2);
-    }
-
+    
     .second-hand {
       position: absolute;
-      width: 24px;
-      height: 45%;
-      background: linear-gradient(45deg, #0e9b8a, #6caffb, #0e4d9b);
+      width: 2px;
+      height: 38%;
+      background-color: var(--black);
       bottom: 50%;
       transform-origin: bottom center;
       z-index: 5;
-      clip-path: polygon(50% 0%, 70% 100%, 30% 100%);
-      box-shadow: 0 0 20px rgba(14, 155, 138, 0.8);
-      animation: shiny-reflection 2s linear infinite;
+      border-radius: 50% 50% 0 0;
     }
-    @keyframes shiny-reflection {
-      0%, 100% { filter: brightness(1); }
-      50% { filter: brightness(1.5); }
-    }
+    
     .second-hand::after {
       content: '';
       position: absolute;
-      width: 32px;
-      height: 32px;
-      background: linear-gradient(45deg, #ff0000, #ff6b6b);
+      width: 12px;
+      height: 12px;
+      background-color: var(--black);
       border-radius: 50%;
       left: 50%;
+      top: 0;
+      transform: translate(-50%, -50%);
+    }
+    
+    .background-square {
+      position: absolute;
+      width: 35vw;
+      height: 35vw;
+      background-color: var(--very-light-gray);
       top: 10%;
-      transform: translateX(-50%);
-      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+      right: -10%;
+      z-index: 0;
+      border-radius: 2px;
     }
-
-    .brand-logo {
-      position: absolute;
-      top: 3%;
-      left: 50%;
-      transform: translateX(-50%);
-      max-width: 120px;
-      opacity: 0.9;
-      z-index: 4;
-      transition: all 0.3s ease;
-      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
-      transform-origin: center;
-    }
-    .brand-logo:hover {
-      transform: translateX(-50%) scale(1.15);
-      opacity: 1;
-    }
-
-    .brand-name {
-      position: absolute;
-      top: 25%;
-      left: 0%;
-      transform: translateX(10%);
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #ffffff;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      z-index: 3;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-      width: 80%;
-    }
-    .slogan {
-      margin-top: 1rem;
-      font-size: 1.1rem;
-      color: #ff6b6b;
-      text-align: center;
-      text-shadow: 0 0 15px rgba(255, 107, 107, 0.6);
-      animation: glow 2s ease-in-out infinite;
-    }
-    @keyframes glow {
-      0% { text-shadow: 0 0 15px rgba(255, 107, 107, 0.6); }
-      50% { text-shadow: 0 0 25px rgba(255, 107, 107, 0.8); }
-      100% { text-shadow: 0 0 15px rgba(255, 107, 107, 0.6); }
-    }
-    .slogan-description {
-      margin-top: 0.5rem;
-      font-size: 0.8rem;
-      color: #ffffff;
-      text-align: center;
-      max-width: 80%;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.4;
-      opacity: 0.9;
-    }
-
-    /*  SECTION: SERVICES  */
-    .services-section {
+    
+    /* Servicii Section */
+    .services {
+      padding: 8rem 0;
+      background-color: var(--white);
       position: relative;
-      padding: 4rem 2rem;
+    }
+    
+    .section-header {
       text-align: center;
-      background: rgba(0,0,0,0.2);
-      backdrop-filter: blur(10px);
-      z-index: 2;
+      margin-bottom: 5rem;
     }
-    .services-section h2 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+    
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
     }
-    .services-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      max-width: 1200px;
+    
+    .section-description {
+      font-size: 1.1rem;
+      color: var(--gray);
+      max-width: 600px;
       margin: 0 auto;
     }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
     .service-card {
-      width: 280px;
-      height: 350px;
-      background: var(--card-bg);
-      border-radius: 15px;
-      perspective: 1000px;
-      cursor: pointer;
-      transition: transform 0.5s;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
-      transform-style: preserve-3d;
+      background-color: var(--white);
+      padding: 2.5rem;
+      border-radius: 4px;
+      transition: all 0.3s ease;
       position: relative;
-    }
-    .service-card:hover {
-      transform: scale(1.05);
-    }
-    .service-card-inner {
-      position: absolute;
-      width: 100%;
+      z-index: 2;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+      border: 1px solid var(--very-light-gray);
       height: 100%;
-      border-radius: 15px;
-      transition: transform 1s;
-      transform-style: preserve-3d;
-    }
-    .service-card:hover .service-card-inner {
-      transform: rotateY(180deg);
-    }
-    .service-card-front, .service-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 15px;
-      backface-visibility: hidden;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 1rem;
-      text-align: center;
     }
-    .service-card-front {
-      background: var(--card-bg);
+    
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     }
-    .service-card-back {
-      background: var(--card-hover-bg);
-      transform: rotateY(180deg);
-    }
+    
     .service-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
     }
+    
     .service-title {
+      font-size: 1.5rem;
       font-weight: 600;
-      margin-bottom: 0.5rem;
-      font-size: 1.2rem;
-      letter-spacing: 1px;
-    }
-    .service-desc {
-      font-size: 0.9rem;
-      opacity: 0.9;
-      line-height: 1.3;
-    }
-
-    /*  CTA SECTION  */
-    .cta-section {
-      text-align: center;
-      padding: 3rem 2rem;
-      position: relative;
-      background: rgba(14,155,138, 0.2);
-      margin-top: 2rem;
-      backdrop-filter: blur(10px);
-    }
-    .cta-section h2 {
-      font-size: 2rem;
       margin-bottom: 1rem;
     }
-    .cta-section p {
-      margin: 0 auto 2rem auto;
+    
+    .service-description {
+      font-size: 1rem;
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+    }
+    
+    .service-features {
+      list-style: none;
+      margin-top: auto;
+    }
+    
+    .service-feature {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+      color: var(--dark-gray);
+    }
+    
+    .service-feature::before {
+      content: '—';
+      margin-right: 0.75rem;
+      color: var(--gray);
+    }
+    
+    /* CTA Section */
+    .cta {
+      padding: 7rem 0;
+      background-color: var(--black);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .cta-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+    }
+    
+    .cta-description {
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
       max-width: 700px;
-      font-size: 1rem;
-      line-height: 1.4;
+      color: var(--very-light-gray);
     }
-    .cta-btn {
-      display: inline-block;
-      padding: 1rem 2rem;
-      background: #0E9B8A;
-      color: #FFF;
-      text-decoration: none;
-      border-radius: 30px;
-      font-size: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      box-shadow: 0 0 15px rgba(14,155,138, 0.6);
-      transition: all 0.3s ease;
-      position: relative;
+    
+    .btn-cta {
+      background-color: var(--white);
+      color: var(--black);
+      font-size: 1.1rem;
+      padding: 1rem 3rem;
     }
-    .cta-btn::before {
-      content: "";
+    
+    .btn-cta:hover {
+      background-color: transparent;
+      color: var(--white);
+      border-color: var(--white);
+    }
+    
+    .cta-pattern {
       position: absolute;
-      top: -3px; left: -3px;
-      right: -3px; bottom: -3px;
-      border-radius: 30px;
-      border: 2px solid rgba(255,255,255,0.5);
-      opacity: 0;
-      transform: scale(0.95);
-      transition: all 0.3s ease;
-    }
-    .cta-btn:hover::before {
-      opacity: 1;
-      transform: scale(1);
-    }
-    .cta-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(14,155,138, 0.8);
-    }
-
-    /*  FOOTER  */
-    footer {
-      background: rgba(0,0,0,0.4);
-      backdrop-filter: blur(5px);
-      padding: 1rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .footer-content {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      align-items: center;
-    }
-    .footer-content a {
-      color: #FFF;
-      text-decoration: none;
-      opacity: 0.8;
-      transition: opacity 0.3s;
-    }
-    .footer-content a:hover {
-      opacity: 1;
-    }
-
-    /* Navigație Contact (floating) dacă dorești să o menții */
-    .navigation {
-      position: fixed;
-      bottom: 8rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 1rem;
-      z-index: 20;
-    }
-    .contact-button {
-      position: relative;
-      padding: 1rem 2rem;
-      text-decoration: none;
-      color: #ffffff;
-      background: rgba(14, 155, 138, 0.3);
-      border: 1px solid rgba(14, 155, 138, 0.5);
-      border-radius: 30px;
-      font-size: 1rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(14, 155, 138, 0.3);
-      backdrop-filter: blur(10px);
-      cursor: pointer;
-    }
-    .contact-button:hover {
-      background: rgba(14, 155, 138, 0.5);
-      box-shadow: 0 4px 30px rgba(14, 155, 138, 0.5);
-      transform: translateY(-2px);
-    }
-    .contact-button .phone-number {
-      position: absolute;
-      top: 120%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(14, 155, 138, 0.9);
-      padding: 0.8rem 1.5rem;
-      border-radius: 15px;
-      box-shadow: 0 4px 20px rgba(14, 155, 138, 0.3);
-      font-size: 0.9rem;
-      color: #ffffff;
+      font-size: 15rem;
+      opacity: 0.03;
+      font-weight: 700;
+      top: 50%;
+      right: -5%;
+      transform: translateY(-50%);
+      z-index: 1;
       white-space: nowrap;
+    }
+    
+    /* Footer */
+    .footer {
+      background-color: var(--white);
+      padding: 5rem 0 2rem;
+      position: relative;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 4rem;
+    }
+    
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.5px;
+    }
+    
+    .footer-description {
+      font-size: 1rem;
+      color: var(--gray);
+      margin-bottom: 2rem;
+      max-width: 380px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: var(--very-light-gray);
+      color: var(--black);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      background-color: var(--black);
+      color: var(--white);
+    }
+    
+    .footer-heading {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-link {
+      margin-bottom: 0.8rem;
+    }
+    
+    .footer-link a {
+      color: var(--gray);
+      transition: all 0.3s ease;
+    }
+    
+    .footer-link a:hover {
+      color: var(--black);
+      padding-left: 5px;
+    }
+    
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--very-light-gray);
+    }
+    
+    .copyright {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    
+    .footer-bottom-links {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .footer-bottom-link {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    
+    /* Contact Floating Button */
+    .contact-floating {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 999;
+    }
+    
+    .contact-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      background-color: var(--black);
+      color: var(--white);
+      border-radius: 50%;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .contact-button:hover {
+      transform: scale(1.1);
+    }
+    
+    .contact-tooltip {
+      position: absolute;
+      top: 0;
+      right: 70px;
+      background-color: var(--white);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      border-radius: 4px;
+      width: 200px;
       opacity: 0;
       visibility: hidden;
+      transform: translateY(10px);
       transition: all 0.3s ease;
     }
-    .contact-button:hover .phone-number {
+    
+    .contact-button:hover + .contact-tooltip {
       opacity: 1;
       visibility: visible;
-      transform: translate(-50%, 5px);
+      transform: translateY(0);
     }
-
-    /* Mobile-friendly */
+    
+    .contact-tooltip h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: var(--black);
+    }
+    
+    .contact-tooltip p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 0;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero-visual {
+        order: -1;
+        margin-bottom: 2rem;
+      }
+      
+      .background-square {
+        display: none;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
     @media (max-width: 768px) {
-      .brand-name {
-        font-size: 1rem;
+      .navbar-container {
+        position: relative;
       }
-      .slogan {
-        font-size: 1rem;
+      
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background-color: var(--white);
+        padding: 1.5rem;
+        gap: 1rem;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        display: none;
+        border-radius: 0 0 4px 4px;
       }
-      .slogan-description {
-        font-size: 0.7rem;
+      
+      .nav-links.active {
+        display: flex;
       }
-      .cta-section h2 {
-        font-size: 1.5rem;
+      
+      .hamburger {
+        display: block;
       }
-      .cta-section p {
-        font-size: 0.9rem;
+      
+      .hero-title {
+        font-size: 2.5rem;
       }
-      .services-section h2 {
-        font-size: 1.5rem;
+      
+      .section-title {
+        font-size: 2rem;
       }
-      .service-card {
-        width: 90%;
-        max-width: 300px;
+      
+      .cta-title {
+        font-size: 2.2rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+      
+      .footer-bottom-links {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .btn {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+      
+      .btn-secondary {
+        margin-left: 0;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Starfield (efect de stele) -->
-  <div class="starfield"></div>
-
   <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">CASTEMILL</div>
-    <div class="nav-links">
-      <a href="#hero">Home</a>
-      <a href="#services">Servicii</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <div class="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
+  <nav class="navbar" id="navbar">
+    <div class="container navbar-container">
+      <div class="logo">CASTEMILL</div>
+      <div class="nav-links" id="navLinks">
+        <a href="#hero" class="nav-link">Acasă</a>
+        <a href="#services" class="nav-link">Servicii</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <a href="#demo" class="nav-link">Demonstrație</a>
+      </div>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
   </nav>
 
-  <!-- Secțiunea HERO cu ceasul -->
+  <!-- Hero Section -->
   <section class="hero" id="hero">
-    <div class="main-container">
-      <div class="clock-container" id="clockContainer">
-        <div class="clock-face">
-          <!-- Logo -->
-          <img src="logo.png" alt="CASTEMILL" class="brand-logo" id="brandLogo">
-          <!-- Text brand și slogan -->
-          <div class="brand-name">
-            CASTEMILL S.R.L.
-            <div class="slogan">
-              <b>Turning Data into Time for Your Business</b>
-            </div>
-            <div class="slogan-description">
-              <i>Saving entrepreneurs time by providing actionable, AI-driven insights, 
-                 allowing them to focus on growth and strategy rather than tedious data analysis.</i>
-            </div>
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-tagline">Business Intelligence Solutions</div>
+        <h1 class="hero-title">Turning Data into Time for Your Business</h1>
+        <p class="hero-description">Transformăm datele complexe în soluții inteligente, economisind timp prețios pentru antreprenori și permițându-le să se concentreze pe strategie și creștere.</p>
+        <div class="hero-buttons">
+          <a href="#demo" class="btn">Solicită demo</a>
+          <a href="#services" class="btn btn-secondary">Serviciile noastre</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="clock-container">
+          <div class="clock-face">
+            <div class="second-hand" id="secondHand"></div>
           </div>
-          <!-- Limba secundar animată -->
-          <div class="second-hand"></div>
         </div>
       </div>
     </div>
+    <div class="background-square"></div>
   </section>
 
-  <!-- Secțiune Servicii/Produse -->
-  <section class="services-section" id="services">
-    <h2>Serviciile Noastre BI</h2>
-    <div class="services-container">
-      <!-- Card 1 -->
-      <div class="service-card">
-        <div class="service-card-inner">
-          <div class="service-card-front">
-            <div class="service-icon">⚙️</div>
-            <div class="service-title">Automatizări</div>
-            <div class="service-desc">
-              Fluxuri de lucru optimizate, reducând erorile și costurile.
-            </div>
-          </div>
-          <div class="service-card-back">
-            <div class="service-title">Ce oferim?</div>
-            <div class="service-desc">
-              <ul style="list-style:none; padding:0;">
-                <li>- Integrare sistem ERP/CRM</li>
-                <li>- Flow-uri de aprobare automate</li>
-                <li>- Raportare automată la final de zi</li>
-              </ul>
-            </div>
-          </div>
+  <!-- Services Section -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Soluții Business Intelligence</h2>
+        <p class="section-description">Optimizăm fluxurile de lucru și transformăm date complexe în decizii de afaceri inteligente.</p>
+      </div>
+      <div class="services-grid">
+        <!-- Service 1 -->
+        <div class="service-card">
+          <div class="service-icon">⚙️</div>
+          <h3 class="service-title">Automatizări</h3>
+          <p class="service-description">Fluxuri de lucru optimizate, cu eliminarea proceselor manuale redundante și reducerea erorilor.</p>
+          <ul class="service-features">
+            <li class="service-feature">Integrare sistem ERP/CRM</li>
+            <li class="service-feature">Flow-uri de aprobare automate</li>
+            <li class="service-feature">Raportare automată și dashboards</li>
+          </ul>
+        </div>
+        
+        <!-- Service 2 -->
+        <div class="service-card">
+          <div class="service-icon">📈</div>
+          <h3 class="service-title">Analiză AI</h3>
+          <p class="service-description">Luarea deciziilor bazate pe date, cu ajutorul modelelor predictive și a analizelor avansate.</p>
+          <ul class="service-features">
+            <li class="service-feature">Previziuni vânzări personalizate</li>
+            <li class="service-feature">Optimizare stocuri și resurse</li>
+            <li class="service-feature">Modele predictive pentru business</li>
+          </ul>
+        </div>
+        
+        <!-- Service 3 -->
+        <div class="service-card">
+          <div class="service-icon">🏗️</div>
+          <h3 class="service-title">Estimare Preț Construcții</h3>
+          <p class="service-description">Calcul precis și rapid al costurilor pentru proiecte complexe din domeniul construcțiilor.</p>
+          <ul class="service-features">
+            <li class="service-feature">Bază de date actualizată cu prețuri</li>
+            <li class="service-feature">Ajustare dinamică a costurilor</li>
+            <li class="service-feature">Generare ofertă profesională</li>
+          </ul>
+        </div>
+        
+        <!-- Service 4 -->
+        <div class="service-card">
+          <div class="service-icon">🔗</div>
+          <h3 class="service-title">Integrare Sisteme</h3>
+          <p class="service-description">Unificăm platforme diverse într-un singur ecosistem digital eficient și scalabil.</p>
+          <ul class="service-features">
+            <li class="service-feature">API secure și documentate</li>
+            <li class="service-feature">Migrare date existente</li>
+            <li class="service-feature">Scalabilitate pentru business-uri în creștere</li>
+          </ul>
         </div>
       </div>
-      <!-- Card 2 -->
-      <div class="service-card">
-        <div class="service-card-inner">
-          <div class="service-card-front">
-            <div class="service-icon">📈</div>
-            <div class="service-title">Analiză AI</div>
-            <div class="service-desc">
-              Decizii bazate pe date, cu modele predictive avansate.
-            </div>
-          </div>
-          <div class="service-card-back">
-            <div class="service-title">Ce oferim?</div>
-            <div class="service-desc">
-              <ul style="list-style:none; padding:0;">
-                <li>- Previziuni vânzări</li>
-                <li>- Optimizare stocuri</li>
-                <li>- Modele predictive personalizate</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Card 3 -->
-      <div class="service-card">
-        <div class="service-card-inner">
-          <div class="service-card-front">
-            <div class="service-icon">🏗️</div>
-            <div class="service-title">Estimare Preț Construcții</div>
-            <div class="service-desc">
-              Calcul precis și rapid al costurilor pentru proiecte mari.
-            </div>
-          </div>
-          <div class="service-card-back">
-            <div class="service-title">Ce oferim?</div>
-            <div class="service-desc">
-              <ul style="list-style:none; padding:0;">
-                <li>- Bază de date actualizată cu prețuri</li>
-                <li>- Ajustare dinamică a costurilor</li>
-                <li>- Generare ofertă profesională</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Card 4 -->
-      <div class="service-card">
-        <div class="service-card-inner">
-          <div class="service-card-front">
-            <div class="service-icon">🔗</div>
-            <div class="service-title">Integrare Sisteme</div>
-            <div class="service-desc">
-              Unificăm platforme diverse (ERP, CRM, WMS) într-un singur ecosistem.
-            </div>
-          </div>
-          <div class="service-card-back">
-            <div class="service-title">Ce oferim?</div>
-            <div class="service-desc">
-              <ul style="list-style:none; padding:0;">
-                <li>- API secure</li>
-                <li>- Migrare date existentă</li>
-                <li>- Scalabilitate pe măsură ce business-ul crește</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Adaugă mai multe carduri la nevoie -->
     </div>
   </section>
 
   <!-- CTA Section -->
-  <section class="cta-section" id="contact">
-    <h2>Transformă-ți datele în putere decizională!</h2>
-    <p>
-      Consultanță personalizată pentru afacerea ta: de la analiză de date până la strategii complete BI, 
-      Castemill te ajută să economisești timp și să-ți crești profitul.
-    </p>
-    <a href="#hero" class="cta-btn">Solicită o Demostrație!</a>
+  <section class="cta" id="contact">
+    <div class="container cta-container">
+      <h2 class="cta-title">Transformă-ți datele în putere decizională!</h2>
+      <p class="cta-description">Consultanță personalizată pentru afacerea ta: de la analiză de date până la strategii complete BI, Castemill te ajută să economisești timp și să-ți crești profitul.</p>
+      <a href="#demo" class="btn btn-cta" id="demo">Solicită o Demonstrație!</a>
+    </div>
+    <div class="cta-pattern">CASTEMILL</div>
   </section>
 
-  <!-- Navigație Contact (opțional dacă mai dorești butonul flotant) -->
-  <nav class="navigation">
-    <div class="contact-button">
-      Contact
-      <span class="phone-number">+40 721 720 155</span>
-    </div>
-  </nav>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-content">
-      <a href="https://www.facebook.com/castemill" target="_blank">Facebook</a> |
-      <a href="https://www.x.com/castemill" target="_blank">X</a> |
-      <a href="https://www.instagram.com/castemill" target="_blank">Instagram</a> 
-      <span style="margin-left: 1rem;">© 2025 Castemill SRL. All Rights Reserved.</span>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-info">
+          <div class="footer-logo">CASTEMILL</div>
+          <p class="footer-description">Transformăm date complexe în soluții inteligente pentru a economisi timp prețios antreprenorilor și a le permite să se concentreze pe creștere.</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/castemill" class="social-icon" target="_blank">f</a>
+            <a href="https://www.x.com/castemill" class="social-icon" target="_blank">𝕏</a>
+            <a href="https://www.instagram.com/castemill" class="social-icon" target="_blank">IG</a>
+            <a href="https://www.linkedin.com/company/castemill" class="social-icon" target="_blank">in</a>
+          </div>
+        </div>
+        
+        <div class="footer-links-column">
+          <h4 class="footer-heading">Companie</h4>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#">Despre noi</a></li>
+            <li class="footer-link"><a href="#">Cariere</a></li>
+            <li class="footer-link"><a href="#">Blog</a></li>
+            <li class="footer-link"><a href="#">Noutăți</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links-column">
+          <h4 class="footer-heading">Servicii</h4>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#">Automatizări</a></li>
+            <li class="footer-link"><a href="#">Analiză AI</a></li>
+            <li class="footer-link"><a href="#">Estimare Prețuri</a></li>
+            <li class="footer-link"><a href="#">Integrare Sisteme</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links-column">
+          <h4 class="footer-heading">Contact</h4>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="tel:+40721720155">+40 721 720 155</a></li>
+            <li class="footer-link"><a href="mailto:contact@castemill.com">contact@castemill.com</a></li>
+            <li class="footer-link"><a href="#">București, România</a></li>
+            <li class="footer-link"><a href="#">Programare întâlnire</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="copyright">© 2025 Castemill SRL. Toate drepturile rezervate.</div>
+        <div class="footer-bottom-links">
+          <a href="#" class="footer-bottom-link">Termeni și Condiții</a>
+          <a href="#" class="footer-bottom-link">Politica de Confidențialitate</a>
+          <a href="#" class="footer-bottom-link">Cookie Policy</a>
+        </div>
+      </div>
     </div>
   </footer>
-
-  <!-- Scripturi GSAP și efect parallax -->
+  
+  <!-- Contact Floating Button -->
+  <div class="contact-floating">
+    <div class="contact-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+    </div>
+    <div class="contact-tooltip">
+      <h3>Contactează-ne</h3>
+      <p>+40 721 720 155</p>
+    </div>
+  </div>
+  
+  <!-- Script-uri -->
   <script>
-    // Animăm rotiția limbii secundare (second-hand) – 360 grade / 60s
-    gsap.to('.second-hand', {
-      rotation: -360,
-      duration: 60,
-      ease: "none",
-      repeat: -1,
-      transformOrigin: "bottom center",
+    // Navbar Scroll Effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
     });
-
-    // Efect parallax la mișcarea mouse-ului - clock-container
-    document.addEventListener('mousemove', (e) => {
-      const halfWidth = window.innerWidth / 2;
-      const halfHeight = window.innerHeight / 2;
-      const rotateY = ((e.clientX - halfWidth) / halfWidth) * 5;  
-      const rotateX = -((e.clientY - halfHeight) / halfHeight) * 5; 
-      gsap.to('#clockContainer', { 
-        rotationY: rotateY, 
-        rotationX: rotateX, 
-        duration: 0.5 
+    
+    // Mobile Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    
+    hamburger.addEventListener('click', function() {
+      navLinks.classList.toggle('active');
+    });
+    
+    // Smooth Scroll pentru link-uri
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          
+          // Închide meniul mobil dacă e deschis
+          if (navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+          }
+        }
       });
     });
-
-    // Meniul hamburger simplu (toggle) - doar un exemplu minimal
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    hamburger.addEventListener('click', () => {
-      if (navLinks.style.display === 'flex') {
-        navLinks.style.display = 'none';
-      } else {
-        navLinks.style.display = 'flex';
+    
+    // Animație pentru limbă secundară ceas
+    gsap.to('#secondHand', {
+      rotation: 360,
+      duration: 60,
+      repeat: -1,
+      ease: 'linear',
+      transformOrigin: 'bottom center'
+    });
+    
+    // GSAP ScrollTrigger pentru animații la scroll
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Animații pentru cardurile de servicii
+    gsap.utils.toArray('.service-card').forEach((card, i) => {
+      gsap.from(card, {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        },
+        delay: i * 0.1
+      });
+    });
+    
+    // Animație pentru CTA section
+    gsap.from('.cta-title, .cta-description, .btn-cta', {
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: '.cta',
+        start: 'top 75%',
+        toggleActions: 'play none none none'
       }
     });
   </script>
-</body>
-</html>
