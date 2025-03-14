@@ -236,6 +236,7 @@
       z-index: 1;
     }
     
+    /* Ceas futuristic nou - început */
     .clock-container {
       position: relative;
       width: 100%;
@@ -259,6 +260,16 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
+    }
+
+    .outer-ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 2px solid rgba(0, 0, 0, 0.05);
+      pointer-events: none;
     }
     
     .second-hand {
@@ -272,17 +283,73 @@
       border-radius: 50% 50% 0 0;
     }
     
-    .second-hand::after {
-      content: '';
+    .dot {
       position: absolute;
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       background-color: var(--black);
       border-radius: 50%;
+      top: 50%;
       left: 50%;
-      top: 0;
       transform: translate(-50%, -50%);
+      z-index: 10;
     }
+    
+    .tick {
+      position: absolute;
+      width: 1px;
+      height: 10px;
+      background-color: var(--gray);
+      top: 10px;
+      left: 50%;
+      transform-origin: bottom center;
+    }
+    
+    .tick.hour {
+      height: 15px;
+      width: 2px;
+      background-color: var(--black);
+    }
+    
+    .digital-time {
+      position: absolute;
+      bottom: 35%;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 1px;
+    }
+    
+    .data-point {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: var(--black);
+      opacity: 0.2;
+      z-index: 1;
+    }
+    
+    .data-flow {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background-color: var(--black);
+      opacity: 0;
+      z-index: 2;
+    }
+    
+    .clock-label {
+      position: absolute;
+      top: 30%;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gray);
+      opacity: 0.7;
+    }
+    /* Ceas futuristic nou - sfârșit */
     
     .background-square {
       position: absolute;
@@ -717,7 +784,12 @@
       <div class="hero-visual">
         <div class="clock-container">
           <div class="clock-face">
+            <div class="outer-ring"></div>
+            <div class="dot"></div>
             <div class="second-hand" id="secondHand"></div>
+            <div class="digital-time" id="digitalTime"></div>
+            <div class="clock-label">DATA TIME</div>
+            <!-- Tick marks și data points vor fi adăugate prin JavaScript -->
           </div>
         </div>
       </div>
@@ -903,7 +975,98 @@
       });
     });
     
-    // Animație pentru limbă secundară ceas
+    // Crearea ceasului futuristic
+    const clockFace = document.querySelector('.clock-face');
+    const digitalTime = document.getElementById('digitalTime');
+    
+    // Creează tick marks
+    for (let i = 0; i < 60; i++) {
+      const tick = document.createElement('div');
+      tick.className = i % 5 === 0 ? 'tick hour' : 'tick';
+      tick.style.transform = `rotate(${i * 6}deg) translateX(-50%)`;
+      clockFace.appendChild(tick);
+    }
+    
+    // Creează puncte de date aleatorii în fundal
+    for (let i = 0; i < 80; i++) {
+      const dataPoint = document.createElement('div');
+      dataPoint.className = 'data-point';
+      
+      // Poziție aleatorie în cadrul ceasului (în format polar)
+      const angle = Math.random() * 360;
+      const distance = Math.random() * 45 + 5; // % din raza
+      
+      dataPoint.style.left = `${50 + Math.cos(angle * Math.PI / 180) * distance}%`;
+      dataPoint.style.top = `${50 + Math.sin(angle * Math.PI / 180) * distance}%`;
+      
+      clockFace.appendChild(dataPoint);
+    }
+    
+    // Creează fluxuri de date (puncte care se mișcă)
+    for (let i = 0; i < 15; i++) {
+      const dataFlow = document.createElement('div');
+      dataFlow.className = 'data-flow';
+      clockFace.appendChild(dataFlow);
+      
+      // Animează fluxul de date
+      animateDataFlow(dataFlow);
+    }
+    
+    function animateDataFlow(element) {
+      // Generează un traseu aleatoriu pentru fluxul de date
+      const startAngle = Math.random() * 360;
+      const startDistance = Math.random() * 35 + 10;
+      const endAngle = startAngle + (Math.random() * 60 - 30);
+      const endDistance = Math.random() * 10 + (startDistance < 25 ? 30 : 10);
+      
+      const startX = 50 + Math.cos(startAngle * Math.PI / 180) * startDistance;
+      const startY = 50 + Math.sin(startAngle * Math.PI / 180) * startDistance;
+      const endX = 50 + Math.cos(endAngle * Math.PI / 180) * endDistance;
+      const endY = 50 + Math.sin(endAngle * Math.PI / 180) * endDistance;
+      
+      // Setează poziția inițială
+      element.style.left = `${startX}%`;
+      element.style.top = `${startY}%`;
+      
+      // Creează animația
+      const duration = Math.random() * 3000 + 2000; // 2-5 secunde
+      
+      gsap.to(element, {
+        left: `${endX}%`,
+        top: `${endY}%`,
+        opacity: 0.8,
+        duration: duration / 1000,
+        ease: "power1.inOut",
+        onComplete: function() {
+          gsap.to(element, {
+            opacity: 0,
+            duration: 0.5,
+            onComplete: function() {
+              // Resetează și pornește din nou
+              setTimeout(() => {
+                animateDataFlow(element);
+              }, Math.random() * 1000);
+            }
+          });
+        }
+      });
+    }
+    
+    // Actualizează ora digitală
+    function updateDigitalTime() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      
+      digitalTime.textContent = `${hours}:${minutes}:${seconds}`;
+    }
+    
+    // Actualizează ora în timp real
+    setInterval(updateDigitalTime, 1000);
+    updateDigitalTime(); // Inițial
+    
+    // Animație pentru secundar
     gsap.to('#secondHand', {
       rotation: 360,
       duration: 60,
@@ -943,3 +1106,5 @@
       }
     });
   </script>
+</body>
+</html>
