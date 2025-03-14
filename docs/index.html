@@ -240,16 +240,18 @@
     .clock-container {
       position: relative;
       width: 100%;
-      height: 550px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding-bottom: 100%;
+      max-width: 550px;
+      max-height: 550px;
+      margin: 0 auto;
     }
     
     .clock-face {
       position: absolute;
-      width: 75%;
-      height: 75%;
+      top: 10%;
+      left: 10%;
+      width: 80%;
+      height: 80%;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--white) 0%, var(--very-light-gray) 100%);
       box-shadow: 
@@ -261,6 +263,7 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      aspect-ratio: 1 / 1;
     }
 
     .outer-ring {
@@ -313,7 +316,9 @@
     
     .digital-time {
       position: absolute;
-      bottom: 35%;
+      top: 60%;
+      left: 50%;
+      transform: translateX(-50%);
       font-size: 1rem;
       font-weight: 500;
       color: var(--gray);
@@ -342,7 +347,9 @@
     
     .clock-label {
       position: absolute;
-      top: 30%;
+      top: 40%;
+      left: 50%;
+      transform: translateX(-50%);
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -787,8 +794,8 @@
             <div class="outer-ring"></div>
             <div class="dot"></div>
             <div class="second-hand" id="secondHand"></div>
-            <div class="digital-time" id="digitalTime"></div>
             <div class="clock-label">DATA TIME</div>
+            <div class="digital-time" id="digitalTime"></div>
             <!-- Tick marks și data points vor fi adăugate prin JavaScript -->
           </div>
         </div>
@@ -979,12 +986,15 @@
     const clockFace = document.querySelector('.clock-face');
     const digitalTime = document.getElementById('digitalTime');
     
-    // Creează tick marks
+    // Creează tick marks (începând de la poziția 1, nu de la 12)
     for (let i = 0; i < 60; i++) {
-      const tick = document.createElement('div');
-      tick.className = i % 5 === 0 ? 'tick hour' : 'tick';
-      tick.style.transform = `rotate(${i * 6}deg) translateX(-50%)`;
-      clockFace.appendChild(tick);
+      // Sărim peste poziția orei 12 pentru a elimina "steluța"
+      if (i !== 0) {
+        const tick = document.createElement('div');
+        tick.className = i % 5 === 0 ? 'tick hour' : 'tick';
+        tick.style.transform = `rotate(${i * 6}deg) translateX(-50%)`;
+        clockFace.appendChild(tick);
+      }
     }
     
     // Creează puncte de date aleatorii în fundal
