@@ -405,25 +405,7 @@
       box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
     }
     
-    .tick {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.3);
-      top: 5%;
-      left: 50%;
-      transform-origin: bottom center;
-      border-radius: 1px;
-    }
-    
-    .tick.minute {
-      width: 1px;
-      height: 8px;
-    }
-    
-    .tick.hour {
-      width: 3px;
-      height: 15px;
-      background: rgba(255, 255, 255, 0.6);
-    }
+    /* Clock design - removed tick styles for cleaner look */
     
     .digital-time {
       position: absolute;
@@ -1652,27 +1634,26 @@
       scrollProgress.style.width = scrollPercent + '%';
     });
 
-    // Theme toggle
+    // Theme toggle (using in-memory storage for Claude artifacts)
     const themeToggle = document.getElementById('themeToggle');
     const body = document.body;
+    let currentTheme = 'light'; // In-memory theme storage
     
     themeToggle.addEventListener('click', function() {
-      if (body.getAttribute('data-theme') === 'dark') {
+      if (currentTheme === 'dark') {
         body.removeAttribute('data-theme');
         themeToggle.textContent = '🌓';
-        localStorage.setItem('theme', 'light');
+        currentTheme = 'light';
       } else {
         body.setAttribute('data-theme', 'dark');
         themeToggle.textContent = '🌞';
-        localStorage.setItem('theme', 'dark');
+        currentTheme = 'dark';
       }
     });
 
-    // Load saved theme
-    if (localStorage.getItem('theme') === 'dark') {
-      body.setAttribute('data-theme', 'dark');
-      themeToggle.textContent = '🌞';
-    }
+    // Initialize with light theme
+    currentTheme = 'light';
+    themeToggle.textContent = '🌓';
 
     // Navbar scroll effect
     window.addEventListener('scroll', function() {
@@ -1802,19 +1783,9 @@
       retina_detect: true
     });
     
-    // Enhanced Clock
+    // Enhanced Clock - removed tick marks for cleaner design
     const clockFace = document.querySelector('.clock-face');
     const digitalTime = document.getElementById('digitalTime');
-    
-    // Create tick marks
-    for (let i = 0; i < 60; i++) {
-      if (i !== 0) {
-        const tick = document.createElement('div');
-        tick.className = i % 5 === 0 ? 'tick hour' : 'tick minute';
-        tick.style.transform = `rotate(${i * 6}deg) translateX(-50%)`;
-        clockFace.appendChild(tick);
-      }
-    }
     
     // Create floating data points
     for (let i = 0; i < 20; i++) {
