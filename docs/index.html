@@ -1177,6 +1177,236 @@
     </div>
   </footer>
 
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Notificare cookie-uri">
+    <div class="cookie-content">
+      <p>
+        <strong>Acest site folosește cookie-uri</strong><br>
+        Folosim cookie-uri pentru a îmbunătăți experiența ta și a analiza traficul. 
+        <a href="#privacy">Politica de confidențialitate</a>
+      </p>
+      <div class="cookie-actions">
+        <button type="button" class="btn btn-primary" id="cookieAccept">Accept</button>
+        <button type="button" class="btn btn-secondary" id="cookieDecline">Refuz</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="exit-popup" id="exitPopup" role="dialog" aria-modal="true" aria-labelledby="exitPopupTitle">
+    <div class="exit-popup-overlay" data-exit-close aria-hidden="true"></div>
+    <div class="exit-popup-content">
+      <button class="close-btn" type="button" data-exit-close aria-label="Închide fereastra">×</button>
+      <h2 id="exitPopupTitle">Nu pleca încă! 🚀</h2>
+      <p>Programează un demo gratuit și descoperă cum Castemill BI poate transforma afacerea ta.</p>
+      <div style="margin-top: 2rem;">
+        <a href="mailto:office@castemill.com" class="btn btn-primary" id="exitPopupCta">Vreau Demo Gratuit</a>
+      </div>
+    </div>
+  </div>
+
+  <a href="https://t.me/CastemillBI_bot" class="telegram-fab" target="_blank" rel="noopener" aria-label="Contactează-ne pe Telegram">
+    <span class="telegram-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" role="img" focusable="false">
+        <path d="M21.5 2.5a1.25 1.25 0 0 0-1.34-.22L3.08 9.3a1.25 1.25 0 0 0 .16 2.35l4.92 1.47 1.86 5.78a1.25 1.25 0 0 0 2.06.51l3.06-3.02 4.27 3.26a1.25 1.25 0 0 0 1.98-.76l2.28-14.5a1.25 1.25 0 0 0-.67-1.36Zm-4.53 5.31-6.57 6.57-.84 3.14-1.27-3.96 8.68-5.75Z"></path>
+      </svg>
+    </span>
+    <span class="telegram-label">Chat Telegram</span>
+  </a>
+
+  <style>
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #6366f1, #8b5cf6);
+      width: 0;
+      z-index: 9999;
+      transition: width 0.2s ease;
+    }
+
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--surface);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 1.5rem;
+      z-index: 10000;
+      box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    }
+
+    .cookie-banner.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .cookie-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .cookie-content p {
+      flex: 1;
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--text-dim);
+    }
+
+    .cookie-content a {
+      color: var(--text);
+      text-decoration: underline;
+    }
+
+    .cookie-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .exit-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 10001;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .exit-popup.is-visible {
+      display: flex;
+    }
+
+    .exit-popup-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(6px);
+    }
+
+    .exit-popup-content {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 3rem;
+      max-width: 520px;
+      text-align: center;
+      box-shadow: 0 40px 80px rgba(15, 15, 25, 0.45);
+      animation: slideUp 0.35s ease;
+    }
+
+    .exit-popup-content h2 {
+      margin-bottom: 1rem;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .telegram-fab {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1.25rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 20px 40px rgba(99, 102, 241, 0.35);
+      font-weight: 600;
+      transition: transform 0.3s var(--transition), box-shadow 0.3s var(--transition);
+      z-index: 9999;
+    }
+
+    .telegram-fab:hover,
+    .telegram-fab:focus-visible {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 24px 48px rgba(99, 102, 241, 0.45);
+    }
+
+    .telegram-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .telegram-label {
+      white-space: nowrap;
+    }
+
+    .cursor-circle {
+      width: 24px;
+      height: 24px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.85), transparent 60%);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 768px) {
+      .cookie-content {
+        flex-direction: column;
+        text-align: center;
+        align-items: stretch;
+      }
+
+      .cookie-actions {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .cookie-actions .btn {
+        width: 100%;
+      }
+
+      .telegram-fab {
+        bottom: 1.25rem;
+        right: 1.25rem;
+        padding: 0.75rem 1rem;
+      }
+
+      .telegram-label {
+        display: none;
+      }
+    }
+  </style>
+
   <script>
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
@@ -1205,6 +1435,123 @@
     document.querySelectorAll('.fade-in').forEach(el => {
       observer.observe(el);
     });
+
+    const scrollProgress = document.querySelector('.scroll-progress');
+    if (scrollProgress) {
+      const updateScrollProgress = () => {
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = scrollHeight > 0 ? (window.scrollY / scrollHeight) * 100 : 0;
+        scrollProgress.style.width = `${Math.min(Math.max(progress, 0), 100)}%`;
+      };
+      window.addEventListener('scroll', updateScrollProgress, { passive: true });
+      updateScrollProgress();
+    }
+
+    const cookieBanner = document.getElementById('cookieBanner');
+    const cookieAcceptBtn = document.getElementById('cookieAccept');
+    const cookieDeclineBtn = document.getElementById('cookieDecline');
+    const cookieConsent = localStorage.getItem('cookiesAccepted');
+
+    const hideCookieBanner = () => {
+      cookieBanner?.classList.remove('is-visible');
+    };
+
+    const handleCookieDecision = (isAccepted) => {
+      localStorage.setItem('cookiesAccepted', isAccepted ? 'true' : 'false');
+      hideCookieBanner();
+
+      if (isAccepted && typeof gtag !== 'undefined') {
+        gtag('consent', 'update', {
+          'analytics_storage': 'granted'
+        });
+      }
+    };
+
+    if (!cookieConsent && cookieBanner) {
+      setTimeout(() => cookieBanner.classList.add('is-visible'), 1800);
+    }
+
+    cookieAcceptBtn?.addEventListener('click', () => handleCookieDecision(true));
+    cookieDeclineBtn?.addEventListener('click', () => handleCookieDecision(false));
+
+    const exitPopup = document.getElementById('exitPopup');
+    const exitPopupCta = document.getElementById('exitPopupCta');
+    let exitPopupShown = sessionStorage.getItem('exitPopupShown') === 'true';
+
+    const showExitPopup = () => {
+      if (!exitPopupShown && exitPopup) {
+        exitPopup.classList.add('is-visible');
+        sessionStorage.setItem('exitPopupShown', 'true');
+        exitPopupShown = true;
+
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'exit_intent_shown', {
+            'event_category': 'popup'
+          });
+        }
+      }
+    };
+
+    document.addEventListener('mouseout', (event) => {
+      if (!event.toElement && !event.relatedTarget && event.clientY <= 0) {
+        showExitPopup();
+      }
+    });
+
+    document.querySelectorAll('[data-exit-close]').forEach((closeTrigger) => {
+      closeTrigger.addEventListener('click', () => {
+        exitPopup?.classList.remove('is-visible');
+      });
+    });
+
+    exitPopupCta?.addEventListener('click', () => {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'exit_popup_conversion', {
+          'event_category': 'lead',
+          'value': 10
+        });
+      }
+    });
+
+    const enableCursorTrail = window.matchMedia('(pointer: fine)').matches && window.innerWidth > 768;
+    if (enableCursorTrail) {
+      const circles = [];
+      const coords = { x: 0, y: 0 };
+
+      for (let i = 0; i < 18; i += 1) {
+        const circle = document.createElement('span');
+        circle.className = 'cursor-circle';
+        document.body.appendChild(circle);
+        circles.push(circle);
+      }
+
+      document.addEventListener('mousemove', (event) => {
+        coords.x = event.clientX;
+        coords.y = event.clientY;
+      });
+
+      const animateCircles = () => {
+        let x = coords.x;
+        let y = coords.y;
+
+        circles.forEach((circle, index) => {
+          circle.style.left = `${x - 12}px`;
+          circle.style.top = `${y - 12}px`;
+          circle.style.transform = `scale(${(circles.length - index) / circles.length})`;
+          circle.style.opacity = `${0.2 + (index / circles.length) * 0.8}`;
+
+          const nextCircle = circles[index + 1];
+          if (nextCircle) {
+            x += (nextCircle.offsetLeft - circle.offsetLeft) * 0.3;
+            y += (nextCircle.offsetTop - circle.offsetTop) * 0.3;
+          }
+        });
+
+        requestAnimationFrame(animateCircles);
+      };
+
+      requestAnimationFrame(animateCircles);
+    }
   </script>
 </body>
 </html>
