@@ -385,17 +385,30 @@
           }
         });
 
+        const contentType = response.headers.get('content-type') || '';
+        const isJsonResponse = contentType.includes('application/json');
+        const responseBody = isJsonResponse ? await response.json() : null;
+
         if (response.ok) {
           successMessage.textContent = 'Cererea a fost trimisă. Redirecționăm...';
           successMessage.hidden = false;
           setTimeout(() => {
             window.location.href = '/demo/thanks.html';
           }, 800);
-        } else {
-          throw new Error('Formular indisponibil temporar');
+          return;
         }
+
+        const detailedMessage = Array.isArray(responseBody?.errors)
+          ? responseBody.errors.map((entry) => entry.message).join(' ')
+          : responseBody?.message;
+
+        throw new Error(detailedMessage || 'Formular indisponibil temporar');
       } catch (error) {
-        errorMessage.textContent = 'A apărut o eroare. Te rugăm să reîncerci sau să ne scrii la office@castemill.com.';
+        const fallbackMessage = 'A apărut o eroare. Te rugăm să reîncerci sau să ne scrii la office@castemill.com.';
+        const errorText = typeof error?.message === 'string' ? error.message.trim() : '';
+        errorMessage.textContent = errorText
+          ? `${errorText} Dacă problema persistă, scrie-ne la office@castemill.com.`
+          : fallbackMessage;
         errorMessage.hidden = false;
         submitButton.disabled = false;
         buttonText.textContent = 'Trimite cererea';
