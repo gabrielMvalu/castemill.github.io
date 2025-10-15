@@ -2,7 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.castemill.com/</loc>
-    <lastmod>2025-01-18</lastmod>
-    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.castemill.com/#produs</loc>
+  </url>
+  <url>
+    <loc>https://www.castemill.com/#functionalitati</loc>
+  </url>
+  <url>
+    <loc>https://www.castemill.com/#preturi</loc>
+  </url>
+  <url>
+    <loc>https://www.castemill.com/#contact</loc>
+  </url>
+  <url>
+    <loc>https://www.castemill.com/demo/</loc>
   </url>
 </urlset>

@@ -1,19 +1,135 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="ro-RO">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Castemill — Platformă BI Inteligentă pentru Afacerea Ta</title>
-  <meta name="description" content="Transformă exporturile din ERP în insight-uri acționabile. Dashboard KPI, analiză vânzări, stocuri, creanțe și cash-flow în timp real.">
-  <link rel="canonical" href="https://www.castemill.com">
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <title>Castemill — Business Intelligence pentru ERP | Demo Gratuit 7 Zile</title>
+  <meta name="description" content="Dashboard KPI, vânzări, stocuri, cash-flow în timp real. Implementare în ≤2 zile. Demo gratuit 7 zile.">
+  <link rel="canonical" href="https://www.castemill.com/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  
+
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Castemill — Business Intelligence pentru ERP | Demo Gratuit 7 Zile">
+  <meta property="og:description" content="Dashboard KPI, vânzări, stocuri, cash-flow în timp real. Implementare în ≤2 zile. Demo gratuit 7 zile.">
+  <meta property="og:url" content="https://www.castemill.com/">
+  <meta property="og:image" content="https://www.castemill.com/og-image-1200x630.png">
+  <meta property="og:locale" content="ro_RO">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Castemill — Business Intelligence pentru ERP | Demo Gratuit 7 Zile">
+  <meta name="twitter:description" content="Dashboard KPI, vânzări, stocuri, cash-flow în timp real. Implementare în ≤2 zile. Demo gratuit 7 zile.">
+  <meta name="twitter:image" content="https://www.castemill.com/twitter-card-1600x900.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.castemill.com/#organization",
+        "name": "Castemill SRL",
+        "url": "https://www.castemill.com/",
+        "logo": "https://www.castemill.com/og-image-1200x630.png",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "office@castemill.com",
+          "telephone": "+40 721 720 155",
+          "areaServed": "RO"
+        }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://www.castemill.com/#software",
+        "name": "Castemill BI Platform",
+        "applicationCategory": "BusinessApplication",
+        "applicationSuite": "Business Intelligence pentru ERP",
+        "operatingSystem": "Web",
+        "url": "https://www.castemill.com/",
+        "publisher": {
+          "@id": "https://www.castemill.com/#organization"
+        },
+        "freeTrial": "7 zile",
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "Start",
+            "price": "150",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock",
+            "description": "Abonament lunar Castemill BI Start"
+          },
+          {
+            "@type": "Offer",
+            "name": "Business",
+            "price": "450",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock",
+            "description": "Abonament lunar Castemill BI Business"
+          },
+          {
+            "@type": "Offer",
+            "name": "Enterprise",
+            "price": "1200",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock",
+            "description": "Abonament lunar Castemill BI Enterprise"
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.castemill.com/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Acasă",
+            "item": "https://www.castemill.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Castemill BI",
+            "item": "https://www.castemill.com/#produs"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.castemill.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Cât durează implementarea Castemill BI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Implementarea standard durează maximum 2 zile lucrătoare, folosind exporturile existente din ERP."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Este disponibil un test gratuit?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Da, oferim un test gratuit de 7 zile fără să fie necesar cardul."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <style>
-    * {
+    *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -41,7 +157,27 @@
       overflow-x: hidden;
     }
 
-    /* Header */
+    a {
+      color: inherit;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      padding: 0.75rem 1.5rem;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 999px;
+      z-index: 999;
+      text-decoration: none;
+      transition: top 0.3s ease;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
     header {
       position: fixed;
       top: 0;
@@ -49,7 +185,7 @@
       right: 0;
       z-index: 100;
       backdrop-filter: blur(20px) saturate(180%);
-      background: rgba(10, 10, 15, 0.8);
+      background: rgba(10, 10, 15, 0.85);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
@@ -74,7 +210,7 @@
 
     .nav-links {
       display: flex;
-      gap: 2.5rem;
+      gap: 2rem;
       align-items: center;
     }
 
@@ -87,7 +223,8 @@
       position: relative;
     }
 
-    .nav-links a:hover {
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
       color: var(--text);
     }
 
@@ -102,11 +239,24 @@
       transition: width 0.3s var(--transition);
     }
 
-    .nav-links a:hover::after {
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after {
       width: 100%;
     }
 
-    /* Hero Section */
+    .nav-cta {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff !important;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.35);
+    }
+
+    main {
+      margin-top: 96px;
+    }
+
     .hero {
       min-height: 100vh;
       display: flex;
@@ -153,13 +303,6 @@
       letter-spacing: -0.03em;
     }
 
-    .gradient-text {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
     .hero-text p {
       font-size: 1.25rem;
       color: var(--text-dim);
@@ -194,7 +337,8 @@
       box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
     }
 
-    .btn-primary:hover {
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
       transform: translateY(-2px);
       box-shadow: 0 15px 50px rgba(99, 102, 241, 0.4);
     }
@@ -205,12 +349,12 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .btn-secondary:hover {
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
       background: var(--surface-2);
       border-color: rgba(255, 255, 255, 0.2);
     }
 
-    /* Hero Visual */
     .hero-visual {
       position: relative;
       height: 500px;
@@ -232,29 +376,9 @@
       50% { transform: translateY(-20px) rotate(1deg); }
     }
 
-    .mockup-1 {
-      width: 320px;
-      height: 200px;
-      top: 0;
-      left: 0;
-      animation-delay: 0s;
-    }
-
-    .mockup-2 {
-      width: 280px;
-      height: 180px;
-      top: 120px;
-      right: 40px;
-      animation-delay: 1s;
-    }
-
-    .mockup-3 {
-      width: 260px;
-      height: 160px;
-      bottom: 40px;
-      left: 60px;
-      animation-delay: 2s;
-    }
+    .mockup-1 { width: 320px; height: 200px; top: 0; left: 0; animation-delay: 0s; }
+    .mockup-2 { width: 280px; height: 180px; top: 120px; right: 40px; animation-delay: 1s; }
+    .mockup-3 { width: 260px; height: 160px; bottom: 40px; left: 60px; animation-delay: 2s; }
 
     .mockup-bar {
       height: 8px;
@@ -273,7 +397,6 @@
     .mockup-line:nth-child(2) { width: 80%; }
     .mockup-line:nth-child(3) { width: 60%; }
 
-    /* Stats Section */
     .stats {
       padding: 4rem 2rem;
       background: var(--surface);
@@ -306,7 +429,6 @@
       font-size: 0.85rem;
     }
 
-    /* Product Section */
     .product {
       padding: 8rem 2rem;
       max-width: 1400px;
@@ -346,7 +468,6 @@
       margin: 0 auto;
     }
 
-    /* Features Grid */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -376,11 +497,13 @@
       transition: transform 0.4s var(--transition);
     }
 
-    .feature-card:hover::before {
+    .feature-card:hover::before,
+    .feature-card:focus-within::before {
       transform: scaleX(1);
     }
 
-    .feature-card:hover {
+    .feature-card:hover,
+    .feature-card:focus-within {
       transform: translateY(-8px);
       border-color: rgba(99, 102, 241, 0.3);
       box-shadow: 0 20px 60px rgba(99, 102, 241, 0.15);
@@ -430,7 +553,6 @@
       font-weight: bold;
     }
 
-    /* Pricing Section */
     .pricing {
       padding: 8rem 2rem;
       background: var(--surface);
@@ -444,80 +566,59 @@
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-      margin-top: 4rem;
+      gap: 2.5rem;
     }
 
     .pricing-card {
-      background: var(--bg);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: var(--surface-2);
       border-radius: var(--radius);
-      padding: 3rem;
-      position: relative;
-      transition: all 0.4s var(--transition);
+      padding: 2.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
 
     .pricing-card.featured {
-      border: 2px solid var(--accent);
-      transform: scale(1.05);
-    }
-
-    .pricing-card.featured::before {
-      content: 'RECOMANDAT';
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: white;
-      padding: 0.4rem 1.2rem;
-      border-radius: 50px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-    }
-
-    .pricing-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(99, 102, 241, 0.3);
-    }
-
-    .pricing-card.featured:hover {
-      transform: scale(1.05) translateY(-8px);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      box-shadow: 0 30px 60px rgba(99, 102, 241, 0.25);
     }
 
     .pricing-card h3 {
       font-size: 1.5rem;
-      margin-bottom: 0.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
     }
 
     .pricing-card .price {
       font-size: 3rem;
       font-weight: 900;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin: 1rem 0;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: flex-end;
+      gap: 0.5rem;
     }
 
     .pricing-card .price span {
-      font-size: 1.2rem;
+      font-size: 1rem;
       color: var(--text-dim);
+      text-transform: uppercase;
     }
 
     .pricing-card ul {
       list-style: none;
-      margin: 2rem 0;
+      margin-top: 1.5rem;
+      display: grid;
+      gap: 0.8rem;
     }
 
     .pricing-card ul li {
-      padding: 0.8rem 0;
       color: var(--text-dim);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.95rem;
       display: flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: 0.6rem;
     }
 
     .pricing-card ul li::before {
@@ -527,7 +628,6 @@
       font-size: 1.2rem;
     }
 
-    /* CTA Section */
     .cta-section {
       padding: 8rem 2rem;
       text-align: center;
@@ -566,7 +666,6 @@
       margin-bottom: 2.5rem;
     }
 
-    /* Footer */
     footer {
       background: var(--surface);
       border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -583,7 +682,7 @@
     }
 
     .footer-brand {
-      max-width: 350px;
+      max-width: 360px;
     }
 
     .footer-brand .logo {
@@ -616,8 +715,13 @@
       transition: color 0.3s;
     }
 
-    .footer-col ul li a:hover {
+    .footer-col ul li a:hover,
+    .footer-col ul li a:focus-visible {
       color: var(--accent);
+    }
+
+    .footer-cta {
+      margin: 2rem 0 0;
     }
 
     .footer-bottom {
@@ -630,6 +734,8 @@
       align-items: center;
       color: var(--text-dim);
       font-size: 0.9rem;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
     .social-links {
@@ -650,13 +756,13 @@
       transition: all 0.3s;
     }
 
-    .social-links a:hover {
+    .social-links a:hover,
+    .social-links a:focus-visible {
       border-color: var(--accent);
       color: var(--accent);
       background: var(--accent-glow);
     }
 
-    /* Responsive */
     @media (max-width: 1024px) {
       .hero-content {
         grid-template-columns: 1fr;
@@ -672,7 +778,7 @@
       }
 
       .nav-links {
-        gap: 1.5rem;
+        gap: 1.25rem;
       }
     }
 
@@ -683,6 +789,10 @@
 
       .nav-links {
         display: none;
+      }
+
+      main {
+        margin-top: 80px;
       }
 
       .hero {
@@ -714,15 +824,8 @@
       .footer-content {
         grid-template-columns: 1fr;
       }
-
-      .footer-bottom {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-      }
     }
 
-    /* Scroll animations */
     .fade-in {
       opacity: 0;
       transform: translateY(30px);
@@ -740,291 +843,300 @@
     .fade-in:nth-child(2) { animation-delay: 0.2s; }
     .fade-in:nth-child(3) { animation-delay: 0.3s; }
     .fade-in:nth-child(4) { animation-delay: 0.4s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .hero::before,
+      .dashboard-mockup,
+      .fade-in {
+        animation: none !important;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Header -->
+  <a class="skip-link" href="#main-content">Sari la conținut</a>
   <header>
     <nav>
-      <div class="logo">CASTEMILL</div>
-      <div class="nav-links">
+      <a href="/" class="logo" aria-label="Castemill SRL - Acasă">CASTEMILL</a>
+      <div class="nav-links" role="navigation" aria-label="Meniu principal">
         <a href="#produs">Produs</a>
         <a href="#functionalitati">Funcționalități</a>
         <a href="#preturi">Prețuri</a>
         <a href="#contact">Contact</a>
+        <a href="/demo" aria-label="Accesează demo-ul Castemill BI">Demo</a>
+        <a href="/docs/Manual-Structura-Aplicatiei.pdf" target="_blank" rel="noopener">Manual</a>
+        <a href="/demo" class="nav-cta" aria-label="Încearcă gratuit 7 zile Castemill BI">Încearcă Gratuit</a>
       </div>
     </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <h1>
-          Transformă datele ERP în<br>
-          <span class="gradient-text">insight-uri acționabile</span>
-        </h1>
-        <p>
-          Platformă Business Intelligence care centralizează KPI-uri, vânzări, stocuri, 
-          creanțe și cash-flow într-un singur dashboard inteligent. Fără integrări complicate, 
-          doar exporturi din ERP.
-        </p>
-        <div class="cta-group">
-          <a href="#contact" class="btn btn-primary">
-            <span>Solicită Demo Gratuit</span>
-            <span>→</span>
-          </a>
-          <a href="#functionalitati" class="btn btn-secondary">
-            <span>Descoperă Funcționalitățile</span>
-          </a>
+  <main id="main-content">
+    <section class="hero" id="produs">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>Business Intelligence complet pentru ERP — în doar 2 zile.</h1>
+          <p>Castemill BI este platforma SaaS care transformă exporturile tale ERP în dashboard-uri KPI, vânzări, stocuri și cash-flow în timp real. Fără integrări complicate, fără implementări interminabile.</p>
+          <div class="cta-group">
+            <a href="/demo" class="btn btn-primary" aria-label="Încearcă gratuit 7 zile Castemill BI">Încearcă Gratuit 7 Zile</a>
+            <a href="#functionalitati" class="btn btn-secondary" aria-label="Vezi funcționalitățile Castemill BI">Vezi Funcționalitățile</a>
+          </div>
+          <p style="margin-top: 1.5rem; font-size: 0.95rem; color: var(--text-dim);">
+            <strong>Manualul platformei:</strong> <a href="/docs/Manual-Structura-Aplicatiei.pdf" target="_blank" rel="noopener" style="color: var(--accent);">Descarcă ghidul complet</a>
+          </p>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="dashboard-mockup mockup-1">
+            <div class="mockup-bar"></div>
+            <div class="mockup-line"></div>
+            <div class="mockup-line"></div>
+            <div class="mockup-line"></div>
+          </div>
+          <div class="dashboard-mockup mockup-2">
+            <div class="mockup-bar"></div>
+            <div class="mockup-line"></div>
+            <div class="mockup-line"></div>
+            <div class="mockup-line"></div>
+          </div>
+          <div class="dashboard-mockup mockup-3">
+            <div class="mockup-bar"></div>
+            <div class="mockup-line"></div>
+            <div class="mockup-line"></div>
+            <div class="mockup-line"></div>
+          </div>
         </div>
       </div>
-      <div class="hero-visual">
-        <div class="dashboard-mockup mockup-1">
-          <div class="mockup-bar" style="width: 70%"></div>
-          <div class="mockup-line"></div>
-          <div class="mockup-line"></div>
-          <div class="mockup-line"></div>
+    </section>
+
+    <section class="stats" aria-label="Indicatori de încredere">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <h3>2 zile</h3>
+          <p>Implementare</p>
         </div>
-        <div class="dashboard-mockup mockup-2">
-          <div class="mockup-bar" style="width: 85%"></div>
-          <div class="mockup-line"></div>
-          <div class="mockup-line"></div>
+        <div class="stat-item">
+          <h3>100%</h3>
+          <p>Date în timp real</p>
         </div>
-        <div class="dashboard-mockup mockup-3">
-          <div class="mockup-bar" style="width: 60%"></div>
-          <div class="mockup-line"></div>
-          <div class="mockup-line"></div>
+        <div class="stat-item">
+          <h3>7 zile</h3>
+          <p>Test gratuit</p>
+        </div>
+        <div class="stat-item">
+          <h3>24/7</h3>
+          <p>Acces cloud</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Stats Section -->
-  <section class="stats">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <h3>≤2</h3>
-        <p>Zile Implementare</p>
-      </div>
-      <div class="stat-item">
-        <h3>7+</h3>
-        <p>Module Complete</p>
-      </div>
-      <div class="stat-item">
-        <h3>100%</h3>
-        <p>Real-Time</p>
-      </div>
-      <div class="stat-item">
-        <h3>0</h3>
-        <p>Integrări Complexe</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Product Section -->
-  <section class="product" id="produs">
-    <div class="section-header">
-      <span class="section-tag">Produs Principal</span>
-      <h2>Platforma Castemill BI</h2>
-      <p>
-        O soluție completă de Business Intelligence construită pentru companii 
-        care doresc vizibilitate totală fără complicații tehnice.
-      </p>
-    </div>
-
-    <div class="features-grid" id="functionalitati">
-      <div class="feature-card fade-in">
-        <div class="feature-icon">📊</div>
-        <h3>Dashboard KPI Executiv</h3>
-        <p>Sumar financiar complet cu active circulante, datorii, lichiditate și grafic Waterfall pentru fluxuri de numerar.</p>
-        <ul class="feature-list">
-          <li>Creanțe și datorii în timp real</li>
-          <li>Analiză cu/fără efecte comerciale</li>
-          <li>Indicatori de lichiditate</li>
-          <li>Vizualizări executive</li>
-        </ul>
-      </div>
-
-      <div class="feature-card fade-in">
-        <div class="feature-icon">💰</div>
-        <h3>Analiză Vânzări Avansată</h3>
-        <p>Evoluție zilnică, lunară și anuală cu comparații inter-an, top clienți și produse, filtre pe gestiuni și agenți.</p>
-        <ul class="feature-list">
-          <li>Comparații an curent vs anterior</li>
-          <li>Top 20 clienți cu pondere</li>
-          <li>Export Excel instant</li>
-          <li>TVA variabil automat</li>
-        </ul>
-      </div>
-
-      <div class="feature-card fade-in">
-        <div class="feature-icon">📦</div>
-        <h3>Balanță Stocuri Inteligentă</h3>
-        <p>Valoare la cost și vânzare, distribuție pe gestiuni, analiză vechime pe intervale (1-90, 90-365, >365 zile).</p>
-        <ul class="feature-list">
-          <li>Treemap ierarhic pe grupă/gestiune</li>
-          <li>Identificare stocuri imobilizate</li>
-          <li>Filtre producător/produs</li>
-          <li>Export XLSX per interval</li>
-        </ul>
-      </div>
-
-      <div class="feature-card fade-in">
-        <div class="feature-icon">📄</div>
-        <h3>Facturi Neîncasate</h3>
-        <p>Monitorizare creanțe pe client cu statusuri (restant, scadent azi, în termen) și rapoarte PDF profesionale.</p>
-        <ul class="feature-list">
-          <li>PDF individual sau multi-client</li>
-          <li>Filtre pe scadență și agent</li>
-          <li>Total restante evidențiat</li>
-          <li>Status scadență automat</li>
-        </ul>
-      </div>
-
-      <div class="feature-card fade-in">
-        <div class="feature-icon">💳</div>
-        <h3>Facturi Neachitate</h3>
-        <p>Centralizare datorii către furnizori cu PDF continuu multi-furnizor și total general pe raport.</p>
-        <ul class="feature-list">
-          <li>Comutare cu/fără efecte</li>
-          <li>Rapoarte continue (fără page break)</li>
-          <li>Filtre pe scadență</li>
-          <li>Total general raport</li>
-        </ul>
-      </div>
-
-      <div class="feature-card fade-in">
-        <div class="feature-icon">📅</div>
-        <h3>Scadențe Plăți</h3>
-        <p>Vizualizare obligații pe termen scurt cu heatmap calendar, timeline și distribuție pe terți.</p>
-        <ul class="feature-list">
-          <li>Heatmap calendar lunar</li>
-          <li>Bubble chart cu sumă cumulativă</li>
-          <li>Top terți</li>
-          <li>Planificare cash-flow</li>
-        </ul>
-      </div>
-
-      <div class="feature-card fade-in">
-        <div class="feature-icon">🛒</div>
-        <h3>Cumpărări & Intrări</h3>
-        <p>Monitorizare aprovizionări cu top furnizori, treemap și filtre pe gestiuni/furnizori/date.</p>
-        <ul class="feature-list">
-          <li>Top 20 furnizori cu pondere</li>
-          <li>Treemap vizualizare</li>
-          <li>Statistici per perioada</li>
-          <li>Export Excel rapid</li>
-        </ul>
-      </div>
-
-      <div class="feature-card fade-in">
-        <div class="feature-icon">🔐</div>
-        <h3>Multi-Companie & Securitate</h3>
-        <p>Suport pentru entități multiple, autentificare robustă și cache performant pentru date voluminoase.</p>
-        <ul class="feature-list">
-          <li>Separare completă pe companii</li>
-          <li>Autentificare securizată</li>
-          <li>Performanță optimizată</li>
-          <li>White-label disponibil</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing Section -->
-  <section class="pricing" id="preturi">
-    <div class="pricing-container">
+    <section class="product" id="functionalitati">
       <div class="section-header">
-        <span class="section-tag">Prețuri Transparente</span>
-        <h2>Alege planul potrivit</h2>
-        <p>Implementare în maxim 2 zile. Fără costuri ascunse. Suport inclus.</p>
+        <span class="section-tag">Platformă SaaS completă</span>
+        <h2>Control total asupra performanței în Castemill BI</h2>
+        <p>Tot ce ai nevoie pentru a transforma datele ERP în insight-uri acționabile. Dashboard-uri interactive, rapoarte automate și monitorizare cash-flow într-o singură platformă SaaS.</p>
       </div>
 
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <h3>Start</h3>
-          <div class="price">150 €<span>/lună</span></div>
-          <p style="color: var(--text-dim); margin-bottom: 2rem;">Perfect pentru companii mici</p>
-          <ul>
-            <li>Până la 3 utilizatori</li>
-            <li>Toate modulele standard</li>
-            <li>Hostare partajată</li>
-            <li>Suport prin email</li>
-            <li>Actualizări incluse</li>
+      <div class="features-grid">
+        <article class="feature-card fade-in">
+          <div class="feature-icon" aria-hidden="true">📊</div>
+          <h3>Dashboard KPI Executiv</h3>
+          <p>Sumar financiar complet cu active circulante, datorii, lichiditate și grafic Waterfall pentru fluxuri de numerar.</p>
+          <ul class="feature-list">
+            <li>Creanțe și datorii în timp real</li>
+            <li>Analiză cu/fără efecte comerciale</li>
+            <li>Indicatori de lichiditate</li>
+            <li>Vizualizări executive</li>
           </ul>
-          <a href="#contact" class="btn btn-secondary" style="width: 100%; margin-top: 2rem;">Comandă Acum</a>
+        </article>
+
+        <article class="feature-card fade-in">
+          <div class="feature-icon" aria-hidden="true">💰</div>
+          <h3>Analiză Vânzări Avansată</h3>
+          <p>Evoluție zilnică, lunară și anuală cu comparații inter-an, top clienți și produse, filtre pe gestiuni și agenți.</p>
+          <ul class="feature-list">
+            <li>Comparații an curent vs anterior</li>
+            <li>Top 20 clienți cu pondere</li>
+            <li>Export Excel instant</li>
+            <li>TVA variabil automat</li>
+          </ul>
+        </article>
+
+        <article class="feature-card fade-in">
+          <div class="feature-icon" aria-hidden="true">📦</div>
+          <h3>Balanță Stocuri Inteligentă</h3>
+          <p>Valoare la cost și vânzare, distribuție pe gestiuni, analiză vechime pe intervale (1-90, 90-365, &gt;365 zile).</p>
+          <ul class="feature-list">
+            <li>Treemap ierarhic pe grupă/gestiune</li>
+            <li>Identificare stocuri imobilizate</li>
+            <li>Filtre producător/produs</li>
+            <li>Export XLSX per interval</li>
+          </ul>
+        </article>
+
+        <article class="feature-card fade-in">
+          <div class="feature-icon" aria-hidden="true">📄</div>
+          <h3>Facturi Neîncasate</h3>
+          <p>Monitorizare creanțe pe client cu statusuri (restant, scadent azi, în termen) și rapoarte PDF profesionale.</p>
+          <ul class="feature-list">
+            <li>PDF individual sau multi-client</li>
+            <li>Filtre pe scadență și agent</li>
+            <li>Total restante evidențiat</li>
+            <li>Status scadență automat</li>
+          </ul>
+        </article>
+
+        <article class="feature-card fade-in">
+          <div class="feature-icon" aria-hidden="true">💳</div>
+          <h3>Facturi Neachitate</h3>
+          <p>Centralizare datorii către furnizori cu PDF continuu multi-furnizor și total general pe raport.</p>
+          <ul class="feature-list">
+            <li>Comutare cu/fără efecte</li>
+            <li>Rapoarte continue (fără page break)</li>
+            <li>Filtre pe scadență</li>
+            <li>Total general raport</li>
+          </ul>
+        </article>
+
+        <article class="feature-card fade-in">
+          <div class="feature-icon" aria-hidden="true">📅</div>
+          <h3>Scadențe Plăți</h3>
+          <p>Vizualizare obligații pe termen scurt cu heatmap calendar, timeline și distribuție pe terți.</p>
+          <ul class="feature-list">
+            <li>Heatmap calendar lunar</li>
+            <li>Bubble chart cu sumă cumulativă</li>
+            <li>Top terți</li>
+            <li>Planificare cash-flow</li>
+          </ul>
+        </article>
+
+        <article class="feature-card fade-in">
+          <div class="feature-icon" aria-hidden="true">🛒</div>
+          <h3>Cumpărări &amp; Intrări</h3>
+          <p>Monitorizare aprovizionări cu top furnizori, treemap și filtre pe gestiuni/furnizori/date.</p>
+          <ul class="feature-list">
+            <li>Top 20 furnizori cu pondere</li>
+            <li>Treemap vizualizare</li>
+            <li>Statistici per perioadă</li>
+            <li>Export Excel rapid</li>
+          </ul>
+        </article>
+
+        <article class="feature-card fade-in">
+          <div class="feature-icon" aria-hidden="true">🔐</div>
+          <h3>Multi-Companie &amp; Securitate</h3>
+          <p>Suport pentru entități multiple, autentificare robustă și cache performant pentru date voluminoase.</p>
+          <ul class="feature-list">
+            <li>Separare completă pe companii</li>
+            <li>Autentificare securizată</li>
+            <li>Performanță optimizată</li>
+            <li>White-label opțional</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="pricing" id="preturi">
+      <div class="pricing-container">
+        <div class="section-header">
+          <span class="section-tag">Prețuri transparente</span>
+          <h2>Alege planul potrivit echipei tale</h2>
+          <p>Implementare în maxim 2 zile. Fără costuri ascunse. Suport inclus pentru fiecare plan al platformei SaaS.</p>
         </div>
 
-        <div class="pricing-card featured">
-          <h3>Business</h3>
-          <div class="price">450 €<span>/lună</span></div>
-          <p style="color: var(--text-dim); margin-bottom: 2rem;">Cel mai popular pentru IMM-uri</p>
-          <ul>
-            <li>Până la 15 utilizatori</li>
-            <li>Toate modulele + personalizări</li>
-            <li>Hostare dedicată</li>
-            <li>Suport prioritar</li>
-            <li>Rapoarte custom</li>
-            <li>Integrări suplimentare</li>
-          </ul>
-          <a href="#contact" class="btn btn-primary" style="width: 100%; margin-top: 2rem;">Comandă Acum</a>
+        <div class="pricing-grid">
+          <article class="pricing-card">
+            <h3>Start</h3>
+            <div class="price">150 €<span>/lună</span></div>
+            <p style="color: var(--text-dim); margin-bottom: 2rem;">Ideal pentru companii la început de drum.</p>
+            <ul>
+              <li>Până la 3 utilizatori</li>
+              <li>Toate modulele standard</li>
+              <li>Hostare partajată</li>
+              <li>Suport prin email</li>
+              <li>Actualizări incluse</li>
+            </ul>
+            <a href="/demo" class="btn btn-secondary" style="width: 100%; margin-top: 2rem;" aria-label="Încearcă gratuit planul Start">Încearcă Gratuit</a>
+          </article>
+
+          <article class="pricing-card featured">
+            <h3>Business</h3>
+            <div class="price">450 €<span>/lună</span></div>
+            <p style="color: var(--text-dim); margin-bottom: 2rem;">Cel mai popular pentru IMM-uri agile.</p>
+            <ul>
+              <li>Până la 15 utilizatori</li>
+              <li>Toate modulele + personalizări</li>
+              <li>Hostare dedicată</li>
+              <li>Suport prioritar</li>
+              <li>Rapoarte custom</li>
+              <li>Integrări suplimentare</li>
+            </ul>
+            <a href="/demo" class="btn btn-primary" style="width: 100%; margin-top: 2rem;" aria-label="Încearcă gratuit planul Business">Încearcă Gratuit</a>
+          </article>
+
+          <article class="pricing-card">
+            <h3>Enterprise</h3>
+            <div class="price">1.200 €<span>/lună</span></div>
+            <p style="color: var(--text-dim); margin-bottom: 2rem;">Scalabilitate completă pentru grupuri.</p>
+            <ul>
+              <li>Utilizatori nelimitați</li>
+              <li>White-label complet</li>
+              <li>SLA garantat</li>
+              <li>Manager dedicat</li>
+              <li>Onboarding avansat</li>
+              <li>Multi-companie nelimitat</li>
+            </ul>
+            <a href="/demo" class="btn btn-secondary" style="width: 100%; margin-top: 2rem;" aria-label="Încearcă gratuit planul Enterprise">Încearcă Gratuit</a>
+          </article>
         </div>
 
-        <div class="pricing-card">
-          <h3>Enterprise</h3>
-          <div class="price">1.200 €<span>/lună</span></div>
-          <p style="color: var(--text-dim); margin-bottom: 2rem;">Pentru organizații mari</p>
-          <ul>
-            <li>Utilizatori nelimitați</li>
-            <li>White-label complet</li>
-            <li>SLA garantat</li>
-            <li>Manager dedicat</li>
-            <li>Consultanță strategică</li>
-            <li>Multi-companie nelimitat</li>
-          </ul>
-          <a href="#contact" class="btn btn-secondary" style="width: 100%; margin-top: 2rem;">Contactează-ne</a>
+        <p style="text-align: center; color: var(--text-dim); margin-top: 3rem;">
+          Fără card pentru testul de 7 zile. Implementare standard 500-1.500 € (one-time) în funcție de complexitate.
+        </p>
+      </div>
+    </section>
+
+    <section class="cta-section" aria-label="Înscriere demo după prețuri">
+      <div class="cta-content">
+        <h2>Activează demo-ul Castemill BI și vezi datele tale în acțiune</h2>
+        <p>Completează formularul de demo și primești acces la platforma SaaS în maximum 24 de ore. Echipa noastră te ghidează pas cu pas.</p>
+        <div class="cta-group" style="justify-content: center;">
+          <a href="/demo" class="btn btn-primary" aria-label="Încearcă gratuit 7 zile Castemill BI după prețuri">Încearcă Gratuit 7 Zile</a>
+          <a href="mailto:office@castemill.com" class="btn btn-secondary" aria-label="Contactează Castemill BI prin email">Contact rapid</a>
         </div>
       </div>
+    </section>
 
-      <p style="text-align: center; color: var(--text-dim); margin-top: 3rem;">
-        <strong>Implementare:</strong> 500-1.500 € (one-time, în funcție de complexitate)<br>
-        <em>Primul demo este gratuit • Fără angajamente pe termen lung</em>
-      </p>
-    </div>
-  </section>
+    <section class="cta-section" id="contact">
+      <div class="cta-content">
+        <h2>Gata să transformi datele în decizii inteligente?</h2>
+        <p>Programează demo-ul personalizat Castemill BI și descoperă cum platforma SaaS îți oferă vizibilitate completă asupra KPI, vânzărilor, stocurilor și cash-flow-ului.</p>
+        <div class="cta-group" style="justify-content: center;">
+          <a href="/demo" class="btn btn-primary" aria-label="Încearcă gratuit 7 zile Castemill BI din secțiunea de contact">Încearcă Gratuit 7 Zile</a>
+          <a href="tel:+40721720155" class="btn btn-secondary" aria-label="Sună Castemill BI">Sună-ne: +40 721 720 155</a>
+        </div>
+        <p style="margin-top: 2rem; font-size: 0.95rem;">📧 <a href="mailto:office@castemill.com" style="color: var(--text);">office@castemill.com</a></p>
+      </div>
+    </section>
+  </main>
 
-  <!-- CTA Section -->
-  <section class="cta-section" id="contact">
-    <div class="cta-content">
-      <h2>Gata să transformi datele<br>în decizii inteligente?</h2>
-      <p>
-        Programează un demo personalizat și descoperă cum Castemill BI 
-        poate revoluționa modul în care îți monitorizezi afacerea.
-      </p>
-      <a href="mailto:office@castemill.com?subject=Demo%20Platformă%20BI&body=Bună%20ziua,%0D%0A%0D%0AAș%20dori%20să%20programez%20un%20demo%20pentru%20Platforma%20Castemill%20BI.%0D%0A%0D%0AVă%20mulțumesc!" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.2rem 2.5rem;">
-        <span>Solicită Demo Gratuit</span>
-        <span>→</span>
-      </a>
-      <p style="margin-top: 2rem; font-size: 0.9rem;">
-        📧 office@castemill.com • 📞 +40 721 720 155
-      </p>
-    </div>
-  </section>
-
-  <!-- Footer -->
   <footer>
     <div class="footer-content">
       <div class="footer-brand">
-        <div class="logo">CASTEMILL</div>
-        <p>
-          Transformăm complexitatea datelor în claritate decizională. 
-          Soluții Business Intelligence concepute pentru eficiență maximă.
-        </p>
+        <a href="/" class="logo" aria-label="Castemill SRL - Acasă">CASTEMILL</a>
+        <p>Castemill BI este platforma SaaS dezvoltată de Castemill SRL pentru a oferi companiilor vizibilitate completă asupra indicatorilor de performanță.</p>
         <div class="social-links">
-          <a href="https://www.linkedin.com/company/castemill" target="_blank" aria-label="LinkedIn">in</a>
-          <a href="https://www.facebook.com/castemill" target="_blank" aria-label="Facebook">f</a>
+          <a href="https://www.linkedin.com/company/castemill" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+          <a href="https://www.facebook.com/castemill" target="_blank" rel="noopener" aria-label="Facebook">f</a>
           <a href="mailto:office@castemill.com" aria-label="Email">@</a>
+        </div>
+        <div class="footer-cta">
+          <a href="/demo" class="btn btn-primary" aria-label="Încearcă gratuit Castemill BI din footer">Încearcă Gratuit 7 Zile</a>
         </div>
       </div>
 
@@ -1033,28 +1145,28 @@
         <ul>
           <li><a href="#functionalitati">Funcționalități</a></li>
           <li><a href="#preturi">Prețuri</a></li>
-          <li><a href="#contact">Demo</a></li>
-          <li><a href="#documentatie">Documentație</a></li>
+          <li><a href="/demo">Demo</a></li>
+          <li><a href="/docs/Manual-Structura-Aplicatiei.pdf" target="_blank" rel="noopener">Manualul platformei</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Companie</h4>
         <ul>
-          <li><a href="#despre">Despre noi</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#cariere">Cariere</a></li>
-          <li><a href="#blog">Blog</a></li>
+          <li><a href="mailto:office@castemill.com">Contact</a></li>
+          <li><a href="tel:+40721720155">Telefon</a></li>
+          <li><a href="https://www.linkedin.com/company/castemill" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://www.facebook.com/castemill" target="_blank" rel="noopener">Facebook</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Legal</h4>
+        <h4>Resurse</h4>
         <ul>
-          <li><a href="#termeni">Termeni & Condiții</a></li>
-          <li><a href="#confidentialitate">Confidențialitate</a></li>
-          <li><a href="#gdpr">GDPR</a></li>
-          <li><a href="#cookies">Cookies</a></li>
+          <li><a href="/demo">Încearcă gratuit</a></li>
+          <li><a href="mailto:office@castemill.com?subject=Parteneriat%20Castemill%20BI">Parteneriate</a></li>
+          <li><a href="/docs/Manual-Structura-Aplicatiei.pdf" target="_blank" rel="noopener">Manualul platformei</a></li>
+          <li><a href="mailto:office@castemill.com?subject=Suport%20Castemill%20BI">Suport</a></li>
         </ul>
       </div>
     </div>
@@ -1066,18 +1178,16 @@
   </footer>
 
   <script>
-    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
-        e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
+          e.preventDefault();
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
     });
 
-    // Intersection Observer for fade-in animations
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -1098,5 +1208,3 @@
   </script>
 </body>
 </html>
-
-

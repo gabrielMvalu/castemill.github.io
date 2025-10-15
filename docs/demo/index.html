@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ro-RO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo gratuit Castemill BI — Încearcă platforma 7 zile</title>
+  <meta name="description" content="Completează formularul pentru demo Castemill BI. Activăm contul în 24h și primești 7 zile gratuite fără card.">
+  <link rel="canonical" href="https://www.castemill.com/demo/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180.png">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.25), transparent 40%), #05050a;
+      color: #f5f5ff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    header {
+      padding: 1.5rem 2rem;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 3rem;
+      padding: 3rem 2rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .intro {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .intro h1 {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .intro p {
+      color: rgba(229, 229, 255, 0.8);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .intro ul {
+      list-style: none;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .intro li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      color: rgba(229, 229, 255, 0.85);
+    }
+
+    .intro li::before {
+      content: '✓';
+      color: #10b981;
+      font-weight: 700;
+      margin-top: 0.1rem;
+    }
+
+    .card {
+      background: rgba(17, 17, 27, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 25px 60px rgba(8, 8, 16, 0.45);
+      backdrop-filter: blur(10px);
+    }
+
+    form {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      font-weight: 600;
+      color: rgba(245, 245, 255, 0.9);
+    }
+
+    input, select, textarea {
+      background: rgba(12, 12, 20, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      color: #f5f5ff;
+      font-size: 1rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: rgba(99, 102, 241, 0.8);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+    }
+
+    .checkbox-group {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .checkbox-option {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 500;
+      color: rgba(229, 229, 255, 0.85);
+    }
+
+    .checkbox-option input {
+      width: 18px;
+      height: 18px;
+    }
+
+    button[type="submit"] {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border: none;
+      border-radius: 999px;
+      padding: 1rem 2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    button[type="submit"]:hover,
+    button[type="submit"]:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
+    }
+
+    button[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-top-color: #fff;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .form-note {
+      font-size: 0.95rem;
+      color: rgba(229, 229, 255, 0.7);
+      line-height: 1.5;
+    }
+
+    .error-message {
+      color: #fca5a5;
+      font-weight: 500;
+    }
+
+    .success-message {
+      color: #bbf7d0;
+      font-weight: 500;
+    }
+
+    footer {
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.95rem;
+      color: rgba(229, 229, 255, 0.6);
+    }
+
+    footer a {
+      color: #a5b4fc;
+      text-decoration: none;
+    }
+
+    footer a:hover,
+    footer a:focus-visible {
+      text-decoration: underline;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/" class="logo" aria-label="Înapoi la pagina principală Castemill">CASTEMILL</a>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h1>Activează demo-ul Castemill BI</h1>
+      <p>Completează formularul și în 24 de ore îți activăm accesul la platforma SaaS Castemill BI. Primești 7 zile gratuite pentru a analiza KPI, vânzările, stocurile și cash-flow-ul din ERP-ul tău.</p>
+      <ul>
+        <li>Fără card necesar — doar exporturile ERP.</li>
+        <li>Onboarding asistat de echipa Castemill SRL.</li>
+        <li>Dashboard-uri preconfigurate pentru decizii rapide.</li>
+      </ul>
+      <p class="form-note">Preferi să ne scrii direct? <a href="mailto:office@castemill.com">office@castemill.com</a></p>
+    </section>
+
+    <section class="card" aria-label="Formular demo Castemill BI">
+      <form id="demo-form" action="https://formspree.io/f/REPLACE_TOKEN" method="POST" novalidate>
+        <!-- TODO: Înlocuiește REPLACE_TOKEN cu tokenul real Formspree înainte de producție. -->
+        <input type="hidden" name="_subject" value="Cerere demo Castemill BI">
+        <input type="hidden" name="_origin" id="form-origin" value="">
+        <input type="text" name="company_website" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0;">
+
+        <label>
+          Nume companie
+          <input type="text" name="company_name" autocomplete="organization" required>
+        </label>
+
+        <label>
+          Nume și prenume
+          <input type="text" name="full_name" autocomplete="name" required>
+        </label>
+
+        <label>
+          Email
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+
+        <label>
+          Telefon
+          <input type="tel" name="phone" autocomplete="tel" required>
+        </label>
+
+        <label>
+          ERP folosit
+          <select name="erp" required>
+            <option value="" disabled selected>Alege ERP-ul</option>
+            <option>WinMentor</option>
+            <option>Saga</option>
+            <option>Nav/BC</option>
+            <option>SAP B1</option>
+            <option>Altul</option>
+          </select>
+        </label>
+
+        <label>
+          Număr utilizatori
+          <select name="users" required>
+            <option value="" disabled selected>Selectează intervalul</option>
+            <option>1-3</option>
+            <option>4-15</option>
+            <option>&gt;15</option>
+          </select>
+        </label>
+
+        <fieldset class="checkbox-group" aria-labelledby="modules-label">
+          <legend id="modules-label">Module de interes</legend>
+          <label class="checkbox-option"><input type="checkbox" name="modules[]" value="KPI"> KPI</label>
+          <label class="checkbox-option"><input type="checkbox" name="modules[]" value="Vânzări"> Vânzări</label>
+          <label class="checkbox-option"><input type="checkbox" name="modules[]" value="Stocuri"> Stocuri</label>
+          <label class="checkbox-option"><input type="checkbox" name="modules[]" value="Creanțe"> Creanțe</label>
+          <label class="checkbox-option"><input type="checkbox" name="modules[]" value="Plăți"> Plăți</label>
+          <label class="checkbox-option"><input type="checkbox" name="modules[]" value="Cumpărări"> Cumpărări</label>
+        </fieldset>
+
+        <label>
+          Link către export ERP <span style="font-weight: 500; color: rgba(229, 229, 255, 0.6);">(opțional, XLSX/CSV)</span>
+          <input type="url" name="export_link" placeholder="https://...">
+        </label>
+
+        <label>
+          Observații <span style="font-weight: 500; color: rgba(229, 229, 255, 0.6);">(opțional)</span>
+          <textarea name="notes" rows="4" placeholder="Detalii relevante despre integrare"></textarea>
+        </label>
+
+        <label class="checkbox-option" style="align-items: flex-start;">
+          <input type="checkbox" name="gdpr" value="accept" required>
+          <span>Sunt de acord să fiu contactat pentru demo.</span>
+        </label>
+
+        <p class="form-note">Trimitem informațiile direct către echipa Castemill SRL. Dacă formularul nu funcționează, scrie-ne la <a href="mailto:office@castemill.com">office@castemill.com</a>.</p>
+
+        <div class="error-message" id="error-message" role="alert" aria-live="assertive" hidden></div>
+        <div class="success-message" id="success-message" aria-live="polite" hidden></div>
+
+        <button type="submit" id="submit-button" aria-label="Trimite formular demo Castemill BI">
+          <span id="button-text">Trimite cererea</span>
+          <span class="spinner" id="button-spinner" hidden></span>
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Castemill SRL • <a href="/docs/Manual-Structura-Aplicatiei.pdf" target="_blank" rel="noopener">Manualul platformei</a> • <a href="/">Înapoi acasă</a>
+  </footer>
+
+  <script>
+    const form = document.getElementById('demo-form');
+    const submitButton = document.getElementById('submit-button');
+    const buttonText = document.getElementById('button-text');
+    const buttonSpinner = document.getElementById('button-spinner');
+    const errorMessage = document.getElementById('error-message');
+    const successMessage = document.getElementById('success-message');
+    const originField = document.getElementById('form-origin');
+
+    originField.value = window.location.href;
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (form.company_website.value) {
+        return;
+      }
+
+      if (!form.reportValidity()) {
+        return;
+      }
+
+      submitButton.disabled = true;
+      buttonText.textContent = 'Se trimite...';
+      buttonSpinner.hidden = false;
+      errorMessage.hidden = true;
+      successMessage.hidden = true;
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          successMessage.textContent = 'Cererea a fost trimisă. Redirecționăm...';
+          successMessage.hidden = false;
+          setTimeout(() => {
+            window.location.href = '/demo/thanks.html';
+          }, 800);
+        } else {
+          throw new Error('Formular indisponibil temporar');
+        }
+      } catch (error) {
+        errorMessage.textContent = 'A apărut o eroare. Te rugăm să reîncerci sau să ne scrii la office@castemill.com.';
+        errorMessage.hidden = false;
+        submitButton.disabled = false;
+        buttonText.textContent = 'Trimite cererea';
+        buttonSpinner.hidden = true;
+      }
+    });
+  </script>
+</body>
+</html>
