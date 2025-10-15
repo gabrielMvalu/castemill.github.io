@@ -1452,6 +1452,22 @@
     const cookieDeclineBtn = document.getElementById('cookieDecline');
     const cookieConsent = localStorage.getItem('cookiesAccepted');
 
+    const applyStoredConsent = (consentValue) => {
+      if (typeof gtag === 'undefined') {
+        return;
+      }
+
+      if (consentValue === 'true') {
+        gtag('consent', 'update', {
+          'analytics_storage': 'granted'
+        });
+      } else if (consentValue === 'false') {
+        gtag('consent', 'update', {
+          'analytics_storage': 'denied'
+        });
+      }
+    };
+
     const hideCookieBanner = () => {
       cookieBanner?.classList.remove('is-visible');
     };
@@ -1460,15 +1476,19 @@
       localStorage.setItem('cookiesAccepted', isAccepted ? 'true' : 'false');
       hideCookieBanner();
 
-      if (isAccepted && typeof gtag !== 'undefined') {
+      if (typeof gtag !== 'undefined') {
         gtag('consent', 'update', {
-          'analytics_storage': 'granted'
+          'analytics_storage': isAccepted ? 'granted' : 'denied'
         });
       }
     };
 
     if (!cookieConsent && cookieBanner) {
       setTimeout(() => cookieBanner.classList.add('is-visible'), 1800);
+    }
+
+    if (cookieConsent) {
+      applyStoredConsent(cookieConsent);
     }
 
     cookieAcceptBtn?.addEventListener('click', () => handleCookieDecision(true));
