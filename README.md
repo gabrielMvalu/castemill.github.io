@@ -17,4 +17,4 @@ Acest depozit conține sursele statice pentru site-ul public [Castemill BI](http
 - După actualizări, împinge modificările pe `main` pentru a declanșa publicarea.
 
 ## Integrare formular
-Formularul de demo folosește Formspree. Înainte de go-live, înlocuiește `REPLACE_TOKEN` din `docs/demo/index.html` cu token-ul real furnizat de Formspree.
+Formularul de demo utilizează [FormSubmit](https://formsubmit.co/) pentru a trimite cererile direct către `office@castemill.com`. Dacă adresa de destinație se schimbă, actualizează atributul `action` din `docs/demo/index.html`.

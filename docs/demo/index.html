@@ -257,10 +257,11 @@
     </section>
 
     <section class="card" aria-label="Formular demo Castemill BI">
-      <form id="demo-form" action="https://formspree.io/f/REPLACE_TOKEN" method="POST" novalidate>
-        <!-- TODO: Înlocuiește REPLACE_TOKEN cu tokenul real Formspree înainte de producție. -->
+      <form id="demo-form" action="https://formsubmit.co/ajax/office@castemill.com" method="POST" novalidate>
+        <!-- Formularul trimite datele prin FormSubmit direct către office@castemill.com. -->
         <input type="hidden" name="_subject" value="Cerere demo Castemill BI">
         <input type="hidden" name="_origin" id="form-origin" value="">
+        <input type="hidden" name="_captcha" value="false">
         <input type="text" name="company_website" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0;">
 
         <label>
@@ -344,7 +345,7 @@
   </main>
 
   <footer>
-    © 2025 Castemill SRL • <a href="/docs/Manual-Structura-Aplicatiei.pdf" target="_blank" rel="noopener">Manualul platformei</a> • <a href="/">Înapoi acasă</a>
+    © 2025 Castemill SRL • <a href="/Manual-Structura-Aplicatiei.pdf" target="_blank" rel="noopener">Manualul platformei</a> • <a href="/">Înapoi acasă</a>
   </footer>
 
   <script>
@@ -400,7 +401,7 @@
 
         const detailedMessage = Array.isArray(responseBody?.errors)
           ? responseBody.errors.map((entry) => entry.message).join(' ')
-          : responseBody?.message;
+          : responseBody?.message || responseBody?.error || responseBody?.success;
 
         throw new Error(detailedMessage || 'Formular indisponibil temporar');
       } catch (error) {
