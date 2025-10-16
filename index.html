@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="ro" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Secret — Teaser</title>
+    <meta
+      name="description"
+      content="Un semnal minimalist: ceva mare se pregătește. The secret. Soon to be revealed."
+    />
+    <meta property="og:title" content="The Secret — Teaser" />
+    <meta
+      property="og:description"
+      content="Semnale criptice. Analitice simulate. Ceva mare se pregătește."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://castemill.github.io/" />
+    <meta property="og:image" content="https://dummyimage.com/1200x630/0b0d10/e6ebef&text=%F0%9F%94%AE" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="The Secret — Teaser" />
+    <meta
+      name="twitter:description"
+      content="Rămâi aproape. Semnale în creștere, consola AI și un timeline criptic."
+    />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>\u2728</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Spline+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0b0d10;
+        --fg: #e6ebef;
+        --muted: #98a2b3;
+        --brand: #7c5cff;
+        --accent: #22d3ee;
+        --surface: color-mix(in srgb, var(--fg) 4%, transparent);
+        --card-bg: color-mix(in srgb, var(--fg) 6%, transparent);
+        --shadow-soft: 0 24px 80px -48px rgba(8, 9, 12, 0.8);
+        --header-height: 76px;
+        --spotlight-size: 38vmax;
+        --font-sans: "Inter", "Spline Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+        --font-display: "Spline Sans", "Inter", system-ui, sans-serif;
+        --font-mono: "IBM Plex Mono", "Fira Code", "SFMono-Regular", Menlo, monospace;
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f7f9fc;
+          --fg: #111826;
+          --muted: #4c5561;
+          --brand: #5f3bff;
+          --accent: #0ea5e9;
+          --surface: rgba(17, 24, 38, 0.04);
+          --card-bg: rgba(17, 24, 38, 0.08);
+          color-scheme: light;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        :root {
+          --spotlight-size: 46vmax;
+        }
+      }
+
+      :where(*, *::before, *::after) {
+        box-sizing: border-box;
+      }
+
+      :where(html) {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--font-sans);
+        background: var(--bg);
+        color: var(--fg);
+        min-height: 100vh;
+        line-height: 1.6;
+        font-size: clamp(16px, 1.1vw, 18px);
+        -webkit-font-smoothing: antialiased;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(
+            circle at var(--spotlight-x, 50%) var(--spotlight-y, 40%),
+            color-mix(in srgb, var(--accent) 24%, transparent) 0%,
+            transparent 62%
+          ),
+          var(--noise-gradient);
+        mix-blend-mode: screen;
+        opacity: clamp(0.45, 1vw, 0.7);
+        transition: opacity 0.4s ease;
+        z-index: 0;
+        will-change: background-position;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        body::before {
+          transition: none;
+          opacity: 0.3;
+        }
+      }
+
+      :where(a) {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      :where(button) {
+        font: inherit;
+        cursor: pointer;
+        background: none;
+        border: none;
+      }
+
+      :where(button, [role="button"], a) {
+        transition: transform 0.3s ease, color 0.3s ease, background 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      :where(:focus-visible) {
+        outline: 2px solid color-mix(in srgb, var(--accent) 65%, transparent);
+        outline-offset: 4px;
+      }
+
+      .layout {
+        position: relative;
+        isolation: isolate;
+      }
+
+      header.teaser-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        height: var(--header-height);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 clamp(1.5rem, 4vw, 4rem);
+        background: color-mix(in srgb, var(--bg) 70%, transparent 30%);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid color-mix(in srgb, var(--fg) 8%, transparent);
+      }
+
+      header.teaser-header nav {
+        display: flex;
+        align-items: center;
+        gap: clamp(1.2rem, 4vw, 2.5rem);
+      }
+
+      .brand {
+        font-family: var(--font-display);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        color: var(--muted);
+      }
+
+      .brand svg {
+        width: 1.6rem;
+        height: 1.6rem;
+        fill: none;
+        stroke: var(--accent);
+        stroke-width: 1.4;
+        opacity: 0.85;
+      }
+
+      .pill-button {
+        position: relative;
+        padding: 0.65rem 1.6rem;
+        border-radius: 999px;
+        background: linear-gradient(135deg, color-mix(in srgb, var(--brand) 88%, transparent) 0%,
+              color-mix(in srgb, var(--accent) 45%, transparent) 100%);
+        color: var(--fg);
+        font-weight: 600;
+        box-shadow: 0 20px 40px -30px color-mix(in srgb, var(--brand) 80%, transparent);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        border: 1px solid color-mix(in srgb, var(--brand) 50%, transparent 50%);
+        will-change: transform;
+      }
+
+      .pill-button:hover,
+      .pill-button:focus-visible {
+        box-shadow: 0 28px 60px -32px color-mix(in srgb, var(--accent) 75%, transparent);
+      }
+
+      .pill-button svg {
+        width: 1.1rem;
+        height: 1.1rem;
+        stroke: currentColor;
+        stroke-width: 1.6;
+        fill: none;
+      }
+
+      .hero {
+        min-height: calc(100vh - var(--header-height));
+        padding: clamp(4rem, 12vh, 8rem) clamp(1.5rem, 6vw, 8rem);
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 2.5rem;
+        align-items: center;
+        position: relative;
+      }
+
+      .hero::before,
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        mix-blend-mode: screen;
+      }
+
+      .hero::before {
+        background: radial-gradient(ellipse at 20% 20%, color-mix(in srgb, var(--brand) 30%, transparent) 0%, transparent 55%),
+          radial-gradient(ellipse at 80% 40%, color-mix(in srgb, var(--accent) 30%, transparent) 0%, transparent 60%);
+        opacity: 0.45;
+        transform: translate3d(0, calc(var(--hero-parallax, 0) * -0.2px), 0);
+        transition: opacity 0.6s ease;
+      }
+
+      .hero::after {
+        background-image: var(--noise-gradient);
+        opacity: 0.2;
+        filter: contrast(120%);
+        mix-blend-mode: soft-light;
+      }
+
+      .hero-content {
+        grid-column: 1 / span 7;
+        position: relative;
+        z-index: 2;
+      }
+      .hero-tag {
+        text-transform: uppercase;
+        letter-spacing: 0.26em;
+        font-size: 0.72rem;
+        color: var(--muted);
+        margin-bottom: 1.5rem;
+      }
+
+      h1.hero-title {
+        font-family: var(--font-display);
+        font-size: clamp(2.8rem, 6vw, 5rem);
+        letter-spacing: -0.02em;
+        margin: 0 0 1.6rem;
+        line-height: 1.05;
+      }
+
+      .hero-title span.hero-accent {
+        display: inline-block;
+        background: linear-gradient(120deg, color-mix(in srgb, var(--brand) 80%, transparent) 0%, color-mix(in srgb, var(--accent) 85%, transparent) 100%);
+        -webkit-background-clip: text;
+        color: transparent;
+        background-size: 200% 200%;
+        animation: hue-shift 6s ease-in-out infinite alternate;
+      }
+
+      @keyframes hue-shift {
+        0% {
+          background-position: 0% 50%;
+        }
+        100% {
+          background-position: 100% 50%;
+        }
+      }
+
+      .hero-lead {
+        font-size: clamp(1.08rem, 2.2vw, 1.6rem);
+        color: var(--muted);
+        max-width: 36ch;
+        margin-bottom: 2.5rem;
+        position: relative;
+      }
+
+      .hero-lead span.reveal {
+        display: inline-block;
+        clip-path: inset(0 100% 0 0);
+        animation: reveal-text 1.6s ease forwards;
+      }
+
+      @keyframes reveal-text {
+        to {
+          clip-path: inset(0 0 0 0);
+        }
+      }
+
+      .typewriter {
+        min-height: 2.4rem;
+        font-size: 1.1rem;
+        letter-spacing: 0.04em;
+        color: var(--fg);
+        margin-bottom: 2.8rem;
+        border-left: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
+        padding-left: 1rem;
+        position: relative;
+      }
+
+      .typewriter::after {
+        content: "";
+        display: inline-block;
+        width: 1px;
+        height: 1.4em;
+        margin-left: 6px;
+        background: currentColor;
+        animation: blink 1s steps(1) infinite;
+        vertical-align: -0.2em;
+      }
+
+      @keyframes blink {
+        0%,
+        49% {
+          opacity: 1;
+        }
+        50%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .hero-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .hero-badge {
+        font-size: 0.8rem;
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .hero-badge svg {
+        width: 0.9rem;
+        height: 0.9rem;
+        stroke: var(--muted);
+      }
+
+      .hero-visual {
+        grid-column: 8 / -1;
+        position: relative;
+        z-index: 1;
+        min-height: 320px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero-visual .orbital {
+        width: clamp(260px, 30vw, 420px);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        position: relative;
+        background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--brand) 45%, transparent) 0%, transparent 70%);
+        border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent 60%);
+        box-shadow: inset 0 0 80px rgba(124, 92, 255, 0.15);
+        overflow: hidden;
+      }
+
+      .orbital::before,
+      .orbital::after {
+        content: "";
+        position: absolute;
+        inset: 12%;
+        border-radius: 50%;
+        border: 1px dashed color-mix(in srgb, var(--accent) 65%, transparent 35%);
+        animation: orbit 12s linear infinite;
+      }
+
+      .orbital::after {
+        inset: 22%;
+        animation-direction: reverse;
+        border-style: solid;
+        opacity: 0.5;
+      }
+
+      @keyframes orbit {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .orbital span {
+        position: absolute;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--accent);
+        filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 70%, transparent));
+        animation: pulse 3.2s ease-in-out infinite;
+      }
+
+      .orbital span:nth-child(1) {
+        top: 18%;
+        left: 50%;
+      }
+
+      .orbital span:nth-child(2) {
+        bottom: 22%;
+        right: 24%;
+        animation-delay: 0.8s;
+      }
+
+      .orbital span:nth-child(3) {
+        bottom: 30%;
+        left: 26%;
+        animation-delay: 1.4s;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(0.8);
+          opacity: 0.6;
+        }
+        50% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+      }
+
+      .section {
+        padding: clamp(4rem, 12vh, 7rem) clamp(1.5rem, 6vw, 7rem);
+      }
+
+      .section-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1.5rem;
+        margin-bottom: clamp(2.5rem, 8vh, 4rem);
+      }
+
+      .section-title {
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        font-family: var(--font-display);
+        margin: 0;
+      }
+
+      .section-caption {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .analytics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: clamp(1.5rem, 3vw, 2.5rem);
+      }
+
+      .card {
+        position: relative;
+        padding: clamp(1.5rem, 3vw, 2.4rem);
+        border-radius: 1.5rem;
+        background: color-mix(in srgb, var(--fg) 6%, transparent);
+        border: 1px solid color-mix(in srgb, var(--fg) 8%, transparent);
+        box-shadow: var(--shadow-soft);
+        backdrop-filter: blur(18px);
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        min-height: 220px;
+        overflow: hidden;
+      }
+
+      .card::after {
+        content: "Simulare";
+        position: absolute;
+        top: 1.2rem;
+        right: 1.2rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        color: color-mix(in srgb, var(--muted) 70%, transparent);
+      }
+
+      .card h3 {
+        margin: 0;
+        font-size: 1.05rem;
+        font-weight: 600;
+      }
+
+      canvas#teaser-chart {
+        width: 100% !important;
+        height: 220px !important;
+      }
+
+      .counter {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+
+      .counter-value {
+        font-size: clamp(1.6rem, 4vw, 2.4rem);
+        font-family: var(--font-display);
+      }
+
+      .counter-label {
+        color: var(--muted);
+        font-size: 0.85rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .console {
+        background: linear-gradient(160deg, color-mix(in srgb, var(--card-bg) 100%, transparent) 0%, color-mix(in srgb, var(--bg) 70%, transparent) 100%);
+        border-radius: 2rem;
+        padding: clamp(2rem, 4vw, 3rem);
+        border: 1px solid color-mix(in srgb, var(--fg) 10%, transparent);
+        box-shadow: var(--shadow-soft);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .console::before {
+        content: "";
+        position: absolute;
+        inset: -40%;
+        background: conic-gradient(from 90deg, color-mix(in srgb, var(--brand) 40%, transparent), color-mix(in srgb, var(--accent) 30%, transparent), transparent 65%);
+        opacity: 0.18;
+        filter: blur(60px);
+        transform: rotate(12deg);
+      }
+
+      .console-inner {
+        position: relative;
+        font-family: var(--font-mono);
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: var(--accent);
+        height: clamp(220px, 40vh, 320px);
+        overflow-y: auto;
+        padding-right: 1rem;
+      }
+
+      .console-line {
+        display: block;
+        color: color-mix(in srgb, var(--accent) 75%, var(--fg) 25%);
+      }
+
+      .console-line[data-type="command"]::before {
+        content: "> ";
+        color: var(--muted);
+      }
+
+      .console-line[data-type="response"] {
+        color: var(--fg);
+      }
+
+      .console-line.is-glitch {
+        animation: glitch 0.6s steps(2) 2;
+      }
+
+      @keyframes glitch {
+        0% {
+          text-shadow: 1px 0 color-mix(in srgb, var(--brand) 60%, transparent), -1px 0 color-mix(in srgb, var(--accent) 60%, transparent);
+        }
+        50% {
+          text-shadow: -2px 0 color-mix(in srgb, var(--brand) 60%, transparent), 2px 0 color-mix(in srgb, var(--accent) 60%, transparent);
+        }
+        100% {
+          text-shadow: none;
+        }
+      }
+
+      .cursor-blink {
+        animation: blink 1s steps(1) infinite;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 1.8rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .timeline-step {
+        padding: clamp(1.4rem, 3vw, 2.1rem);
+        border-radius: 1.4rem;
+        background: color-mix(in srgb, var(--fg) 5%, transparent);
+        border: 1px solid color-mix(in srgb, var(--fg) 10%, transparent);
+        backdrop-filter: blur(14px);
+        min-height: 170px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.3s ease, border-color 0.3s ease;
+        will-change: transform;
+      }
+
+      .timeline-step:hover,
+      .timeline-step:focus-within {
+        border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+      }
+
+      .timeline-index {
+        font-size: 0.75rem;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .timeline-title {
+        font-family: var(--font-display);
+        font-size: 1.4rem;
+        margin: 0.6rem 0;
+      }
+
+      .timeline-meta {
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      footer.teaser-footer {
+        padding: 2.5rem clamp(1.5rem, 6vw, 7rem) 3.5rem;
+        border-top: 1px solid color-mix(in srgb, var(--fg) 8%, transparent);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1rem;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(5, 7, 10, 0.6);
+        backdrop-filter: blur(20px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        z-index: 50;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .modal-backdrop.is-visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal-dialog {
+        width: min(420px, 100%);
+        border-radius: 1.6rem;
+        background: color-mix(in srgb, var(--bg) 92%, var(--card-bg) 8%);
+        border: 1px solid color-mix(in srgb, var(--fg) 8%, transparent);
+        padding: clamp(2rem, 4vw, 2.8rem);
+        display: grid;
+        gap: 1.5rem;
+        position: relative;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .modal-title {
+        margin: 0;
+        font-size: 1.8rem;
+        font-family: var(--font-display);
+      }
+
+      .modal-description {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .modal-form {
+        display: grid;
+        gap: 1.2rem;
+      }
+
+      .modal-form label {
+        display: grid;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .modal-form input {
+        padding: 0.8rem 1rem;
+        border-radius: 0.9rem;
+        border: 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
+        background: color-mix(in srgb, var(--fg) 4%, transparent);
+        color: var(--fg);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 1.2rem;
+        right: 1.2rem;
+        color: var(--muted);
+      }
+
+      .toast {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        padding: 1rem 1.4rem;
+        border-radius: 1rem;
+        background: color-mix(in srgb, var(--accent) 20%, var(--bg) 80%);
+        border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+        box-shadow: var(--shadow-soft);
+        color: var(--fg);
+        font-size: 0.9rem;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        z-index: 60;
+      }
+
+      .toast.is-visible {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .developer-overlay {
+        position: fixed;
+        top: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 1rem 1.4rem;
+        border-radius: 1rem;
+        background: color-mix(in srgb, var(--bg) 85%, transparent 15%);
+        border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+        color: var(--accent);
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        letter-spacing: 0.04em;
+        display: none;
+        z-index: 80;
+      }
+
+      .developer-overlay.is-active {
+        display: block;
+      }
+
+      .developer-overlay strong {
+        color: var(--fg);
+      }
+
+      .notice {
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      @media (max-width: 1024px) {
+        .hero {
+          grid-template-columns: repeat(6, 1fr);
+        }
+        .hero-content {
+          grid-column: 1 / -1;
+        }
+        .hero-visual {
+          grid-column: 1 / -1;
+          order: -1;
+          margin-bottom: 3rem;
+        }
+      }
+
+      @media (max-width: 720px) {
+        header.teaser-header {
+          padding: 0 clamp(1rem, 4vw, 2rem);
+        }
+        .hero {
+          padding-top: clamp(4rem, 16vh, 6rem);
+        }
+        .section-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .toast {
+          left: 50%;
+          right: auto;
+          transform: translate(-50%, 10px);
+        }
+        .toast.is-visible {
+          transform: translate(-50%, 0);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.001ms !important;
+          scroll-behavior: auto !important;
+        }
+        body::before,
+        .hero::before,
+        .hero::after,
+        .orbital::before,
+        .orbital::after {
+          animation: none !important;
+        }
+        .typewriter::after {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout" data-spotlight>
+      <header class="teaser-header" role="banner">
+        <div class="brand" aria-label="NumeleCompaniei">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 16c0-6.627 5.373-12 12-12s12 5.373 12 12-5.373 12-12 12" /><path d="M16 4v24" /><path d="M8 12.5C9.5 10 12.5 8 16 8s6.5 2 8 4.5" /></svg>
+          <span>NumeleCompaniei · teaser</span>
+        </div>
+        <nav aria-label="Principal">
+          <a href="#semnale" class="hero-badge" data-magnetic>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18" /><path d="M3 6h18" /><path d="M3 18h18" /></svg>
+            <span>Semnale</span>
+          </a>
+          <button class="pill-button" data-open-modal data-magnetic>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18" /><path d="M7 10h10" /><path d="M12 15h5" /><path d="M7 15h1" /></svg>
+            <span>Contact · listă de așteptare</span>
+          </button>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-content">
+            <div class="hero-tag">Teaser · #000</div>
+            <h1 class="hero-title" id="hero-title">
+              Ceva <span class="hero-accent">mare</span> se pregătește.
+            </h1>
+            <p class="hero-lead">
+              <span class="reveal">The secret. Soon to be revealed.</span>
+            </p>
+            <div class="typewriter" data-typewriter aria-live="polite"></div>
+            <div class="hero-cta">
+              <button class="pill-button" data-open-modal data-magnetic>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14" /><path d="M5 12h14" /></svg>
+                <span>Anunță-mă</span>
+              </button>
+              <div class="hero-badge">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v4" /><path d="M12 18v4" /><path d="M4.93 4.93l2.83 2.83" /><path d="M16.24 16.24l2.83 2.83" /><circle cx="12" cy="12" r="4" /></svg>
+                <span>Simulare · Demo</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-visual" aria-hidden="true">
+            <div class="orbital" data-parallax>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="semnale" aria-labelledby="analytics-title">
+          <div class="section-header">
+            <h2 class="section-title" id="analytics-title">Semnale în creștere (simulare)</h2>
+            <p class="section-caption">Indicatori sintetici, generați local. Nu se colectează date.</p>
+          </div>
+          <div class="analytics-grid">
+            <article class="card" data-magnetic>
+              <h3>Fluxuri corelate</h3>
+              <canvas id="teaser-chart" aria-label="Tendințe simulate" role="img"></canvas>
+            </article>
+            <article class="card" data-magnetic>
+              <h3>Metrici sintetice</h3>
+              <div class="counters" id="counter-container"></div>
+            </article>
+            <article class="card" data-magnetic>
+              <h3>Semnal contextual</h3>
+              <p class="notice">Actualizări la fiecare 2s cu zgomot gaussian. Stabilitate monitorizată.</p>
+              <ul class="notice" id="pulse-feed" aria-live="polite"></ul>
+            </article>
+            <article class="card" data-magnetic>
+              <h3>Stare sistem</h3>
+              <p class="notice">Rețele virtuale sincronizate. Latență simulată sub pragurile interne.</p>
+              <p class="notice">Statut: <strong>În pre-lansare</strong></p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="console-title">
+          <div class="section-header">
+            <h2 class="section-title" id="console-title">Interfață experimentală (simulare)</h2>
+            <p class="section-caption">Pseudo-comenzi, răspunsuri criptice. Acces complet indisponibil.</p>
+          </div>
+          <div class="console" data-magnetic>
+            <div class="console-inner" id="ai-console" aria-live="polite" aria-label="Flux console AI"></div>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="timeline-title">
+          <div class="section-header">
+            <h2 class="section-title" id="timeline-title">Secvența — doar indicii</h2>
+            <p class="section-caption">Semnal → Sincronizare → Prag → Dezvăluire</p>
+          </div>
+          <div class="timeline" id="timeline">
+            <article class="timeline-step" tabindex="0" data-tilt>
+              <div>
+                <span class="timeline-index">T-03</span>
+                <h3 class="timeline-title">Semnal</h3>
+              </div>
+              <p class="timeline-meta">Detecție inițială. Spectrul se clarifică. Nivel: confidențial.</p>
+            </article>
+            <article class="timeline-step" tabindex="0" data-tilt>
+              <div>
+                <span class="timeline-index">T-02</span>
+                <h3 class="timeline-title">Sincronizare</h3>
+              </div>
+              <p class="timeline-meta">Fluxuri sincronizate în orbite paralele. Rezonanță detectată.</p>
+            </article>
+            <article class="timeline-step" tabindex="0" data-tilt>
+              <div>
+                <span class="timeline-index">T-01</span>
+                <h3 class="timeline-title">Prag</h3>
+              </div>
+              <p class="timeline-meta">Analiză finală. Acces limitat. Parametrii aproape fixați.</p>
+            </article>
+            <article class="timeline-step" tabindex="0" data-tilt>
+              <div>
+                <span class="timeline-index">T0</span>
+                <h3 class="timeline-title">În curând</h3>
+              </div>
+              <p class="timeline-meta">Dezvăluire iminentă. Activează notificările. Nimic public încă.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="teaser-footer" role="contentinfo">
+        <span>© <span id="year"></span> NumeleCompaniei. Toate drepturile rezervate.</span>
+        <a href="#" aria-label="Politici (placeholder)">Politici · Placeholder</a>
+        <span>Aceasta este o pagină teaser — fără colectare de date.</span>
+      </footer>
+    </div>
+
+    <div class="modal-backdrop" data-modal aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-dialog">
+        <button class="modal-close" type="button" data-close-modal aria-label="Închide">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M18 6 6 18" stroke="currentColor" stroke-width="1.6" /><path d="m6 6 12 12" stroke="currentColor" stroke-width="1.6" /></svg>
+        </button>
+        <h2 class="modal-title" id="modal-title">Listă de așteptare (teaser)</h2>
+        <p class="modal-description">
+          Completează simularea de mai jos. Nu trimitem date nicăieri, dar îți vom arăta ce se întâmplă la lansare.
+        </p>
+        <form class="modal-form" aria-describedby="modal-note">
+          <label>
+            Nume
+            <input type="text" name="name" autocomplete="off" placeholder="Numele tău" />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" autocomplete="off" placeholder="email@exemplu.com" />
+          </label>
+          <button class="pill-button" type="button" data-submit-waitlist data-magnetic>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5L20 7" /></svg>
+            <span>Simulează înscrierea</span>
+          </button>
+        </form>
+        <p class="notice" id="modal-note">Acțiune simulată. Datele nu sunt salvate.</p>
+      </div>
+    </div>
+
+    <div class="toast" role="status" aria-live="assertive">Te-am trecut pe lista de așteptare — simulare.</div>
+
+    <div class="developer-overlay" data-dev-overlay>
+      <div><strong>Overlay dezvoltator</strong></div>
+      <div>FPS: <span data-fps>--</span></div>
+      <div>Animații: <span data-anim-state>activ</span></div>
+      <div>Fundal: <span data-bg-state>dinamic</span></div>
+      <div>Comută cu tasta <code>.</code></div>
+    </div>
+    <script>
+      // TEASER: Config principal. Ajustează brandul, paleta și mesajele aici.
+      window.__TEASER_CONFIG = {
+        brandName: "NumeleCompaniei",
+        palette: {
+          bg: "var(--bg)",
+          fg: "var(--fg)",
+          muted: "var(--muted)",
+          brand: "var(--brand)",
+          accent: "var(--accent)"
+        },
+        messages: [
+          "inteligență contextuală",
+          "insight-uri în timp real",
+          "experiențe fluide",
+          "optimizare autonomă",
+          "scalabilitate instant"
+        ],
+        counters: [
+          { label: "uptime (simulare)", from: 0, to: 99.98, suffix: "%", decimals: 2, durationMs: 1800 },
+          { label: "evenimente/min (simulare)", from: 0, to: 1200000, suffix: "", decimals: 0, durationMs: 2200 },
+          { label: "latență (simulare)", from: 100, to: 12, suffix: " ms", decimals: 0, durationMs: 2000, reverse: true }
+        ],
+        revealDate: null
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" integrity="sha384-9tFoZT3zh0+BTtPlqvGjufH6G+j6lJzi10BGSAdoo6gWQBaIj++ImQxGc1dQc5sK" crossorigin="anonymous"></script>
+    <script>
+      // TEASER: Utilitare animații și interacțiuni.
+      (function () {
+        const config = window.__TEASER_CONFIG;
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const body = document.body;
+        const yearEl = document.getElementById("year");
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+        // Fundal noise gradient fallback
+        const noiseSvg = encodeURIComponent(`
+          <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+            <filter id="n" x="0" y="0">
+              <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/>
+              <feColorMatrix type="saturate" values="0"/>
+            </filter>
+            <rect width="200" height="200" filter="url(#n)" opacity="0.35"/>
+          </svg>`);
+        body.style.setProperty(
+          "--noise-gradient",
+          `linear-gradient(135deg, color-mix(in srgb, ${config.palette.brand} 25%, transparent) 0%, transparent 40%), url("data:image/svg+xml,${noiseSvg}")`
+        );
+
+        // Spotlight follow
+        const spotlightTarget = document.querySelector("[data-spotlight]");
+        if (spotlightTarget && !prefersReducedMotion) {
+          spotlightTarget.addEventListener("pointermove", (event) => {
+            const rect = spotlightTarget.getBoundingClientRect();
+            const x = ((event.clientX - rect.left) / rect.width) * 100;
+            const y = ((event.clientY - rect.top) / rect.height) * 100;
+            body.style.setProperty("--spotlight-x", `${x}%`);
+            body.style.setProperty("--spotlight-y", `${y}%`);
+          });
+        }
+
+        // Hero parallax on scroll
+        const hero = document.querySelector(".hero");
+        if (hero && !prefersReducedMotion) {
+          const updateParallax = () => {
+            const rect = hero.getBoundingClientRect();
+            const offset = Math.max(0, window.innerHeight - rect.top);
+            hero.style.setProperty("--hero-parallax", offset);
+            requestAnimationFrame(updateParallax);
+          };
+          requestAnimationFrame(updateParallax);
+        }
+
+        // Typewriter effect
+        const typewriterEl = document.querySelector("[data-typewriter]");
+        if (typewriterEl) {
+          const messages = config.messages.slice();
+          if (prefersReducedMotion) {
+            typewriterEl.textContent = messages[0] || "";
+          } else {
+            let messageIndex = 0;
+            let charIndex = 0;
+            let deleting = false;
+            const speed = { typing: 90, deleting: 40, hold: 1600 };
+
+            const type = () => {
+              const current = messages[messageIndex % messages.length];
+              if (!deleting) {
+                charIndex += 1;
+                typewriterEl.textContent = current.slice(0, charIndex);
+                if (charIndex === current.length) {
+                  deleting = true;
+                  setTimeout(type, speed.hold);
+                  return;
+                }
+              } else {
+                charIndex -= 1;
+                typewriterEl.textContent = current.slice(0, Math.max(0, charIndex));
+                if (charIndex <= 0) {
+                  deleting = false;
+                  messageIndex = (messageIndex + 1) % messages.length;
+                }
+              }
+              const delay = deleting ? speed.deleting : speed.typing;
+              setTimeout(type, delay);
+            };
+            type();
+          }
+        }
+        // Modal logic
+        const modal = document.querySelector("[data-modal]");
+        const openButtons = document.querySelectorAll("[data-open-modal]");
+        const closeButton = document.querySelector("[data-close-modal]");
+        const focusableSelectors = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+        let lastFocus = null;
+        const openModal = () => {
+          if (!modal) return;
+          modal.classList.add("is-visible");
+          modal.setAttribute("aria-hidden", "false");
+          lastFocus = document.activeElement;
+          const focusable = modal.querySelectorAll(focusableSelectors);
+          if (focusable.length) {
+            focusable[0].focus();
+          }
+        };
+        const closeModal = () => {
+          if (!modal) return;
+          modal.classList.remove("is-visible");
+          modal.setAttribute("aria-hidden", "true");
+          if (lastFocus && typeof lastFocus.focus === "function") {
+            lastFocus.focus();
+          }
+        };
+        openButtons.forEach((btn) => btn.addEventListener("click", openModal));
+        if (closeButton) closeButton.addEventListener("click", closeModal);
+        if (modal) {
+          modal.addEventListener("click", (event) => {
+            if (event.target === modal) closeModal();
+          });
+          modal.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+              event.preventDefault();
+              closeModal();
+            } else if (event.key === "Tab") {
+              const focusable = modal.querySelectorAll(focusableSelectors);
+              if (!focusable.length) return;
+              const first = focusable[0];
+              const last = focusable[focusable.length - 1];
+              if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+              } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+              }
+            }
+          });
+        }
+
+        // Toast notification
+        const toast = document.querySelector(".toast");
+        const waitlistButton = document.querySelector("[data-submit-waitlist]");
+        let toastTimeout;
+        const showToast = () => {
+          if (!toast) return;
+          toast.classList.add("is-visible");
+          clearTimeout(toastTimeout);
+          toastTimeout = setTimeout(() => {
+            toast.classList.remove("is-visible");
+          }, 3200);
+        };
+        if (waitlistButton) {
+          waitlistButton.addEventListener("click", () => {
+            showToast();
+          });
+        }
+
+        // Counters
+        const counterContainer = document.getElementById("counter-container");
+        if (counterContainer) {
+          config.counters.forEach((counter) => {
+            const wrapper = document.createElement("div");
+            wrapper.className = "counter";
+            const valueEl = document.createElement("div");
+            valueEl.className = "counter-value";
+            valueEl.dataset.from = counter.from;
+            valueEl.dataset.to = counter.to;
+            valueEl.dataset.duration = counter.durationMs;
+            valueEl.dataset.decimals = counter.decimals;
+            if (counter.reverse) valueEl.dataset.reverse = "true";
+            valueEl.dataset.suffix = counter.suffix || "";
+            valueEl.textContent = counter.from.toLocaleString("ro-RO");
+            const labelEl = document.createElement("div");
+            labelEl.className = "counter-label";
+            labelEl.textContent = counter.label;
+            wrapper.appendChild(valueEl);
+            wrapper.appendChild(labelEl);
+            counterContainer.appendChild(wrapper);
+          });
+
+          if (!prefersReducedMotion) {
+            const animateCounters = () => {
+              counterContainer.querySelectorAll(".counter-value").forEach((el) => {
+                const from = Number(el.dataset.from) || 0;
+                const to = Number(el.dataset.to) || 0;
+                const duration = Number(el.dataset.duration) || 1500;
+                const decimals = Number(el.dataset.decimals) || 0;
+                const suffix = el.dataset.suffix || "";
+                const start = performance.now();
+                const animate = (now) => {
+                  const progress = Math.min(1, (now - start) / duration);
+                  const eased = 1 - Math.pow(1 - progress, 3);
+                  const current = from + eased * (to - from);
+                  el.textContent = current.toLocaleString("ro-RO", {
+                    minimumFractionDigits: decimals,
+                    maximumFractionDigits: decimals
+                  }) + suffix;
+                  if (progress < 1) requestAnimationFrame(animate);
+                };
+                requestAnimationFrame(animate);
+              });
+            };
+            animateCounters();
+          } else {
+            counterContainer.querySelectorAll(".counter-value").forEach((el) => {
+              const to = Number(el.dataset.to) || 0;
+              const decimals = Number(el.dataset.decimals) || 0;
+              const suffix = el.dataset.suffix || "";
+              el.textContent = to.toLocaleString("ro-RO", {
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals
+              }) + suffix;
+            });
+          }
+        }
+        // Chart.js setup
+        const chartCanvas = document.getElementById("teaser-chart");
+        let teaserChart = null;
+        let chartTick = 0;
+        let chartInterval = null;
+        if (chartCanvas && window.Chart) {
+          const ctx = chartCanvas.getContext("2d");
+          const gradient = ctx.createLinearGradient(0, 0, 0, 220);
+          gradient.addColorStop(0, "rgba(124, 92, 255, 0.5)");
+          gradient.addColorStop(1, "rgba(34, 211, 238, 0.05)");
+          const generateData = () => Array.from({ length: 12 }, () => 60 + Math.random() * 30);
+          const dataset = generateData();
+          chartTick = dataset.length;
+          teaserChart = new Chart(ctx, {
+            type: "line",
+            data: {
+              labels: Array.from({ length: dataset.length }, (_, i) => `t${i + 1}`),
+              datasets: [
+                {
+                  data: dataset,
+                  borderColor: "rgba(124, 92, 255, 0.8)",
+                  backgroundColor: gradient,
+                  fill: true,
+                  tension: 0.4,
+                  borderWidth: 2,
+                  pointRadius: 0,
+                  pointHoverRadius: 4
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              animation: prefersReducedMotion
+                ? false
+                : {
+                    duration: 1200,
+                    easing: "easeOutQuart"
+                  },
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  backgroundColor: "rgba(11, 13, 16, 0.9)",
+                  padding: 12,
+                  displayColors: false,
+                  callbacks: {
+                    title: () => "Semnal",
+                    label: (context) => `Intensitate: ${context.formattedValue}`
+                  }
+                }
+              },
+              scales: {
+                x: {
+                  grid: { display: false },
+                  ticks: { color: getComputedStyle(body).getPropertyValue("--muted") }
+                },
+                y: {
+                  grid: {
+                    color: "rgba(255,255,255,0.04)",
+                    drawTicks: false
+                  },
+                  ticks: { color: getComputedStyle(body).getPropertyValue("--muted") }
+                }
+              }
+            }
+          });
+
+          if (!prefersReducedMotion) {
+            chartInterval = setInterval(() => {
+              const nextData = teaserChart.data.datasets[0].data;
+              nextData.shift();
+              nextData.push(60 + Math.random() * 30);
+              chartTick += 1;
+              const labels = teaserChart.data.labels;
+              labels.shift();
+              labels.push(`t${chartTick}`);
+              teaserChart.update("none");
+              const feed = document.getElementById("pulse-feed");
+              if (feed) {
+                const li = document.createElement("li");
+                li.textContent = `Δ semnal: ${nextData[nextData.length - 1].toFixed(2)}`;
+                feed.prepend(li);
+                while (feed.children.length > 4) {
+                  feed.removeChild(feed.lastChild);
+                }
+              }
+            }, 2000);
+          }
+        }
+        // AI console simulation
+        const consoleEl = document.getElementById("ai-console");
+        if (consoleEl) {
+          const lines = [
+            { type: "command", text: "boot --mode=stealth" },
+            { type: "response", text: "canal securizat pregătit" },
+            { type: "command", text: "analyze stream --window 00:03" },
+            { type: "response", text: "signal detected · noise < 0.02" },
+            { type: "command", text: "predict resonance --alpha" },
+            { type: "response", text: "access: pending" },
+            { type: "command", text: "synchronize nodes --silent" },
+            { type: "response", text: "latency: 12 ms (simulat)" },
+            { type: "command", text: "await reveal" },
+            { type: "response", text: "timer: suspendat" }
+          ];
+          let index = 0;
+          const appendLine = () => {
+            if (index >= lines.length) return;
+            const line = lines[index];
+            const el = document.createElement("span");
+            el.className = "console-line";
+            el.dataset.type = line.type;
+            el.textContent = line.text;
+            consoleEl.appendChild(el);
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+            if (!prefersReducedMotion && Math.random() > 0.7) {
+              el.classList.add("is-glitch");
+            }
+            index += 1;
+            const delay = line.type === "command" ? 600 : 900;
+            setTimeout(appendLine, prefersReducedMotion ? 0 : delay);
+          };
+          appendLine();
+        }
+
+        // Magnetic hover interactions
+        const magneticElements = document.querySelectorAll("[data-magnetic]");
+        if (magneticElements.length && !prefersReducedMotion) {
+          magneticElements.forEach((element) => {
+            const strength = element.classList.contains("pill-button") ? 0.35 : 0.18;
+            element.addEventListener("pointermove", (event) => {
+              const rect = element.getBoundingClientRect();
+              const x = ((event.clientX - rect.left) / rect.width - 0.5) * strength * 40;
+              const y = ((event.clientY - rect.top) / rect.height - 0.5) * strength * 40;
+              element.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+            });
+            element.addEventListener("pointerleave", () => {
+              element.style.transform = "translate3d(0,0,0)";
+            });
+          });
+        }
+
+        // Tilt effect for timeline steps
+        const tiltElements = document.querySelectorAll("[data-tilt]");
+        if (tiltElements.length && !prefersReducedMotion) {
+          tiltElements.forEach((element) => {
+            element.addEventListener("pointermove", (event) => {
+              const rect = element.getBoundingClientRect();
+              const x = ((event.clientX - rect.left) / rect.width - 0.5) * 6;
+              const y = ((event.clientY - rect.top) / rect.height - 0.5) * 6;
+              element.style.transform = `perspective(600px) rotateX(${-y}deg) rotateY(${x}deg)`;
+            });
+            element.addEventListener("pointerleave", () => {
+              element.style.transform = "perspective(600px) rotateX(0deg) rotateY(0deg)";
+            });
+            element.addEventListener("focus", () => {
+              element.style.transform = "perspective(600px) rotateX(0deg) rotateY(0deg)";
+            });
+          });
+        }
+        // Developer overlay toggle (tasta '.')
+        const overlay = document.querySelector("[data-dev-overlay]");
+        const fpsEl = overlay ? overlay.querySelector("[data-fps]") : null;
+        const animStateEl = overlay ? overlay.querySelector("[data-anim-state]") : null;
+        const bgStateEl = overlay ? overlay.querySelector("[data-bg-state]") : null;
+        let overlayActive = false;
+        let fpsFrameId = null;
+        let fpsLast = performance.now();
+        let fpsFrames = 0;
+
+        const updateOverlayState = (motionReduced) => {
+          if (animStateEl) animStateEl.textContent = motionReduced ? "limitat" : "activ";
+          if (bgStateEl) bgStateEl.textContent = motionReduced ? "static" : "dinamic";
+        };
+        updateOverlayState(prefersReducedMotion);
+
+        const fpsLoop = (now) => {
+          fpsFrames += 1;
+          const delta = now - fpsLast;
+          if (delta >= 1000) {
+            const fps = Math.round((fpsFrames * 1000) / delta);
+            if (fpsEl) fpsEl.textContent = String(fps);
+            fpsLast = now;
+            fpsFrames = 0;
+          }
+          fpsFrameId = requestAnimationFrame(fpsLoop);
+        };
+
+        const startFps = () => {
+          fpsLast = performance.now();
+          fpsFrames = 0;
+          if (fpsFrameId) cancelAnimationFrame(fpsFrameId);
+          fpsFrameId = requestAnimationFrame(fpsLoop);
+        };
+
+        const stopFps = () => {
+          if (fpsFrameId) cancelAnimationFrame(fpsFrameId);
+          fpsFrameId = null;
+        };
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "." && !event.metaKey && !event.ctrlKey) {
+            overlayActive = !overlayActive;
+            if (overlay) {
+              overlay.classList.toggle("is-active", overlayActive);
+              if (overlayActive) {
+                startFps();
+              } else {
+                stopFps();
+              }
+            }
+          }
+        });
+        if (overlay) {
+          overlay.addEventListener("click", () => {
+            overlayActive = false;
+            overlay.classList.remove("is-active");
+            stopFps();
+          });
+        }
+
+        const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+        if (motionQuery && typeof motionQuery.addEventListener === "function") {
+          motionQuery.addEventListener("change", (event) => {
+            updateOverlayState(event.matches);
+          });
+        }
+
+        window.addEventListener("beforeunload", () => {
+          if (chartInterval) clearInterval(chartInterval);
+          stopFps();
+        });
+      })();
+    </script>
+  </body>
+</html>
