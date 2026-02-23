@@ -1,1462 +1,1003 @@
 <!DOCTYPE html>
-<html lang="ro" data-theme="dark">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>The Secret — Teaser</title>
-    <meta
-      name="description"
-      content="Un semnal minimalist: ceva mare se pregătește. The secret. Soon to be revealed."
-    />
-    <meta property="og:title" content="The Secret — Teaser" />
-    <meta
-      property="og:description"
-      content="Semnale criptice. Analitice simulate. Ceva mare se pregătește."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://castemill.github.io/" />
-    <meta property="og:image" content="https://dummyimage.com/1200x630/0b0d10/e6ebef&text=%F0%9F%94%AE" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="The Secret — Teaser" />
-    <meta
-      name="twitter:description"
-      content="Rămâi aproape. Semnale în creștere, consola AI și un timeline criptic."
-    />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>\u2728</text></svg>" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Spline+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        color-scheme: dark;
-        --bg: #0b0d10;
-        --fg: #e6ebef;
-        --muted: #98a2b3;
-        --brand: #7c5cff;
-        --accent: #22d3ee;
-        --surface: color-mix(in srgb, var(--fg) 4%, transparent);
-        --card-bg: color-mix(in srgb, var(--fg) 6%, transparent);
-        --shadow-soft: 0 24px 80px -48px rgba(8, 9, 12, 0.8);
-        --header-height: 76px;
-        --spotlight-size: 38vmax;
-        --font-sans: "Inter", "Spline Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
-        --font-display: "Spline Sans", "Inter", system-ui, sans-serif;
-        --font-mono: "IBM Plex Mono", "Fira Code", "SFMono-Regular", Menlo, monospace;
-      }
-
-      @media (prefers-color-scheme: light) {
-        :root {
-          --bg: #f7f9fc;
-          --fg: #111826;
-          --muted: #4c5561;
-          --brand: #5f3bff;
-          --accent: #0ea5e9;
-          --surface: rgba(17, 24, 38, 0.04);
-          --card-bg: rgba(17, 24, 38, 0.08);
-          color-scheme: light;
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        :root {
-          --spotlight-size: 46vmax;
-        }
-      }
-
-      :where(*, *::before, *::after) {
-        box-sizing: border-box;
-      }
-
-      :where(html) {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
-        font-family: var(--font-sans);
-        background: var(--bg);
-        color: var(--fg);
-        min-height: 100vh;
-        line-height: 1.6;
-        font-size: clamp(16px, 1.1vw, 18px);
-        -webkit-font-smoothing: antialiased;
-        position: relative;
-        overflow-x: hidden;
-      }
-
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        background: radial-gradient(
-            circle at var(--spotlight-x, 50%) var(--spotlight-y, 40%),
-            color-mix(in srgb, var(--accent) 24%, transparent) 0%,
-            transparent 62%
-          ),
-          var(--noise-gradient);
-        mix-blend-mode: screen;
-        opacity: clamp(0.45, 1vw, 0.7);
-        transition: opacity 0.4s ease;
-        z-index: 0;
-        will-change: background-position;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        body::before {
-          transition: none;
-          opacity: 0.3;
-        }
-      }
-
-      :where(a) {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      :where(button) {
-        font: inherit;
-        cursor: pointer;
-        background: none;
-        border: none;
-      }
-
-      :where(button, [role="button"], a) {
-        transition: transform 0.3s ease, color 0.3s ease, background 0.3s ease,
-          box-shadow 0.3s ease;
-      }
-
-      :where(:focus-visible) {
-        outline: 2px solid color-mix(in srgb, var(--accent) 65%, transparent);
-        outline-offset: 4px;
-      }
-
-      .layout {
-        position: relative;
-        isolation: isolate;
-      }
-
-      header.teaser-header {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        height: var(--header-height);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 clamp(1.5rem, 4vw, 4rem);
-        background: color-mix(in srgb, var(--bg) 70%, transparent 30%);
-        backdrop-filter: blur(16px);
-        border-bottom: 1px solid color-mix(in srgb, var(--fg) 8%, transparent);
-      }
-
-      header.teaser-header nav {
-        display: flex;
-        align-items: center;
-        gap: clamp(1.2rem, 4vw, 2.5rem);
-      }
-
-      .brand {
-        font-family: var(--font-display);
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        font-size: 0.85rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6rem;
-        color: var(--muted);
-      }
-
-      .brand svg {
-        width: 1.6rem;
-        height: 1.6rem;
-        fill: none;
-        stroke: var(--accent);
-        stroke-width: 1.4;
-        opacity: 0.85;
-      }
-
-      .pill-button {
-        position: relative;
-        padding: 0.65rem 1.6rem;
-        border-radius: 999px;
-        background: linear-gradient(135deg, color-mix(in srgb, var(--brand) 88%, transparent) 0%,
-              color-mix(in srgb, var(--accent) 45%, transparent) 100%);
-        color: var(--fg);
-        font-weight: 600;
-        box-shadow: 0 20px 40px -30px color-mix(in srgb, var(--brand) 80%, transparent);
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        border: 1px solid color-mix(in srgb, var(--brand) 50%, transparent 50%);
-        will-change: transform;
-      }
-
-      .pill-button:hover,
-      .pill-button:focus-visible {
-        box-shadow: 0 28px 60px -32px color-mix(in srgb, var(--accent) 75%, transparent);
-      }
-
-      .pill-button svg {
-        width: 1.1rem;
-        height: 1.1rem;
-        stroke: currentColor;
-        stroke-width: 1.6;
-        fill: none;
-      }
-
-      .hero {
-        min-height: calc(100vh - var(--header-height));
-        padding: clamp(4rem, 12vh, 8rem) clamp(1.5rem, 6vw, 8rem);
-        display: grid;
-        grid-template-columns: repeat(12, minmax(0, 1fr));
-        gap: 2.5rem;
-        align-items: center;
-        position: relative;
-      }
-
-      .hero::before,
-      .hero::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        mix-blend-mode: screen;
-      }
-
-      .hero::before {
-        background: radial-gradient(ellipse at 20% 20%, color-mix(in srgb, var(--brand) 30%, transparent) 0%, transparent 55%),
-          radial-gradient(ellipse at 80% 40%, color-mix(in srgb, var(--accent) 30%, transparent) 0%, transparent 60%);
-        opacity: 0.45;
-        transform: translate3d(0, calc(var(--hero-parallax, 0) * -0.2px), 0);
-        transition: opacity 0.6s ease;
-      }
-
-      .hero::after {
-        background-image: var(--noise-gradient);
-        opacity: 0.2;
-        filter: contrast(120%);
-        mix-blend-mode: soft-light;
-      }
-
-      .hero-content {
-        grid-column: 1 / span 7;
-        position: relative;
-        z-index: 2;
-      }
-      .hero-tag {
-        text-transform: uppercase;
-        letter-spacing: 0.26em;
-        font-size: 0.72rem;
-        color: var(--muted);
-        margin-bottom: 1.5rem;
-      }
-
-      h1.hero-title {
-        font-family: var(--font-display);
-        font-size: clamp(2.8rem, 6vw, 5rem);
-        letter-spacing: -0.02em;
-        margin: 0 0 1.6rem;
-        line-height: 1.05;
-      }
-
-      .hero-title span.hero-accent {
-        display: inline-block;
-        background: linear-gradient(120deg, color-mix(in srgb, var(--brand) 80%, transparent) 0%, color-mix(in srgb, var(--accent) 85%, transparent) 100%);
-        -webkit-background-clip: text;
-        color: transparent;
-        background-size: 200% 200%;
-        animation: hue-shift 6s ease-in-out infinite alternate;
-      }
-
-      @keyframes hue-shift {
-        0% {
-          background-position: 0% 50%;
-        }
-        100% {
-          background-position: 100% 50%;
-        }
-      }
-
-      .hero-lead {
-        font-size: clamp(1.08rem, 2.2vw, 1.6rem);
-        color: var(--muted);
-        max-width: 36ch;
-        margin-bottom: 2.5rem;
-        position: relative;
-      }
-
-      .hero-lead span.reveal {
-        display: inline-block;
-        clip-path: inset(0 100% 0 0);
-        animation: reveal-text 1.6s ease forwards;
-      }
-
-      @keyframes reveal-text {
-        to {
-          clip-path: inset(0 0 0 0);
-        }
-      }
-
-      .typewriter {
-        min-height: 2.4rem;
-        font-size: 1.1rem;
-        letter-spacing: 0.04em;
-        color: var(--fg);
-        margin-bottom: 2.8rem;
-        border-left: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
-        padding-left: 1rem;
-        position: relative;
-      }
-
-      .typewriter::after {
-        content: "";
-        display: inline-block;
-        width: 1px;
-        height: 1.4em;
-        margin-left: 6px;
-        background: currentColor;
-        animation: blink 1s steps(1) infinite;
-        vertical-align: -0.2em;
-      }
-
-      @keyframes blink {
-        0%,
-        49% {
-          opacity: 1;
-        }
-        50%,
-        100% {
-          opacity: 0;
-        }
-      }
-
-      .hero-cta {
-        display: inline-flex;
-        align-items: center;
-        gap: 1rem;
-      }
-
-      .hero-badge {
-        font-size: 0.8rem;
-        color: var(--muted);
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-      }
-
-      .hero-badge svg {
-        width: 0.9rem;
-        height: 0.9rem;
-        stroke: var(--muted);
-      }
-
-      .hero-visual {
-        grid-column: 8 / -1;
-        position: relative;
-        z-index: 1;
-        min-height: 320px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .hero-visual .orbital {
-        width: clamp(260px, 30vw, 420px);
-        aspect-ratio: 1;
-        border-radius: 50%;
-        position: relative;
-        background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--brand) 45%, transparent) 0%, transparent 70%);
-        border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent 60%);
-        box-shadow: inset 0 0 80px rgba(124, 92, 255, 0.15);
-        overflow: hidden;
-      }
-
-      .orbital::before,
-      .orbital::after {
-        content: "";
-        position: absolute;
-        inset: 12%;
-        border-radius: 50%;
-        border: 1px dashed color-mix(in srgb, var(--accent) 65%, transparent 35%);
-        animation: orbit 12s linear infinite;
-      }
-
-      .orbital::after {
-        inset: 22%;
-        animation-direction: reverse;
-        border-style: solid;
-        opacity: 0.5;
-      }
-
-      @keyframes orbit {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      .orbital span {
-        position: absolute;
-        width: 9px;
-        height: 9px;
-        border-radius: 50%;
-        background: var(--accent);
-        filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 70%, transparent));
-        animation: pulse 3.2s ease-in-out infinite;
-      }
-
-      .orbital span:nth-child(1) {
-        top: 18%;
-        left: 50%;
-      }
-
-      .orbital span:nth-child(2) {
-        bottom: 22%;
-        right: 24%;
-        animation-delay: 0.8s;
-      }
-
-      .orbital span:nth-child(3) {
-        bottom: 30%;
-        left: 26%;
-        animation-delay: 1.4s;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          transform: scale(0.8);
-          opacity: 0.6;
-        }
-        50% {
-          transform: scale(1.2);
-          opacity: 1;
-        }
-      }
-
-      .section {
-        padding: clamp(4rem, 12vh, 7rem) clamp(1.5rem, 6vw, 7rem);
-      }
-
-      .section-header {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 1.5rem;
-        margin-bottom: clamp(2.5rem, 8vh, 4rem);
-      }
-
-      .section-title {
-        font-size: clamp(1.8rem, 3vw, 2.6rem);
-        font-family: var(--font-display);
-        margin: 0;
-      }
-
-      .section-caption {
-        color: var(--muted);
-        font-size: 0.95rem;
-      }
-
-      .analytics-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: clamp(1.5rem, 3vw, 2.5rem);
-      }
-
-      .card {
-        position: relative;
-        padding: clamp(1.5rem, 3vw, 2.4rem);
-        border-radius: 1.5rem;
-        background: color-mix(in srgb, var(--fg) 6%, transparent);
-        border: 1px solid color-mix(in srgb, var(--fg) 8%, transparent);
-        box-shadow: var(--shadow-soft);
-        backdrop-filter: blur(18px);
-        display: flex;
-        flex-direction: column;
-        gap: 1.2rem;
-        min-height: 220px;
-        overflow: hidden;
-      }
-
-      .card::after {
-        content: "Simulare";
-        position: absolute;
-        top: 1.2rem;
-        right: 1.2rem;
-        font-size: 0.7rem;
-        letter-spacing: 0.2em;
-        color: color-mix(in srgb, var(--muted) 70%, transparent);
-      }
-
-      .card h3 {
-        margin: 0;
-        font-size: 1.05rem;
-        font-weight: 600;
-      }
-
-      canvas#teaser-chart {
-        width: 100% !important;
-        height: 220px !important;
-      }
-
-      .counter {
-        display: flex;
-        flex-direction: column;
-        gap: 0.3rem;
-      }
-
-      .counter-value {
-        font-size: clamp(1.6rem, 4vw, 2.4rem);
-        font-family: var(--font-display);
-      }
-
-      .counter-label {
-        color: var(--muted);
-        font-size: 0.85rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-      }
-      .console {
-        background: linear-gradient(160deg, color-mix(in srgb, var(--card-bg) 100%, transparent) 0%, color-mix(in srgb, var(--bg) 70%, transparent) 100%);
-        border-radius: 2rem;
-        padding: clamp(2rem, 4vw, 3rem);
-        border: 1px solid color-mix(in srgb, var(--fg) 10%, transparent);
-        box-shadow: var(--shadow-soft);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .console::before {
-        content: "";
-        position: absolute;
-        inset: -40%;
-        background: conic-gradient(from 90deg, color-mix(in srgb, var(--brand) 40%, transparent), color-mix(in srgb, var(--accent) 30%, transparent), transparent 65%);
-        opacity: 0.18;
-        filter: blur(60px);
-        transform: rotate(12deg);
-      }
-
-      .console-inner {
-        position: relative;
-        font-family: var(--font-mono);
-        font-size: 0.95rem;
-        line-height: 1.5;
-        color: var(--accent);
-        height: clamp(220px, 40vh, 320px);
-        overflow-y: auto;
-        padding-right: 1rem;
-      }
-
-      .console-line {
-        display: block;
-        color: color-mix(in srgb, var(--accent) 75%, var(--fg) 25%);
-      }
-
-      .console-line[data-type="command"]::before {
-        content: "> ";
-        color: var(--muted);
-      }
-
-      .console-line[data-type="response"] {
-        color: var(--fg);
-      }
-
-      .console-line.is-glitch {
-        animation: glitch 0.6s steps(2) 2;
-      }
-
-      @keyframes glitch {
-        0% {
-          text-shadow: 1px 0 color-mix(in srgb, var(--brand) 60%, transparent), -1px 0 color-mix(in srgb, var(--accent) 60%, transparent);
-        }
-        50% {
-          text-shadow: -2px 0 color-mix(in srgb, var(--brand) 60%, transparent), 2px 0 color-mix(in srgb, var(--accent) 60%, transparent);
-        }
-        100% {
-          text-shadow: none;
-        }
-      }
-
-      .cursor-blink {
-        animation: blink 1s steps(1) infinite;
-      }
-
-      .timeline {
-        display: grid;
-        gap: 1.8rem;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      }
-
-      .timeline-step {
-        padding: clamp(1.4rem, 3vw, 2.1rem);
-        border-radius: 1.4rem;
-        background: color-mix(in srgb, var(--fg) 5%, transparent);
-        border: 1px solid color-mix(in srgb, var(--fg) 10%, transparent);
-        backdrop-filter: blur(14px);
-        min-height: 170px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        transition: transform 0.3s ease, border-color 0.3s ease;
-        will-change: transform;
-      }
-
-      .timeline-step:hover,
-      .timeline-step:focus-within {
-        border-color: color-mix(in srgb, var(--accent) 50%, transparent);
-      }
-
-      .timeline-index {
-        font-size: 0.75rem;
-        letter-spacing: 0.26em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-
-      .timeline-title {
-        font-family: var(--font-display);
-        font-size: 1.4rem;
-        margin: 0.6rem 0;
-      }
-
-      .timeline-meta {
-        color: var(--muted);
-        font-size: 0.85rem;
-      }
-
-      footer.teaser-footer {
-        padding: 2.5rem clamp(1.5rem, 6vw, 7rem) 3.5rem;
-        border-top: 1px solid color-mix(in srgb, var(--fg) 8%, transparent);
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 1rem;
-        color: var(--muted);
-        font-size: 0.85rem;
-      }
-
-      .modal-backdrop {
-        position: fixed;
-        inset: 0;
-        background: rgba(5, 7, 10, 0.6);
-        backdrop-filter: blur(20px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem;
-        z-index: 50;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease;
-      }
-
-      .modal-backdrop.is-visible {
-        opacity: 1;
-        pointer-events: auto;
-      }
-
-      .modal-dialog {
-        width: min(420px, 100%);
-        border-radius: 1.6rem;
-        background: color-mix(in srgb, var(--bg) 92%, var(--card-bg) 8%);
-        border: 1px solid color-mix(in srgb, var(--fg) 8%, transparent);
-        padding: clamp(2rem, 4vw, 2.8rem);
-        display: grid;
-        gap: 1.5rem;
-        position: relative;
-        box-shadow: var(--shadow-soft);
-      }
-
-      .modal-title {
-        margin: 0;
-        font-size: 1.8rem;
-        font-family: var(--font-display);
-      }
-
-      .modal-description {
-        color: var(--muted);
-        font-size: 0.95rem;
-      }
-
-      .modal-form {
-        display: grid;
-        gap: 1.2rem;
-      }
-
-      .modal-form label {
-        display: grid;
-        gap: 0.5rem;
-        font-size: 0.85rem;
-        color: var(--muted);
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .modal-form input {
-        padding: 0.8rem 1rem;
-        border-radius: 0.9rem;
-        border: 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
-        background: color-mix(in srgb, var(--fg) 4%, transparent);
-        color: var(--fg);
-      }
-
-      .modal-close {
-        position: absolute;
-        top: 1.2rem;
-        right: 1.2rem;
-        color: var(--muted);
-      }
-
-      .toast {
-        position: fixed;
-        bottom: 2rem;
-        right: 2rem;
-        padding: 1rem 1.4rem;
-        border-radius: 1rem;
-        background: color-mix(in srgb, var(--accent) 20%, var(--bg) 80%);
-        border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
-        box-shadow: var(--shadow-soft);
-        color: var(--fg);
-        font-size: 0.9rem;
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(10px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        z-index: 60;
-      }
-
-      .toast.is-visible {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
-      }
-
-      .developer-overlay {
-        position: fixed;
-        top: 1.5rem;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 1rem 1.4rem;
-        border-radius: 1rem;
-        background: color-mix(in srgb, var(--bg) 85%, transparent 15%);
-        border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
-        color: var(--accent);
-        font-family: var(--font-mono);
-        font-size: 0.9rem;
-        letter-spacing: 0.04em;
-        display: none;
-        z-index: 80;
-      }
-
-      .developer-overlay.is-active {
-        display: block;
-      }
-
-      .developer-overlay strong {
-        color: var(--fg);
-      }
-
-      .notice {
-        font-size: 0.8rem;
-        color: var(--muted);
-      }
-
-      @media (max-width: 1024px) {
-        .hero {
-          grid-template-columns: repeat(6, 1fr);
-        }
-        .hero-content {
-          grid-column: 1 / -1;
-        }
-        .hero-visual {
-          grid-column: 1 / -1;
-          order: -1;
-          margin-bottom: 3rem;
-        }
-      }
-
-      @media (max-width: 720px) {
-        header.teaser-header {
-          padding: 0 clamp(1rem, 4vw, 2rem);
-        }
-        .hero {
-          padding-top: clamp(4rem, 16vh, 6rem);
-        }
-        .section-header {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-        .toast {
-          left: 50%;
-          right: auto;
-          transform: translate(-50%, 10px);
-        }
-        .toast.is-visible {
-          transform: translate(-50%, 0);
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-          animation-duration: 0.001ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.001ms !important;
-          scroll-behavior: auto !important;
-        }
-        body::before,
-        .hero::before,
-        .hero::after,
-        .orbital::before,
-        .orbital::after {
-          animation: none !important;
-        }
-        .typewriter::after {
-          display: none;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="layout" data-spotlight>
-      <header class="teaser-header" role="banner">
-        <div class="brand" aria-label="NumeleCompaniei">
-          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 16c0-6.627 5.373-12 12-12s12 5.373 12 12-5.373 12-12 12" /><path d="M16 4v24" /><path d="M8 12.5C9.5 10 12.5 8 16 8s6.5 2 8 4.5" /></svg>
-          <span>CASTEMILL SRL</span>
-        </div>
-        <nav aria-label="Principal">
-          <a href="#semnale" class="hero-badge" data-magnetic>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18" /><path d="M3 6h18" /><path d="M3 18h18" /></svg>
-            <span>Semnale</span>
-          </a>
-          <button class="pill-button" data-open-modal data-magnetic>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18" /><path d="M7 10h10" /><path d="M12 15h5" /><path d="M7 15h1" /></svg>
-            <span>Contact · listă de așteptare</span>
-          </button>
-        </nav>
-      </header>
-
-      <main>
-        <section class="hero" aria-labelledby="hero-title">
-          <div class="hero-content">
-            <div class="hero-tag">Teaser · #000</div>
-            <h1 class="hero-title" id="hero-title">
-              Ceva <span class="hero-accent">mare</span> se pregătește.
-            </h1>
-            <p class="hero-lead">
-              <span class="reveal">The secret. Soon to be revealed.</span>
-            </p>
-            <div class="typewriter" data-typewriter aria-live="polite"></div>
-            <div class="hero-cta">
-              <button class="pill-button" data-open-modal data-magnetic>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14" /><path d="M5 12h14" /></svg>
-                <span>Anunță-mă</span>
-              </button>
-              <div class="hero-badge">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v4" /><path d="M12 18v4" /><path d="M4.93 4.93l2.83 2.83" /><path d="M16.24 16.24l2.83 2.83" /><circle cx="12" cy="12" r="4" /></svg>
-                <span>Simulare · Demo</span>
-              </div>
-            </div>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balustrade Configurator · GlassLine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #f5f4f1;
+  --surface:   #ffffff;
+  --panel-bg:  #fafaf8;
+  --border:    #e2e0da;
+  --border2:   #ccc9c0;
+  --accent:    #1a1a18;
+  --gold:      #b8956a;
+  --text:      #1a1a18;
+  --muted:     #8a8880;
+  --panel-w:   340px;
+  --header-h:  64px;
+  --radius:    10px;
+}
+
+html, body { height: 100%; overflow: hidden; background: var(--bg); }
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+header {
+  height: var(--header-h);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  flex-shrink: 0;
+  z-index: 20;
+}
+.logo { display: flex; align-items: baseline; gap: 10px; }
+.logo-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.55rem;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: var(--text);
+}
+.logo-tag {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.header-right { display: flex; align-items: center; gap: 20px; }
+.hint-pill {
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.cta-btn {
+  background: var(--text);
+  color: #fff;
+  border: none;
+  padding: 9px 22px;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.cta-btn:hover { background: #333; }
+.cta-btn:active { transform: scale(0.97); }
+
+/* LAYOUT */
+.layout { display: flex; flex: 1; overflow: hidden; }
+
+/* PANEL */
+.panel {
+  width: var(--panel-w);
+  flex-shrink: 0;
+  background: var(--panel-bg);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.panel::-webkit-scrollbar { width: 3px; }
+.panel::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+.panel-section {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sec-label {
+  font-size: 0.59rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 13px;
+}
+
+/* SYSTEM CARDS */
+.sys-cards { display: flex; flex-direction: column; gap: 8px; }
+.sys-card {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 12px 13px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  transition: all 0.18s;
+  text-align: left;
+}
+.sys-card:hover { border-color: #a09888; }
+.sys-card.active { border-color: var(--text); background: var(--text); color: #fff; }
+.sys-card.active .sys-sub { color: rgba(255,255,255,0.5); }
+.sys-icon {
+  width: 38px; height: 38px;
+  border-radius: 7px;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.sys-card.active .sys-icon { background: rgba(255,255,255,0.1); }
+.sys-name { font-size: 0.81rem; font-weight: 500; margin-bottom: 2px; }
+.sys-sub  { font-size: 0.69rem; color: var(--muted); }
+
+/* SHAPE GRID */
+.shape-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.shape-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 13px 8px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  transition: all 0.18s;
+  font-family: 'Inter', sans-serif;
+}
+.shape-btn:hover { border-color: #a09888; }
+.shape-btn.active { border-color: var(--text); background: var(--text); }
+.shape-btn.active .shape-label { color: #fff; }
+.shape-btn.active .shape-svg path,
+.shape-btn.active .shape-svg rect,
+.shape-btn.active .shape-svg line,
+.shape-btn.active .shape-svg polyline { stroke: rgba(255,255,255,0.85); }
+.shape-btn.active .shape-svg .fill-glass { fill: rgba(255,255,255,0.2); }
+.shape-label { font-size: 0.7rem; font-weight: 500; color: var(--muted); letter-spacing: 0.03em; }
+
+/* SLIDERS */
+.dim-fields { display: flex; flex-direction: column; gap: 15px; }
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field-row { display: flex; justify-content: space-between; align-items: center; }
+.field label { font-size: 0.77rem; color: var(--text); }
+.field .val {
+  font-size: 0.77rem;
+  font-weight: 600;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+  min-width: 70px;
+  text-align: right;
+}
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 2px;
+  background: var(--border2);
+  border-radius: 1px;
+  outline: none;
+  cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px; height: 15px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+input[type=range]:hover::-webkit-slider-thumb { border-color: var(--gold); }
+
+/* GLASS OPTIONS */
+.glass-btns { display: flex; gap: 8px; }
+.glass-btn {
+  flex: 1;
+  padding: 10px 5px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+.glass-btn:hover { border-color: #a09888; }
+.glass-btn.active { border-color: var(--text); }
+.glass-swatch { width: 32px; height: 18px; border-radius: 4px; border: 1px solid rgba(0,0,0,0.08); }
+.glass-lbl { font-size: 0.67rem; font-weight: 500; color: var(--muted); }
+.glass-btn.active .glass-lbl { color: var(--text); }
+
+/* FINISH SWATCHES */
+.finish-row { display: flex; align-items: center; gap: 10px; }
+.f-swatch {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2.5px solid transparent;
+  position: relative;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+.f-swatch.active { border-color: var(--text); }
+.f-swatch::after { content:''; position:absolute; inset:2px; border-radius:50%; }
+.f-swatch[data-finish="silver"]::after { background: conic-gradient(#c8d2de 0deg, #8a9bb0 120deg, #d8e0e8 240deg, #c8d2de 360deg); }
+.f-swatch[data-finish="black"]::after  { background: conic-gradient(#3a3d44 0deg, #1e2128 120deg, #44474e 240deg, #3a3d44 360deg); }
+.f-swatch[data-finish="gold"]::after   { background: conic-gradient(#e0c078 0deg, #b8956a 120deg, #d8b870 240deg, #e0c078 360deg); }
+.finish-name { font-size: 0.73rem; color: var(--muted); margin-left: 2px; }
+
+/* SUMMARY at bottom of panel */
+.panel-summary {
+  margin-top: auto;
+  background: var(--text);
+  color: #fff;
+  padding: 20px 22px;
+  flex-shrink: 0;
+}
+.sum-title {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 14px;
+}
+.sum-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.sum-val  { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color:#fff; }
+.sum-lbl  { font-size: 0.62rem; color: rgba(255,255,255,0.4); margin-top: 1px; letter-spacing: 0.04em; }
+.quote-btn {
+  width: 100%;
+  padding: 11px;
+  border-radius: 7px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  background: transparent;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.quote-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.45); }
+
+/* CANVAS */
+.canvas-wrap {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+#c { display: block; width: 100%; height: 100%; cursor: grab; }
+#c:active { cursor: grabbing; }
+
+/* DIM BADGE (top-left) */
+.dim-badge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226,224,218,0.8);
+  border-radius: 9px;
+  padding: 10px 15px;
+  font-size: 0.7rem;
+  color: var(--muted);
+  pointer-events: none;
+  line-height: 1.9;
+  min-width: 150px;
+}
+.dim-badge strong { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* SHAPE INFO (bottom-left) */
+.shape-info {
+  position: absolute;
+  bottom: 20px;
+  left: 18px;
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226,224,218,0.8);
+  border-radius: 9px;
+  padding: 11px 15px;
+  font-size: 0.7rem;
+  color: var(--muted);
+  max-width: 230px;
+  line-height: 1.65;
+  pointer-events: none;
+}
+.shape-info strong { color: var(--text); display: block; margin-bottom: 3px; font-size: 0.72rem; }
+
+/* VIEW CONTROLS (bottom-right) */
+.view-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.view-btn {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226,224,218,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+}
+.view-btn:hover { background: #fff; border-color: #a09888; }
+
+/* LOADER */
+#loader {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  transition: opacity 0.5s;
+}
+#loader.gone { opacity: 0; pointer-events: none; }
+.ldots { display: flex; gap: 8px; }
+.ldot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: ldpulse 1.1s ease-in-out infinite;
+}
+.ldot:nth-child(2) { animation-delay: 0.18s; }
+.ldot:nth-child(3) { animation-delay: 0.36s; }
+@keyframes ldpulse { 0%,100%{ opacity:0.2;transform:scale(0.75); } 50%{ opacity:1;transform:scale(1); } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span class="logo-name">GlassLine</span>
+    <span class="logo-tag">Balustrade Systems</span>
+  </div>
+  <div class="header-right">
+    <span class="hint-pill">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="#8a8880" stroke-width="1.4"><circle cx="6.5" cy="6.5" r="5"/><path d="M6.5 4v2.5l1.5 1" stroke-linecap="round"/></svg>
+      Drag to orbit · Scroll to zoom
+    </span>
+    <button class="cta-btn" onclick="alert('Connect your quote / contact form here.')">Request Quote</button>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="panel">
+
+    <!-- SYSTEM -->
+    <div class="panel-section">
+      <div class="sec-label">System Type</div>
+      <div class="sys-cards" id="sys-cards">
+
+        <button class="sys-card active" data-sys="uchannel">
+          <div class="sys-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <rect x="2" y="16" width="18" height="3.5" rx="1" fill="currentColor" opacity="0.15"/>
+              <rect x="2" y="16" width="18" height="3.5" rx="1"/>
+              <rect x="4" y="4" width="14" height="12" rx="0.5" opacity="0.25" fill="currentColor"/>
+              <rect x="4" y="4" width="14" height="12" rx="0.5"/>
+            </svg>
           </div>
-          <div class="hero-visual" aria-hidden="true">
-            <div class="orbital" data-parallax>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
+          <div>
+            <div class="sys-name">U-Channel Frameless</div>
+            <div class="sys-sub">No posts · Maximum transparency</div>
           </div>
-        </section>
-
-        <section class="section" id="semnale" aria-labelledby="analytics-title">
-          <div class="section-header">
-            <h2 class="section-title" id="analytics-title">Semnale în creștere (simulare)</h2>
-            <p class="section-caption">Indicatori sintetici, generați local. Nu se colectează date.</p>
-          </div>
-          <div class="analytics-grid">
-            <article class="card" data-magnetic>
-              <h3>Fluxuri corelate</h3>
-              <canvas id="teaser-chart" aria-label="Tendințe simulate" role="img"></canvas>
-            </article>
-            <article class="card" data-magnetic>
-              <h3>Metrici sintetice</h3>
-              <div class="counters" id="counter-container"></div>
-            </article>
-            <article class="card" data-magnetic>
-              <h3>Semnal contextual</h3>
-              <p class="notice">Actualizări la fiecare 2s cu zgomot gaussian. Stabilitate monitorizată.</p>
-              <ul class="notice" id="pulse-feed" aria-live="polite"></ul>
-            </article>
-            <article class="card" data-magnetic>
-              <h3>Stare sistem</h3>
-              <p class="notice">Rețele virtuale sincronizate. Latență simulată sub pragurile interne.</p>
-              <p class="notice">Statut: <strong>În pre-lansare</strong></p>
-            </article>
-          </div>
-        </section>
-
-        <section class="section" aria-labelledby="console-title">
-          <div class="section-header">
-            <h2 class="section-title" id="console-title">Interfață experimentală (simulare)</h2>
-            <p class="section-caption">Pseudo-comenzi, răspunsuri criptice. Acces complet indisponibil.</p>
-          </div>
-          <div class="console" data-magnetic>
-            <div class="console-inner" id="ai-console" aria-live="polite" aria-label="Flux console AI"></div>
-          </div>
-        </section>
-
-        <section class="section" aria-labelledby="timeline-title">
-          <div class="section-header">
-            <h2 class="section-title" id="timeline-title">Secvența — doar indicii</h2>
-            <p class="section-caption">Semnal → Sincronizare → Prag → Dezvăluire</p>
-          </div>
-          <div class="timeline" id="timeline">
-            <article class="timeline-step" tabindex="0" data-tilt>
-              <div>
-                <span class="timeline-index">T-03</span>
-                <h3 class="timeline-title">Semnal</h3>
-              </div>
-              <p class="timeline-meta">Detecție inițială. Spectrul se clarifică. Nivel: confidențial.</p>
-            </article>
-            <article class="timeline-step" tabindex="0" data-tilt>
-              <div>
-                <span class="timeline-index">T-02</span>
-                <h3 class="timeline-title">Sincronizare</h3>
-              </div>
-              <p class="timeline-meta">Fluxuri sincronizate în orbite paralele. Rezonanță detectată.</p>
-            </article>
-            <article class="timeline-step" tabindex="0" data-tilt>
-              <div>
-                <span class="timeline-index">T-01</span>
-                <h3 class="timeline-title">Prag</h3>
-              </div>
-              <p class="timeline-meta">Analiză finală. Acces limitat. Parametrii aproape fixați.</p>
-            </article>
-            <article class="timeline-step" tabindex="0" data-tilt>
-              <div>
-                <span class="timeline-index">T0</span>
-                <h3 class="timeline-title">În curând</h3>
-              </div>
-              <p class="timeline-meta">Dezvăluire iminentă. Activează notificările. Nimic public încă.</p>
-            </article>
-          </div>
-        </section>
-      </main>
-
-      <footer class="teaser-footer" role="contentinfo">
-        <span>© <span id="year"></span> CASTEMILL SRL. Toate drepturile rezervate.</span>
-        <a href="#" aria-label="Politici (placeholder)">Politici · Placeholder</a>
-        <span>Aceasta este o pagină teaser — fără colectare de date.</span>
-      </footer>
-    </div>
-
-    <div class="modal-backdrop" data-modal aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-      <div class="modal-dialog">
-        <button class="modal-close" type="button" data-close-modal aria-label="Închide">
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M18 6 6 18" stroke="currentColor" stroke-width="1.6" /><path d="m6 6 12 12" stroke="currentColor" stroke-width="1.6" /></svg>
         </button>
-        <h2 class="modal-title" id="modal-title">Listă de așteptare (teaser)</h2>
-        <p class="modal-description">
-          Completează simularea de mai jos. Nu trimitem date nicăieri, dar îți vom arăta ce se întâmplă la lansare.
-        </p>
-        <form class="modal-form" aria-describedby="modal-note">
-          <label>
-            Nume
-            <input type="text" name="name" autocomplete="off" placeholder="Numele tău" />
-          </label>
-          <label>
-            Email
-            <input type="email" name="email" autocomplete="off" placeholder="email@exemplu.com" />
-          </label>
-          <button class="pill-button" type="button" data-submit-waitlist data-magnetic>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5L20 7" /></svg>
-            <span>Simulează înscrierea</span>
-          </button>
-        </form>
-        <p class="notice" id="modal-note">Acțiune simulată. Datele nu sunt salvate.</p>
+
+        <button class="sys-card" data-sys="posts">
+          <div class="sys-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <line x1="4.5" y1="3" x2="4.5" y2="19"/>
+              <line x1="11" y1="3" x2="11" y2="19"/>
+              <line x1="17.5" y1="3" x2="17.5" y2="19"/>
+              <rect x="5.5" y="5" width="4.5" height="12" opacity="0.2" fill="currentColor"/>
+              <rect x="12" y="5" width="4.5" height="12" opacity="0.2" fill="currentColor"/>
+            </svg>
+          </div>
+          <div>
+            <div class="sys-name">Aluminium Posts + Glass</div>
+            <div class="sys-sub">Classic look · Robust structure</div>
+          </div>
+        </button>
+
       </div>
     </div>
 
-    <div class="toast" role="status" aria-live="assertive">Te-am trecut pe lista de așteptare</div>
+    <!-- SHAPE -->
+    <div class="panel-section">
+      <div class="sec-label">Layout Shape</div>
+      <div class="shape-grid" id="shape-grid">
 
-    <div class="developer-overlay" data-dev-overlay>
-      <div><strong>Overlay dezvoltator</strong></div>
-      <div>FPS: <span data-fps>--</span></div>
-      <div>Animații: <span data-anim-state>activ</span></div>
-      <div>Fundal: <span data-bg-state>dinamic</span></div>
-      <div>Comută cu tasta <code>.</code></div>
+        <button class="shape-btn active" data-shape="straight">
+          <svg class="shape-svg" width="44" height="30" viewBox="0 0 44 30" fill="none">
+            <rect class="fill-glass" x="4" y="10" width="36" height="10" rx="1.5" fill="rgba(168,210,240,0.35)"/>
+            <rect x="4" y="10" width="36" height="10" rx="1.5" stroke="#1a1a18" stroke-width="1.6"/>
+          </svg>
+          <span class="shape-label">Straight</span>
+        </button>
+
+        <button class="shape-btn" data-shape="lshape">
+          <svg class="shape-svg" width="44" height="30" viewBox="0 0 44 30" fill="none">
+            <polyline class="fill-glass" points="8,4 8,26 38,26" stroke="rgba(168,210,240,0.35)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <polyline points="8,4 8,26 38,26" stroke="#1a1a18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <span class="shape-label">L-Shape</span>
+        </button>
+
+        <button class="shape-btn" data-shape="cshape">
+          <svg class="shape-svg" width="44" height="30" viewBox="0 0 44 30" fill="none">
+            <path d="M10 4 L10 26 M34 4 L34 26 M10 4 L34 4" stroke="rgba(168,210,240,0.4)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none" class="fill-glass"/>
+            <path d="M10 4 L10 26 M34 4 L34 26 M10 4 L34 4" stroke="#1a1a18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <span class="shape-label">C-Shape</span>
+        </button>
+
+        <button class="shape-btn" data-shape="ushape">
+          <svg class="shape-svg" width="44" height="30" viewBox="0 0 44 30" fill="none">
+            <path d="M6 28 A15 15 0 0 1 38 28" stroke="rgba(168,210,240,0.4)" stroke-width="7" stroke-linecap="round" fill="none" class="fill-glass"/>
+            <path d="M6 28 A15 15 0 0 1 38 28" stroke="#1a1a18" stroke-width="2" stroke-linecap="round" fill="none"/>
+          </svg>
+          <span class="shape-label">Semicircle</span>
+        </button>
+
+      </div>
     </div>
-    <script>
-      // TEASER: Config principal. .
-      window.__TEASER_CONFIG = {
-        brandName: "CASTEMILL SRL",
-        palette: {
-          bg: "var(--bg)",
-          fg: "var(--fg)",
-          muted: "var(--muted)",
-          brand: "var(--brand)",
-          accent: "var(--accent)"
-        },
-        messages: [
-          "inteligență contextuală",
-          "insight-uri în timp real",
-          "experiențe fluide",
-          "optimizare autonomă",
-          "scalabilitate instant"
-        ],
-        counters: [
-          { label: "uptime (simulare)", from: 0, to: 99.98, suffix: "%", decimals: 2, durationMs: 1800 },
-          { label: "evenimente/min (simulare)", from: 0, to: 1200000, suffix: "", decimals: 0, durationMs: 2200 },
-          { label: "latență (simulare)", from: 100, to: 12, suffix: " ms", decimals: 0, durationMs: 2000, reverse: true }
-        ],
-        revealDate: null
-      };
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" integrity="sha384-9tFoZT3zh0+BTtPlqvGjufH6G+j6lJzi10BGSAdoo6gWQBaIj++ImQxGc1dQc5sK" crossorigin="anonymous"></script>
-    <script>
-      // TEASER: Utilitare animații și interacțiuni.
-      (function () {
-        const config = window.__TEASER_CONFIG;
-        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        const body = document.body;
-        const yearEl = document.getElementById("year");
-        if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-        // Fundal noise gradient fallback
-        const noiseSvg = encodeURIComponent(`
-          <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
-            <filter id="n" x="0" y="0">
-              <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/>
-              <feColorMatrix type="saturate" values="0"/>
-            </filter>
-            <rect width="200" height="200" filter="url(#n)" opacity="0.35"/>
-          </svg>`);
-        body.style.setProperty(
-          "--noise-gradient",
-          `linear-gradient(135deg, color-mix(in srgb, ${config.palette.brand} 25%, transparent) 0%, transparent 40%), url("data:image/svg+xml,${noiseSvg}")`
-        );
+    <!-- DIMENSIONS -->
+    <div class="panel-section">
+      <div class="sec-label">Dimensions</div>
+      <div class="dim-fields">
 
-        // Spotlight follow
-        const spotlightTarget = document.querySelector("[data-spotlight]");
-        if (spotlightTarget && !prefersReducedMotion) {
-          spotlightTarget.addEventListener("pointermove", (event) => {
-            const rect = spotlightTarget.getBoundingClientRect();
-            const x = ((event.clientX - rect.left) / rect.width) * 100;
-            const y = ((event.clientY - rect.top) / rect.height) * 100;
-            body.style.setProperty("--spotlight-x", `${x}%`);
-            body.style.setProperty("--spotlight-y", `${y}%`);
-          });
-        }
+        <div class="field" id="field-fw">
+          <div class="field-row">
+            <label>Front Width</label>
+            <span class="val" id="val-fw">3.00 m</span>
+          </div>
+          <input type="range" id="sl-fw" min="500" max="8000" step="100" value="3000">
+        </div>
 
-        // Hero parallax on scroll
-        const hero = document.querySelector(".hero");
-        if (hero && !prefersReducedMotion) {
-          const updateParallax = () => {
-            const rect = hero.getBoundingClientRect();
-            const offset = Math.max(0, window.innerHeight - rect.top);
-            hero.style.setProperty("--hero-parallax", offset);
-            requestAnimationFrame(updateParallax);
-          };
-          requestAnimationFrame(updateParallax);
-        }
+        <div class="field" id="field-sw" style="display:none">
+          <div class="field-row">
+            <label>Side Depth</label>
+            <span class="val" id="val-sw">1.50 m</span>
+          </div>
+          <input type="range" id="sl-sw" min="500" max="5000" step="100" value="1500">
+        </div>
 
-        // Typewriter effect
-        const typewriterEl = document.querySelector("[data-typewriter]");
-        if (typewriterEl) {
-          const messages = config.messages.slice();
-          if (prefersReducedMotion) {
-            typewriterEl.textContent = messages[0] || "";
-          } else {
-            let messageIndex = 0;
-            let charIndex = 0;
-            let deleting = false;
-            const speed = { typing: 90, deleting: 40, hold: 1600 };
+        <div class="field" id="field-radius" style="display:none">
+          <div class="field-row">
+            <label>Arc Radius</label>
+            <span class="val" id="val-radius">2.00 m</span>
+          </div>
+          <input type="range" id="sl-radius" min="500" max="6000" step="100" value="2000">
+        </div>
 
-            const type = () => {
-              const current = messages[messageIndex % messages.length];
-              if (!deleting) {
-                charIndex += 1;
-                typewriterEl.textContent = current.slice(0, charIndex);
-                if (charIndex === current.length) {
-                  deleting = true;
-                  setTimeout(type, speed.hold);
-                  return;
-                }
-              } else {
-                charIndex -= 1;
-                typewriterEl.textContent = current.slice(0, Math.max(0, charIndex));
-                if (charIndex <= 0) {
-                  deleting = false;
-                  messageIndex = (messageIndex + 1) % messages.length;
-                }
-              }
-              const delay = deleting ? speed.deleting : speed.typing;
-              setTimeout(type, delay);
-            };
-            type();
-          }
-        }
-        // Modal logic
-        const modal = document.querySelector("[data-modal]");
-        const openButtons = document.querySelectorAll("[data-open-modal]");
-        const closeButton = document.querySelector("[data-close-modal]");
-        const focusableSelectors = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
-        let lastFocus = null;
-        const openModal = () => {
-          if (!modal) return;
-          modal.classList.add("is-visible");
-          modal.setAttribute("aria-hidden", "false");
-          lastFocus = document.activeElement;
-          const focusable = modal.querySelectorAll(focusableSelectors);
-          if (focusable.length) {
-            focusable[0].focus();
-          }
-        };
-        const closeModal = () => {
-          if (!modal) return;
-          modal.classList.remove("is-visible");
-          modal.setAttribute("aria-hidden", "true");
-          if (lastFocus && typeof lastFocus.focus === "function") {
-            lastFocus.focus();
-          }
-        };
-        openButtons.forEach((btn) => btn.addEventListener("click", openModal));
-        if (closeButton) closeButton.addEventListener("click", closeModal);
-        if (modal) {
-          modal.addEventListener("click", (event) => {
-            if (event.target === modal) closeModal();
-          });
-          modal.addEventListener("keydown", (event) => {
-            if (event.key === "Escape") {
-              event.preventDefault();
-              closeModal();
-            } else if (event.key === "Tab") {
-              const focusable = modal.querySelectorAll(focusableSelectors);
-              if (!focusable.length) return;
-              const first = focusable[0];
-              const last = focusable[focusable.length - 1];
-              if (event.shiftKey && document.activeElement === first) {
-                event.preventDefault();
-                last.focus();
-              } else if (!event.shiftKey && document.activeElement === last) {
-                event.preventDefault();
-                first.focus();
-              }
-            }
-          });
-        }
+        <div class="field">
+          <div class="field-row">
+            <label>Glass Height</label>
+            <span class="val" id="val-h">1 100 mm</span>
+          </div>
+          <input type="range" id="sl-h" min="600" max="1500" step="50" value="1100">
+        </div>
 
-        // Toast notification
-        const toast = document.querySelector(".toast");
-        const waitlistButton = document.querySelector("[data-submit-waitlist]");
-        let toastTimeout;
-        const showToast = () => {
-          if (!toast) return;
-          toast.classList.add("is-visible");
-          clearTimeout(toastTimeout);
-          toastTimeout = setTimeout(() => {
-            toast.classList.remove("is-visible");
-          }, 3200);
-        };
-        if (waitlistButton) {
-          waitlistButton.addEventListener("click", () => {
-            showToast();
-          });
-        }
+        <div class="field" id="field-ps" style="display:none">
+          <div class="field-row">
+            <label>Post Spacing</label>
+            <span class="val" id="val-ps">1 000 mm</span>
+          </div>
+          <input type="range" id="sl-ps" min="500" max="2000" step="50" value="1000">
+        </div>
 
-        // Counters
-        const counterContainer = document.getElementById("counter-container");
-        if (counterContainer) {
-          config.counters.forEach((counter) => {
-            const wrapper = document.createElement("div");
-            wrapper.className = "counter";
-            const valueEl = document.createElement("div");
-            valueEl.className = "counter-value";
-            valueEl.dataset.from = counter.from;
-            valueEl.dataset.to = counter.to;
-            valueEl.dataset.duration = counter.durationMs;
-            valueEl.dataset.decimals = counter.decimals;
-            if (counter.reverse) valueEl.dataset.reverse = "true";
-            valueEl.dataset.suffix = counter.suffix || "";
-            valueEl.textContent = counter.from.toLocaleString("ro-RO");
-            const labelEl = document.createElement("div");
-            labelEl.className = "counter-label";
-            labelEl.textContent = counter.label;
-            wrapper.appendChild(valueEl);
-            wrapper.appendChild(labelEl);
-            counterContainer.appendChild(wrapper);
-          });
+      </div>
+    </div>
 
-          if (!prefersReducedMotion) {
-            const animateCounters = () => {
-              counterContainer.querySelectorAll(".counter-value").forEach((el) => {
-                const from = Number(el.dataset.from) || 0;
-                const to = Number(el.dataset.to) || 0;
-                const duration = Number(el.dataset.duration) || 1500;
-                const decimals = Number(el.dataset.decimals) || 0;
-                const suffix = el.dataset.suffix || "";
-                const start = performance.now();
-                const animate = (now) => {
-                  const progress = Math.min(1, (now - start) / duration);
-                  const eased = 1 - Math.pow(1 - progress, 3);
-                  const current = from + eased * (to - from);
-                  el.textContent = current.toLocaleString("ro-RO", {
-                    minimumFractionDigits: decimals,
-                    maximumFractionDigits: decimals
-                  }) + suffix;
-                  if (progress < 1) requestAnimationFrame(animate);
-                };
-                requestAnimationFrame(animate);
-              });
-            };
-            animateCounters();
-          } else {
-            counterContainer.querySelectorAll(".counter-value").forEach((el) => {
-              const to = Number(el.dataset.to) || 0;
-              const decimals = Number(el.dataset.decimals) || 0;
-              const suffix = el.dataset.suffix || "";
-              el.textContent = to.toLocaleString("ro-RO", {
-                minimumFractionDigits: decimals,
-                maximumFractionDigits: decimals
-              }) + suffix;
-            });
-          }
-        }
-        // Chart.js setup
-        const chartCanvas = document.getElementById("teaser-chart");
-        let teaserChart = null;
-        let chartTick = 0;
-        let chartInterval = null;
-        if (chartCanvas && window.Chart) {
-          const ctx = chartCanvas.getContext("2d");
-          const gradient = ctx.createLinearGradient(0, 0, 0, 220);
-          gradient.addColorStop(0, "rgba(124, 92, 255, 0.5)");
-          gradient.addColorStop(1, "rgba(34, 211, 238, 0.05)");
-          const generateData = () => Array.from({ length: 12 }, () => 60 + Math.random() * 30);
-          const dataset = generateData();
-          chartTick = dataset.length;
-          teaserChart = new Chart(ctx, {
-            type: "line",
-            data: {
-              labels: Array.from({ length: dataset.length }, (_, i) => `t${i + 1}`),
-              datasets: [
-                {
-                  data: dataset,
-                  borderColor: "rgba(124, 92, 255, 0.8)",
-                  backgroundColor: gradient,
-                  fill: true,
-                  tension: 0.4,
-                  borderWidth: 2,
-                  pointRadius: 0,
-                  pointHoverRadius: 4
-                }
-              ]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              animation: prefersReducedMotion
-                ? false
-                : {
-                    duration: 1200,
-                    easing: "easeOutQuart"
-                  },
-              plugins: {
-                legend: { display: false },
-                tooltip: {
-                  backgroundColor: "rgba(11, 13, 16, 0.9)",
-                  padding: 12,
-                  displayColors: false,
-                  callbacks: {
-                    title: () => "Semnal",
-                    label: (context) => `Intensitate: ${context.formattedValue}`
-                  }
-                }
-              },
-              scales: {
-                x: {
-                  grid: { display: false },
-                  ticks: { color: getComputedStyle(body).getPropertyValue("--muted") }
-                },
-                y: {
-                  grid: {
-                    color: "rgba(255,255,255,0.04)",
-                    drawTicks: false
-                  },
-                  ticks: { color: getComputedStyle(body).getPropertyValue("--muted") }
-                }
-              }
-            }
-          });
+    <!-- GLASS -->
+    <div class="panel-section">
+      <div class="sec-label">Glass Type</div>
+      <div class="glass-btns" id="glass-btns">
+        <button class="glass-btn active" data-glass="clear">
+          <div class="glass-swatch" style="background:linear-gradient(140deg,rgba(195,228,255,0.55),rgba(170,215,250,0.25));"></div>
+          <span class="glass-lbl">Clear</span>
+        </button>
+        <button class="glass-btn" data-glass="frosted">
+          <div class="glass-swatch" style="background:linear-gradient(140deg,rgba(225,232,240,0.95),rgba(205,218,230,0.75));"></div>
+          <span class="glass-lbl">Frosted</span>
+        </button>
+        <button class="glass-btn" data-glass="tinted">
+          <div class="glass-swatch" style="background:linear-gradient(140deg,rgba(55,95,140,0.75),rgba(35,72,115,0.55));"></div>
+          <span class="glass-lbl">Tinted</span>
+        </button>
+      </div>
+    </div>
 
-          if (!prefersReducedMotion) {
-            chartInterval = setInterval(() => {
-              const nextData = teaserChart.data.datasets[0].data;
-              nextData.shift();
-              nextData.push(60 + Math.random() * 30);
-              chartTick += 1;
-              const labels = teaserChart.data.labels;
-              labels.shift();
-              labels.push(`t${chartTick}`);
-              teaserChart.update("none");
-              const feed = document.getElementById("pulse-feed");
-              if (feed) {
-                const li = document.createElement("li");
-                li.textContent = `Δ semnal: ${nextData[nextData.length - 1].toFixed(2)}`;
-                feed.prepend(li);
-                while (feed.children.length > 4) {
-                  feed.removeChild(feed.lastChild);
-                }
-              }
-            }, 2000);
-          }
-        }
-        // AI console simulation
-        const consoleEl = document.getElementById("ai-console");
-        if (consoleEl) {
-          const lines = [
-            { type: "command", text: "boot --mode=stealth" },
-            { type: "response", text: "canal securizat pregătit" },
-            { type: "command", text: "analyze stream --window 00:03" },
-            { type: "response", text: "signal detected · noise < 0.02" },
-            { type: "command", text: "predict resonance --alpha" },
-            { type: "response", text: "access: pending" },
-            { type: "command", text: "synchronize nodes --silent" },
-            { type: "response", text: "latency: 12 ms (simulat)" },
-            { type: "command", text: "await reveal" },
-            { type: "response", text: "timer: suspendat" }
-          ];
-          let index = 0;
-          const appendLine = () => {
-            if (index >= lines.length) return;
-            const line = lines[index];
-            const el = document.createElement("span");
-            el.className = "console-line";
-            el.dataset.type = line.type;
-            el.textContent = line.text;
-            consoleEl.appendChild(el);
-            consoleEl.scrollTop = consoleEl.scrollHeight;
-            if (!prefersReducedMotion && Math.random() > 0.7) {
-              el.classList.add("is-glitch");
-            }
-            index += 1;
-            const delay = line.type === "command" ? 600 : 900;
-            setTimeout(appendLine, prefersReducedMotion ? 0 : delay);
-          };
-          appendLine();
-        }
+    <!-- FINISH -->
+    <div class="panel-section">
+      <div class="sec-label">Frame Finish</div>
+      <div class="finish-row" id="finish-row">
+        <div class="f-swatch active" data-finish="silver" title="Silver Anodised"></div>
+        <div class="f-swatch" data-finish="black" title="Matt Black"></div>
+        <div class="f-swatch" data-finish="gold" title="Champagne Gold"></div>
+        <span class="finish-name" id="finish-name">Silver Anodised</span>
+      </div>
+    </div>
 
-        // Magnetic hover interactions
-        const magneticElements = document.querySelectorAll("[data-magnetic]");
-        if (magneticElements.length && !prefersReducedMotion) {
-          magneticElements.forEach((element) => {
-            const strength = element.classList.contains("pill-button") ? 0.35 : 0.18;
-            element.addEventListener("pointermove", (event) => {
-              const rect = element.getBoundingClientRect();
-              const x = ((event.clientX - rect.left) / rect.width - 0.5) * strength * 40;
-              const y = ((event.clientY - rect.top) / rect.height - 0.5) * strength * 40;
-              element.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-            });
-            element.addEventListener("pointerleave", () => {
-              element.style.transform = "translate3d(0,0,0)";
-            });
-          });
-        }
+    <!-- SUMMARY -->
+    <div class="panel-summary" style="margin-top:auto;">
+      <div class="sum-title">Configuration Summary</div>
+      <div class="sum-grid">
+        <div>
+          <div class="sum-val" id="sum-linear">—</div>
+          <div class="sum-lbl">Linear metres</div>
+        </div>
+        <div>
+          <div class="sum-val" id="sum-area">—</div>
+          <div class="sum-lbl">m² glass area</div>
+        </div>
+        <div>
+          <div class="sum-val" id="sum-h">—</div>
+          <div class="sum-lbl">Glass height</div>
+        </div>
+        <div>
+          <div class="sum-val" id="sum-sys">—</div>
+          <div class="sum-lbl">System type</div>
+        </div>
+      </div>
+      <button class="quote-btn" onclick="alert('Connect your quote / contact form here.')">→ &nbsp;Request a Quote</button>
+    </div>
 
-        // Tilt effect for timeline steps
-        const tiltElements = document.querySelectorAll("[data-tilt]");
-        if (tiltElements.length && !prefersReducedMotion) {
-          tiltElements.forEach((element) => {
-            element.addEventListener("pointermove", (event) => {
-              const rect = element.getBoundingClientRect();
-              const x = ((event.clientX - rect.left) / rect.width - 0.5) * 6;
-              const y = ((event.clientY - rect.top) / rect.height - 0.5) * 6;
-              element.style.transform = `perspective(600px) rotateX(${-y}deg) rotateY(${x}deg)`;
-            });
-            element.addEventListener("pointerleave", () => {
-              element.style.transform = "perspective(600px) rotateX(0deg) rotateY(0deg)";
-            });
-            element.addEventListener("focus", () => {
-              element.style.transform = "perspective(600px) rotateX(0deg) rotateY(0deg)";
-            });
-          });
-        }
-        // Developer overlay toggle (tasta '.')
-        const overlay = document.querySelector("[data-dev-overlay]");
-        const fpsEl = overlay ? overlay.querySelector("[data-fps]") : null;
-        const animStateEl = overlay ? overlay.querySelector("[data-anim-state]") : null;
-        const bgStateEl = overlay ? overlay.querySelector("[data-bg-state]") : null;
-        let overlayActive = false;
-        let fpsFrameId = null;
-        let fpsLast = performance.now();
-        let fpsFrames = 0;
+  </aside>
 
-        const updateOverlayState = (motionReduced) => {
-          if (animStateEl) animStateEl.textContent = motionReduced ? "limitat" : "activ";
-          if (bgStateEl) bgStateEl.textContent = motionReduced ? "static" : "dinamic";
-        };
-        updateOverlayState(prefersReducedMotion);
+  <!-- 3D VIEWPORT -->
+  <div class="canvas-wrap" id="canvas-wrap">
+    <canvas id="c"></canvas>
 
-        const fpsLoop = (now) => {
-          fpsFrames += 1;
-          const delta = now - fpsLast;
-          if (delta >= 1000) {
-            const fps = Math.round((fpsFrames * 1000) / delta);
-            if (fpsEl) fpsEl.textContent = String(fps);
-            fpsLast = now;
-            fpsFrames = 0;
-          }
-          fpsFrameId = requestAnimationFrame(fpsLoop);
-        };
+    <div id="loader">
+      <div class="ldots">
+        <div class="ldot"></div>
+        <div class="ldot"></div>
+        <div class="ldot"></div>
+      </div>
+    </div>
 
-        const startFps = () => {
-          fpsLast = performance.now();
-          fpsFrames = 0;
-          if (fpsFrameId) cancelAnimationFrame(fpsFrameId);
-          fpsFrameId = requestAnimationFrame(fpsLoop);
-        };
+    <div class="dim-badge">
+      <strong id="db-linear">—</strong> linear m &nbsp;·&nbsp; <strong id="db-area">—</strong> m² glass
+    </div>
 
-        const stopFps = () => {
-          if (fpsFrameId) cancelAnimationFrame(fpsFrameId);
-          fpsFrameId = null;
-        };
+    <div class="shape-info">
+      <strong id="si-title">U-Channel Frameless</strong>
+      <span id="si-desc">Continuous aluminium base channel. No visible posts — maximum transparency.</span>
+    </div>
 
-        document.addEventListener("keydown", (event) => {
-          if (event.key === "." && !event.metaKey && !event.ctrlKey) {
-            overlayActive = !overlayActive;
-            if (overlay) {
-              overlay.classList.toggle("is-active", overlayActive);
-              if (overlayActive) {
-                startFps();
-              } else {
-                stopFps();
-              }
-            }
-          }
-        });
-        if (overlay) {
-          overlay.addEventListener("click", () => {
-            overlayActive = false;
-            overlay.classList.remove("is-active");
-            stopFps();
-          });
-        }
+    <div class="view-controls">
+      <button class="view-btn" id="btn-reset" title="Reset view">↺</button>
+      <button class="view-btn" id="btn-top"   title="Top view">⊤</button>
+    </div>
+  </div>
 
-        const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-        if (motionQuery && typeof motionQuery.addEventListener === "function") {
-          motionQuery.addEventListener("change", (event) => {
-            updateOverlayState(event.matches);
-          });
-        }
+</div>
 
-        window.addEventListener("beforeunload", () => {
-          if (chartInterval) clearInterval(chartInterval);
-          stopFps();
-        });
-      })();
-    </script>
-  </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+'use strict';
+
+// ── STATE ────────────────────────────────────────────────────────────────────
+const state = {
+  sys:    'uchannel',
+  shape:  'straight',
+  fw:     3000,
+  sw:     1500,
+  radius: 2000,
+  h:      1100,
+  ps:     1000,
+  glass:  'clear',
+  finish: 'silver',
+};
+
+const FINISH_NAMES = { silver:'Silver Anodised', black:'Matt Black', gold:'Champagne Gold' };
+const SYS_TITLES   = { uchannel:'U-Channel Frameless', posts:'Aluminium Posts + Glass' };
+const SYS_DESCS    = {
+  uchannel: 'Continuous aluminium base channel. No visible posts — maximum transparency.',
+  posts:    'Structural aluminium posts at regular spacing with glass infill panels.',
+};
+
+// ── THREE.JS ─────────────────────────────────────────────────────────────────
+const canvas   = document.getElementById('c');
+const wrap     = document.getElementById('canvas-wrap');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.outputEncoding     = THREE.sRGBEncoding;
+renderer.toneMapping        = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xeceae5);
+scene.fog = new THREE.FogExp2(0xeceae5, 0.014);
+
+const camera = new THREE.PerspectiveCamera(36, 1, 0.01, 200);
+
+// Lighting — warm key + cool fill + top ambient
+const keyL = new THREE.DirectionalLight(0xfff8f0, 1.8);
+keyL.position.set(7, 12, 9);
+scene.add(keyL);
+
+const fillL = new THREE.DirectionalLight(0xd5e8ff, 0.75);
+fillL.position.set(-8, 4, -4);
+scene.add(fillL);
+
+const rimL = new THREE.DirectionalLight(0xffffff, 0.35);
+rimL.position.set(1, 5, -10);
+scene.add(rimL);
+
+scene.add(new THREE.HemisphereLight(0xf8f4ee, 0xd0ccc6, 0.85));
+
+// Floor
+const floorMat = new THREE.MeshStandardMaterial({ color: 0xcdc8bf, roughness: 0.88, metalness: 0.0 });
+const floorMesh = new THREE.Mesh(new THREE.PlaneGeometry(50, 50), floorMat);
+floorMesh.rotation.x = -Math.PI / 2;
+floorMesh.position.y = -0.001;
+scene.add(floorMesh);
+
+// Sheen layer on floor
+const sheenMat = new THREE.MeshStandardMaterial({ color:0xffffff, roughness:0.25, metalness:0.05, transparent:true, opacity:0.12 });
+const sheenMesh = new THREE.Mesh(new THREE.PlaneGeometry(50, 50), sheenMat);
+sheenMesh.rotation.x = -Math.PI / 2;
+sheenMesh.position.y = 0.001;
+scene.add(sheenMesh);
+
+// Grid — faint
+const gridH = new THREE.GridHelper(30, 30, 0xb8b4ac, 0xc8c4bc);
+gridH.position.y = 0.003;
+gridH.material.opacity = 0.3;
+gridH.material.transparent = true;
+scene.add(gridH);
+
+// ── MATERIALS ────────────────────────────────────────────────────────────────
+const glassDefs = {
+  clear:   { color:0x7aaec8, opacity:0.42, roughness:0.04, metalness:0.0 },
+  frosted: { color:0xc0d0dc, opacity:0.65, roughness:0.52, metalness:0.0 },
+  tinted:  { color:0x1e3c58, opacity:0.70, roughness:0.05, metalness:0.0 },
+};
+
+function makeGlassMat(key) {
+  const d = glassDefs[key];
+  return new THREE.MeshPhysicalMaterial({
+    color: d.color,
+    transparent: true,
+    opacity: d.opacity,
+    roughness: d.roughness,
+    metalness: d.metalness,
+    reflectivity: 0.85,
+    envMapIntensity: 0.8,
+    side: THREE.DoubleSide,
+  });
+}
+
+const aluDefs = {
+  silver: { color:0x9aaab8, roughness:0.2,  metalness:0.9  },
+  black:  { color:0x252830, roughness:0.32, metalness:0.82 },
+  gold:   { color:0xc8a060, roughness:0.16, metalness:0.88 },
+};
+
+function makeAluMat() {
+  const d = aluDefs[state.finish];
+  return new THREE.MeshStandardMaterial({ color:d.color, roughness:d.roughness, metalness:d.metalness });
+}
+
+// ── GEOMETRY ─────────────────────────────────────────────────────────────────
+const S = mm => mm / 1000;
+let sceneGroup = null;
+
+function bx(mat, w, h, d) {
+  return new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+}
+
+function buildStraight(grp, fw, fh, sx, sz, rotY, gmat, almat) {
+  const thick = 0.012, cH = 0.055, cD = 0.038, pW = 0.048, rH = 0.038, rD = 0.048;
+  const ps = S(state.ps);
+
+  if (state.sys === 'uchannel') {
+    const ch = bx(almat, fw, cH, cD);
+    ch.position.set(sx+fw/2, cH/2, sz); ch.rotation.y = rotY; grp.add(ch);
+    const gh = fh - cH;
+    const gp = bx(gmat, fw-0.025, gh, thick);
+    gp.position.set(sx+fw/2, cH+gh/2, sz); gp.rotation.y = rotY; grp.add(gp);
+    const cap = bx(almat, fw+0.008, 0.020, cD*0.7);
+    cap.position.set(sx+fw/2, fh+0.010, sz); cap.rotation.y = rotY; grp.add(cap);
+  } else {
+    const cnt = Math.max(2, Math.round(fw/ps));
+    const sp  = fw / cnt;
+    for (let i=0; i<=cnt; i++) {
+      const px = sx + i*sp;
+      const post = bx(almat, pW, fh+rH, pW);
+      post.position.set(px, (fh+rH)/2, sz); post.rotation.y = rotY; grp.add(post);
+    }
+    for (let i=0; i<cnt; i++) {
+      const px = sx + i*sp + sp/2;
+      const pw = sp - pW - 0.015;
+      const gp = bx(gmat, pw, fh-0.075, thick);
+      gp.position.set(px, 0.038+(fh-0.075)/2, sz); gp.rotation.y = rotY; grp.add(gp);
+    }
+    const rail = bx(almat, fw+pW, rH, rD);
+    rail.position.set(sx+fw/2, fh+rH/2, sz); rail.rotation.y = rotY; grp.add(rail);
+  }
+}
+
+function buildSide(grp, sw, fh, ex, sz, dir, gmat, almat) {
+  const thick = 0.012, cH = 0.055, cD = 0.038, pW = 0.048, rH = 0.038;
+  const ps = S(state.ps), zs = dir;
+
+  if (state.sys === 'uchannel') {
+    const ch = new THREE.Mesh(new THREE.BoxGeometry(cD, cH, sw), almat);
+    ch.position.set(ex, cH/2, sz+zs*sw/2); grp.add(ch);
+    const gh = fh-cH;
+    const gp = new THREE.Mesh(new THREE.BoxGeometry(thick, gh, sw-0.025), gmat);
+    gp.position.set(ex, cH+gh/2, sz+zs*sw/2); grp.add(gp);
+    const cap = new THREE.Mesh(new THREE.BoxGeometry(cD*0.7, 0.020, sw+0.008), almat);
+    cap.position.set(ex, fh+0.010, sz+zs*sw/2); grp.add(cap);
+  } else {
+    const cnt = Math.max(2, Math.round(sw/ps));
+    const sp  = sw/cnt;
+    for (let i=0; i<=cnt; i++) {
+      const fz = sz + zs*i*sp;
+      const post = new THREE.Mesh(new THREE.BoxGeometry(pW, fh+rH, pW), almat);
+      post.position.set(ex, (fh+rH)/2, fz); grp.add(post);
+    }
+    for (let i=0; i<cnt; i++) {
+      const fz = sz + zs*(i*sp + sp/2);
+      const pd = sp - pW - 0.015;
+      const gp = new THREE.Mesh(new THREE.BoxGeometry(thick, fh-0.075, pd), gmat);
+      gp.position.set(ex, 0.038+(fh-0.075)/2, fz); grp.add(gp);
+    }
+    const rail = new THREE.Mesh(new THREE.BoxGeometry(pW, rH, sw+pW), almat);
+    rail.position.set(ex, fh+rH/2, sz+zs*sw/2); grp.add(rail);
+  }
+}
+
+function buildArc(grp, radius, fh, cx, cz, gmat, almat) {
+  const thick = 0.012, cH = 0.055, cD = 0.038, pW = 0.048, rH = 0.038;
+  const segs = Math.max(24, Math.ceil(Math.PI * radius / 0.18));
+
+  for (let i = 0; i < segs; i++) {
+    const t0   = (i/segs) * Math.PI;
+    const t1   = ((i+1)/segs) * Math.PI;
+    const tmid = (t0+t1) / 2;
+    const mx   = cx + radius * Math.cos(tmid);
+    const mz   = cz + radius * Math.sin(tmid);
+    const clen = 2 * radius * Math.sin((t1-t0)/2);
+    const ry   = tmid; // tangent alignment
+
+    if (state.sys === 'uchannel') {
+      const ch = new THREE.Mesh(new THREE.BoxGeometry(clen+0.001, cH, cD), almat);
+      ch.position.set(mx, cH/2, mz); ch.rotation.y = ry; grp.add(ch);
+      const gh = fh-cH;
+      const gp = new THREE.Mesh(new THREE.BoxGeometry(clen+0.001, gh, thick), gmat);
+      gp.position.set(mx, cH+gh/2, mz); gp.rotation.y = ry; grp.add(gp);
+      const cap = new THREE.Mesh(new THREE.BoxGeometry(clen+0.001, 0.020, cD*0.7), almat);
+      cap.position.set(mx, fh+0.010, mz); cap.rotation.y = ry; grp.add(cap);
+    } else {
+      const px0 = cx + radius*Math.cos(t0), pz0 = cz + radius*Math.sin(t0);
+      const post = new THREE.Mesh(new THREE.BoxGeometry(pW, fh+rH, pW), almat);
+      post.position.set(px0, (fh+rH)/2, pz0); grp.add(post);
+      if (i === segs-1) {
+        const px1 = cx + radius*Math.cos(t1), pz1 = cz + radius*Math.sin(t1);
+        const postL = new THREE.Mesh(new THREE.BoxGeometry(pW, fh+rH, pW), almat);
+        postL.position.set(px1, (fh+rH)/2, pz1); grp.add(postL);
+      }
+      const pw = Math.max(0.01, clen - pW*0.5);
+      const gp = new THREE.Mesh(new THREE.BoxGeometry(pw, fh-0.075, thick), gmat);
+      gp.position.set(mx, 0.038+(fh-0.075)/2, mz); gp.rotation.y = ry; grp.add(gp);
+      const rail = new THREE.Mesh(new THREE.BoxGeometry(clen+0.001, rH, pW*0.8), almat);
+      rail.position.set(mx, fh+rH/2, mz); rail.rotation.y = ry; grp.add(rail);
+    }
+  }
+}
+
+// ── BUILD ────────────────────────────────────────────────────────────────────
+function buildScene() {
+  if (sceneGroup) scene.remove(sceneGroup);
+  sceneGroup = new THREE.Group();
+
+  const gmat  = makeGlassMat(state.glass);
+  const almat = makeAluMat();
+  const fw = S(state.fw), sw = S(state.sw), fh = S(state.h), r = S(state.radius);
+
+  if (state.shape === 'straight') {
+    buildStraight(sceneGroup, fw, fh, -fw/2, 0, 0, gmat, almat);
+  } else if (state.shape === 'lshape') {
+    buildStraight(sceneGroup, fw, fh, -fw/2, 0, 0, gmat, almat);
+    buildSide(sceneGroup, sw, fh, -fw/2, 0, -1, gmat, almat);
+  } else if (state.shape === 'cshape') {
+    buildStraight(sceneGroup, fw, fh, -fw/2, 0, 0, gmat, almat);
+    buildSide(sceneGroup, sw, fh, -fw/2, 0, -1, gmat, almat);
+    buildSide(sceneGroup, sw, fh,  fw/2, 0, -1, gmat, almat);
+  } else if (state.shape === 'ushape') {
+    buildArc(sceneGroup, r, fh, 0, 0, gmat, almat);
+  }
+
+  scene.add(sceneGroup);
+  updateSummary();
+  fitCamera();
+}
+
+// ── SUMMARY ──────────────────────────────────────────────────────────────────
+function updateSummary() {
+  const fw = state.fw/1000, sw = state.sw/1000, r = state.radius/1000, fh = state.h/1000;
+  let lin = 0;
+  if (state.shape==='straight') lin = fw;
+  else if (state.shape==='lshape') lin = fw+sw;
+  else if (state.shape==='cshape') lin = fw+sw*2;
+  else lin = Math.PI*r;
+  const area = lin*fh;
+  const fmt = v => v.toFixed(2);
+
+  document.getElementById('db-linear').textContent  = fmt(lin);
+  document.getElementById('db-area').textContent    = fmt(area);
+  document.getElementById('sum-linear').textContent = fmt(lin)+' m';
+  document.getElementById('sum-area').textContent   = fmt(area)+' m²';
+  document.getElementById('sum-h').textContent      = state.h+' mm';
+  document.getElementById('sum-sys').textContent    = state.sys==='uchannel' ? 'U-Channel' : 'Posts';
+}
+
+// ── CAMERA ───────────────────────────────────────────────────────────────────
+let camT = 0.65, camP = 0.52, camR = 12;
+let tT = camT, tP = camP, tR = camR;
+const camCenter = new THREE.Vector3();
+const tCenter   = new THREE.Vector3();
+
+function fitCamera() {
+  const fw=S(state.fw), sw=S(state.sw), fh=S(state.h), r=S(state.radius);
+  let dim, tz;
+  if (state.shape==='straight') { dim=Math.max(fw,fh); tz=0; }
+  else if (state.shape==='lshape') { dim=Math.max(fw,sw,fh); tz=-sw/2; }
+  else if (state.shape==='cshape') { dim=Math.max(fw,sw,fh); tz=-sw/2; }
+  else { dim=r*2.3; tz=0; }
+  tR = Math.max(dim*1.7+1.5, 4);
+  tCenter.set(0, fh*0.44, tz||0);
+  // angle (tT, tP) intentionally NOT reset — preserve user orbit
+}
+
+// ── ORBIT ────────────────────────────────────────────────────────────────────
+let drag=false, lx=0, ly=0;
+canvas.addEventListener('mousedown',  e => { drag=true;  lx=e.clientX; ly=e.clientY; });
+window.addEventListener('mouseup',    ()=> { drag=false; });
+window.addEventListener('mousemove',  e => {
+  if (!drag) return;
+  tT -= (e.clientX-lx)*0.006;
+  tP  = Math.max(0.07, Math.min(1.38, tP+(e.clientY-ly)*0.005));
+  lx=e.clientX; ly=e.clientY;
+});
+canvas.addEventListener('wheel', e => { tR=Math.max(2,Math.min(45,tR+e.deltaY*0.013)); }, {passive:true});
+canvas.addEventListener('touchstart', e => { drag=true;  lx=e.touches[0].clientX; ly=e.touches[0].clientY; });
+canvas.addEventListener('touchend',   ()=> { drag=false; });
+canvas.addEventListener('touchmove',  e => {
+  if(!drag) return;
+  tT -= (e.touches[0].clientX-lx)*0.006;
+  tP  = Math.max(0.07, Math.min(1.38, tP+(e.touches[0].clientY-ly)*0.005));
+  lx=e.touches[0].clientX; ly=e.touches[0].clientY;
+});
+
+document.getElementById('btn-reset').onclick = () => { tT=0.65; tP=0.52; fitCamera(); };
+document.getElementById('btn-top').onclick   = () => { tT=0;    tP=0.07; };
+
+// ── RESIZE ───────────────────────────────────────────────────────────────────
+function resize() {
+  const w=wrap.clientWidth, h=wrap.clientHeight;
+  renderer.setSize(w,h);
+  camera.aspect=w/h;
+  camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', resize);
+resize();
+
+// ── RENDER LOOP ──────────────────────────────────────────────────────────────
+const lerp = (a,b,t)=>a+(b-a)*t;
+function animate() {
+  requestAnimationFrame(animate);
+  camT = lerp(camT, tT, 0.085);
+  camP = lerp(camP, tP, 0.085);
+  camR = lerp(camR, tR, 0.085);
+  camCenter.lerp(tCenter, 0.085);
+  camera.position.x = camCenter.x + camR*Math.sin(camP)*Math.sin(camT);
+  camera.position.y = camCenter.y + camR*Math.cos(camP);
+  camera.position.z = camCenter.z + camR*Math.sin(camP)*Math.cos(camT);
+  camera.lookAt(camCenter);
+  renderer.render(scene, camera);
+}
+animate();
+
+// ── UI WIRING ────────────────────────────────────────────────────────────────
+document.querySelectorAll('#sys-cards .sys-card').forEach(el => {
+  el.addEventListener('click', () => {
+    state.sys = el.dataset.sys;
+    document.querySelectorAll('#sys-cards .sys-card').forEach(c=>c.classList.toggle('active',c===el));
+    document.getElementById('field-ps').style.display = state.sys==='posts' ? '' : 'none';
+    document.getElementById('si-title').textContent = SYS_TITLES[state.sys];
+    document.getElementById('si-desc').textContent  = SYS_DESCS[state.sys];
+    buildScene();
+  });
+});
+
+document.querySelectorAll('#shape-grid .shape-btn').forEach(el => {
+  el.addEventListener('click', () => {
+    state.shape = el.dataset.shape;
+    document.querySelectorAll('#shape-grid .shape-btn').forEach(c=>c.classList.toggle('active',c===el));
+    const hasSide = ['lshape','cshape'].includes(state.shape);
+    const isArc   = state.shape==='ushape';
+    document.getElementById('field-fw').style.display     = isArc ? 'none' : '';
+    document.getElementById('field-sw').style.display     = hasSide ? '' : 'none';
+    document.getElementById('field-radius').style.display = isArc ? '' : 'none';
+    buildScene();
+  });
+});
+
+document.querySelectorAll('#glass-btns .glass-btn').forEach(el => {
+  el.addEventListener('click', () => {
+    state.glass = el.dataset.glass;
+    document.querySelectorAll('#glass-btns .glass-btn').forEach(c=>c.classList.toggle('active',c===el));
+    buildScene();
+  });
+});
+
+document.querySelectorAll('#finish-row .f-swatch').forEach(el => {
+  el.addEventListener('click', () => {
+    state.finish = el.dataset.finish;
+    document.querySelectorAll('#finish-row .f-swatch').forEach(c=>c.classList.toggle('active',c===el));
+    document.getElementById('finish-name').textContent = FINISH_NAMES[state.finish];
+    buildScene();
+  });
+});
+
+function setupSlider(id, key, valId, fmt) {
+  const sl=document.getElementById(id), vl=document.getElementById(valId);
+  if (!sl||!vl) return;
+  sl.addEventListener('input', ()=>{ state[key]=+sl.value; vl.textContent=fmt(+sl.value); buildScene(); });
+}
+const fmtM  = v => (v/1000).toFixed(2)+' m';
+const fmtMm = v => v+' mm';
+setupSlider('sl-fw',     'fw',     'val-fw',     fmtM);
+setupSlider('sl-sw',     'sw',     'val-sw',     fmtM);
+setupSlider('sl-radius', 'radius', 'val-radius', fmtM);
+setupSlider('sl-h',      'h',      'val-h',      fmtMm);
+setupSlider('sl-ps',     'ps',     'val-ps',     fmtMm);
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+buildScene();
+setTimeout(()=>document.getElementById('loader').classList.add('gone'), 500);
+</script>
+</body>
 </html>
