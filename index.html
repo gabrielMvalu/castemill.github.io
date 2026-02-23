@@ -336,8 +336,6 @@ const SYS_INFO = {
 const canvas = document.getElementById('c');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
 renderer.setPixelRatio(window.devicePixelRatio);
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.setClearColor(0x0e0f11);
 
 const scene = new THREE.Scene();
@@ -352,14 +350,6 @@ const amb = new THREE.AmbientLight(0xffffff, 0.4);
 scene.add(amb);
 const sun = new THREE.DirectionalLight(0xffffff, 1.0);
 sun.position.set(8, 14, 8);
-sun.castShadow = true;
-sun.shadow.mapSize.set(2048, 2048);
-sun.shadow.camera.near = 0.5;
-sun.shadow.camera.far = 60;
-sun.shadow.camera.left = -15;
-sun.shadow.camera.right = 15;
-sun.shadow.camera.top = 15;
-sun.shadow.camera.bottom = -15;
 scene.add(sun);
 const fill = new THREE.DirectionalLight(0x7ec8e3, 0.3);
 fill.position.set(-5, 3, -5);
@@ -373,7 +363,6 @@ const floorGeo = new THREE.PlaneGeometry(30, 30);
 const floorMat = new THREE.MeshStandardMaterial({ color: 0x12141a, roughness: 0.9 });
 const floor = new THREE.Mesh(floorGeo, floorMat);
 floor.rotation.x = -Math.PI / 2;
-floor.receiveShadow = true;
 scene.add(floor);
 
 // ─────────────────────────────────────────────
@@ -417,7 +406,7 @@ function makePillar(mat, w, h, d, x, y, z) {
   const g = new THREE.BoxGeometry(w, h, d);
   const m = new THREE.Mesh(g, mat);
   m.position.set(x, y, z);
-  m.castShadow = true;
+  
   return m;
 }
 
@@ -426,7 +415,7 @@ function makeGlassPanel(gmat, w, h, d, x, y, z, ry) {
   const m = new THREE.Mesh(g, gmat);
   m.position.set(x, y, z);
   if (ry) m.rotation.y = ry;
-  m.castShadow = false;
+  
   return m;
 }
 
@@ -481,7 +470,7 @@ function buildSideSegment(grp, sys, sw, fh, edgeX, startZ, direction, gmat, alma
   if (sys === 'uchannel') {
     const ch = new THREE.Mesh(new THREE.BoxGeometry(channelW, channelH, sw), almat);
     ch.position.set(edgeX, channelH/2, startZ + zSign * sw/2);
-    ch.castShadow = true; grp.add(ch);
+     grp.add(ch);
     const gp = new THREE.Mesh(new THREE.BoxGeometry(thick, fh - channelH, sw - 0.04), gmat);
     gp.position.set(edgeX, channelH + (fh - channelH)/2, startZ + zSign * sw/2);
     grp.add(gp);
@@ -496,7 +485,7 @@ function buildSideSegment(grp, sys, sw, fh, edgeX, startZ, direction, gmat, alma
       const fz = startZ + zSign * i * spacing;
       const post = new THREE.Mesh(new THREE.BoxGeometry(postW, fh + topRailH, postW), almat);
       post.position.set(edgeX, (fh + topRailH)/2, fz);
-      post.castShadow = true; grp.add(post);
+       grp.add(post);
     }
     for (let i = 0; i < postCount; i++) {
       const fz = startZ + zSign * (i * spacing + spacing/2);
@@ -558,7 +547,7 @@ function buildArc(grp, sys, radius, fh, cx, cz, gmat, almat, ps) {
       const ch = new THREE.Mesh(new THREE.BoxGeometry(segLen + 0.002, channelH, channelW), almat);
       ch.position.set(mx, channelH / 2, mz);
       ch.rotation.y = ry;
-      ch.castShadow = true;
+      
       grp.add(ch);
 
       // Glass panel — stands vertical, faces radially outward
@@ -580,7 +569,7 @@ function buildArc(grp, sys, radius, fh, cx, cz, gmat, almat, ps) {
       const pz0 = cz + radius * Math.sin(t0);
       const post = new THREE.Mesh(new THREE.BoxGeometry(postW, fh + topRailH, postW), almat);
       post.position.set(px0, (fh + topRailH) / 2, pz0);
-      post.castShadow = true;
+      
       grp.add(post);
 
       // Last segment: also add closing post at t1
@@ -589,7 +578,7 @@ function buildArc(grp, sys, radius, fh, cx, cz, gmat, almat, ps) {
         const pz1 = cz + radius * Math.sin(t1);
         const postLast = new THREE.Mesh(new THREE.BoxGeometry(postW, fh + topRailH, postW), almat);
         postLast.position.set(px1, (fh + topRailH) / 2, pz1);
-        postLast.castShadow = true;
+        
         grp.add(postLast);
       }
 
